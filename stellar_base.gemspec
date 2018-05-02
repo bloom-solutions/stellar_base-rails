@@ -5,11 +5,11 @@ require "stellar_base/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "stellar_base"
+  s.name        = "stellar_base-rails"
   s.version     = StellarBase::VERSION
   s.authors     = ["Ace Subido"]
   s.email       = ["ace.subido@gmail.com"]
-  s.homepage    = "https://github.com/bloom-solutions/stellar_federation-rails"
+  s.homepage    = "https://github.com/bloom-solutions/stellar_base-rails"
   s.summary     = "Mountable Stellar API Endpoints for Rails"
   s.description = "API Endpoints for the Stellar Protocol"
   s.license     = "MIT"

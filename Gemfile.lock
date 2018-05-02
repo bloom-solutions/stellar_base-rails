@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stellar_base (0.1.0)
+    stellar_base-rails (0.1.0)
       dry-struct
       gem_config
       light-service
@@ -211,7 +211,7 @@ DEPENDENCIES
   pry-byebug
   rspec-rails
   sqlite3
-  stellar_base!
+  stellar_base-rails!
 
 BUNDLED WITH
    1.16.1
