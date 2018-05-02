@@ -11,7 +11,7 @@ module StellarBase
   include GemConfig::Base
 
   with_configuration do
-    has :modules
+    has :modules, default: [:bridge_callbacks]
     has :on_bridge_callback
   end
 
