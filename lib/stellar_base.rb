@@ -8,6 +8,16 @@ require "reform/form/coercion"
 require "stellar_base/engine"
 
 module StellarBase
+  include GemConfig::Base
+
+  with_configuration do
+    has :modules
+    has :on_bridge_callback
+  end
+
+  def self.included_module?(module_name)
+    self.configuration.modules&.include?(module_name)
+  end
 end
 
 
