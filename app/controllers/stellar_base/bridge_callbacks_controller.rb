@@ -1,5 +1,7 @@
 module StellarBase
   class BridgeCallbacksController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def create
       op = BridgeCallbacks::Operations::Process.(bridge_callback: callback_params)
 
