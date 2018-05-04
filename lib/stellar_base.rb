@@ -12,6 +12,7 @@ module StellarBase
 
   with_configuration do
     has :modules, default: [:bridge_callbacks]
+    has :check_bridge_callbacks_authenticity, default: false
     has :on_bridge_callback
   end
 
