@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "pry"
+require "vcr"
 require 'rspec/rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
