@@ -16,14 +16,18 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "dry-struct"
+  s.add_dependency "virtus"
   s.add_dependency "gem_config"
   s.add_dependency "light-service"
   s.add_dependency "rails", "~> 5.1"
+  s.add_dependency "dry-types"
   s.add_dependency "trailblazer", "~> 2.0"
   s.add_dependency "trailblazer-rails"
+  s.add_dependency "httparty"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
+  s.add_development_dependency 'vcr', '~> 4.0'
+  s.add_development_dependency 'webmock'
 
 end

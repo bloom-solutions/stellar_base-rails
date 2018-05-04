@@ -1,6 +1,7 @@
 require "gem_config"
 require "light-service"
-require "dry-struct"
+require "virtus"
+require "httparty"
 require "trailblazer-rails"
 require "disposable"
 require "reform"
