@@ -142,4 +142,64 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
     end
   end
 
+  context "X_PAYLOAD_MAC is configured to be checked" do
+    before do
+      StellarBase.configure do |c|
+        c.check_bridge_callbacks_mac_payload = true
+        c.bridge_callbacks_mac_key = "SDYOGCQL6HLTPZUDYDH7E3YST2AGZR3PJZXED62N42FJA6AWXDP3FSCA"
+      end
+    end
+
+    after do
+      StellarBase.configure do |c|
+        c.check_bridge_callbacks_mac_payload = false
+      end
+    end
+
+    let(:params) do
+      {
+        id: "37587135708020737",
+        from: "GDORX35OXMJXSYI6HXO2URB5K3GW7UPVB5WR7YC36HAMS2EQEQGDIRKT",
+        route: "BX857D13E",
+        amount: "200.0000000",
+        asset_code: "",
+        asset_issuer: "",
+        memo_type: "text",
+        memo: "BX857D13E",
+        data: "",
+        transaction_id: "4685b3b43512be87586832214da1d3ccd45c4098c2d90b8e3539866debe9652f",
+      }
+    end
+
+    let(:encoded_payload) do
+      payload = OpenSSL::HMAC.digest("SHA256", mac_key, params.to_json)
+      Base64.encode64(payload)
+    end
+
+    let(:headers) { { "HTTP_X_PAYLOAD_MAC" => encoded_payload } }
+
+    context "doesn't match" do
+      let(:mac_key) { "1234" }
+
+      it "renders 422" do
+        post uri, params: params, headers: headers
+
+        expect(response.success?).to eq false
+        expect(response.code).to eq "400"
+      end
+    end
+
+    context "it matches" do
+      let(:mac_key) { "SDYOGCQL6HLTPZUDYDH7E3YST2AGZR3PJZXED62N42FJA6AWXDP3FSCA" }
+
+      it "continues to process the payload" do
+        post uri, params: params, headers: headers
+
+        expect(response.success?).to eq true
+        expect(response.code).to eq "200"
+      end
+
+    end
+  end
+
 end
