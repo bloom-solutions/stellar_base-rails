@@ -8,6 +8,7 @@ module StellarBase
           InitializeHorizonClient,
           GetOperation,
           GetTransaction,
+          Compare,
         ]
 
         ctx = LightService::Context.new(

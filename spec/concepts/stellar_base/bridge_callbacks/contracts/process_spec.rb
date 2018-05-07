@@ -36,6 +36,16 @@ module StellarBase
 
         end
 
+        context "no id was submitted" do
+          it "returns errors" do
+            contract = described_class.new(BridgeCallback.new)
+            contract.validate({})
+
+            expect(contract.errors[:id])
+              .to include "can't be blank"
+          end
+        end
+
         context "if check_bridge_callbacks_authenticity is true" do
 
           before do
