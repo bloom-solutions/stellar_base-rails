@@ -14,6 +14,11 @@ module StellarBase
         property :data
         property :transaction_id
 
+        validates :id, presence: true
+        validates :transaction_id, presence: true
+        validates :from, presence: true
+        validates :amount, presence: true
+
         validate :check_callback_authenticity
 
         def check_callback_authenticity
