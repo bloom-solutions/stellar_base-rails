@@ -118,6 +118,28 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
         expect(response.code.to_i).to eq 422
       end
     end
+
+    context "callback details aren't the same with existing operation/transaction" do
+      it "returns 422" do
+        params = {
+          id: "37587135708020737",
+          from: "GDORX35OXMJXSYI6HXO2URB5K3GW7UPVB5WR7YC36HAMS2EQEQGDIRKT",
+          route: "BX857D13E",
+          amount: "200.0000000",
+          asset_code: "",
+          asset_issuer: "",
+          memo_type: "text",
+          memo: "BX857D13E",
+          data: "",
+          transaction_id: "4685b3b43512be87586832214da1d3ccd45c4098c2d90b8e3539866debe9652f",
+        }
+
+        post uri, params: params
+
+        expect(response.success?).to eq false
+        expect(response.code.to_i).to eq 422
+      end
+    end
   end
 
 end
