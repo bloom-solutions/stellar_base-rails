@@ -1,18 +1,15 @@
 # Roadmap
 
-### 0.2.x
-
-#### Securing /bridge_callbacks
+## Securing /bridge_callbacks
 
 Implement application-level security measurements on securing the bridge_callbacks endpoint. Aside from the recommendation of Stellar to accept payloads coming from the Bridge Server IP, we can also do the following on this rails engine.
 
-1. Implementing checking payloads with the mac_key headers
-2. Implementing checking payloads with the api_key headers
-3. Another layer of defense, check authenticity of the callback by checking it against Horizon:
+1. Implementing checking payloads with the `mac_key` headers
+2. Another layer of defense, check authenticity of the callback by checking it against Horizon:
   a. Existence of operation and transaction ID's against a Horizon instance
   b. From, Amount, Issuer and other transaction details
 
-Number 3 can be implemented as follows:
+Number 2 can be implemented as follows:
 
 ```
   c.bridge_callbacks_authenticity = false
@@ -23,7 +20,8 @@ If `c.check_bridge_callbacks_authenticity` is set to `true`, it'll check incomin
 
 ****
 
-### 0.3.0
+## /federation/queries
+
 - Federation Endpoint
 ```
   c.modules = (federation)
@@ -38,7 +36,7 @@ If `c.check_bridge_callbacks_authenticity` is set to `true`, it'll check incomin
 - The class will be expected to return a `StellarBase::FederationQueryResponse`, or you could return nil if no record is found.
 
 
-### 0.4.0
+## /.well-known
 
 - Optionally mount a well-known
 
@@ -73,3 +71,7 @@ if StellarBase.included_module?(:well_known)
   end
 end
 ```
+
+## rails g stellar_base:install
+
+- Convenience generator to automatically mount the engine to routes and to create an initializer template
