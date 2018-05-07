@@ -10,6 +10,7 @@ module StellarBase
           if op.success?
             head :ok
           else
+            log_unsuccessful_callback(op)
             head :unprocessable_entity
           end
         end
@@ -17,6 +18,13 @@ module StellarBase
     end
 
     private
+
+    def log_unsuccessful_callback(op)
+      Rails.logger.warn("Unsuccessful bridge callback #{callback_params.to_s}")
+
+      error_messages = op["contract.default"].errors.full_messages
+      Rails.logger.warn("Details: #{error_messages}")
+    end
 
     def callback_params
       params.permit(
