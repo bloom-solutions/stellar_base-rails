@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://horizon-testnet.stellar.org/operations/TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Mon, 07 May 2018 09:11:26 GMT
+      Content-Type:
+      - application/problem+json; charset=utf-8
+      Content-Length:
+      - '278'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=dc359e70de6f558d252737fe540db1f991525684285; expires=Tue, 07-May-19
+        09:11:25 GMT; path=/; domain=.stellar.org; HttpOnly
+      Vary:
+      - Origin
+      X-Ratelimit-Limit:
+      - '17200'
+      X-Ratelimit-Remaining:
+      - '17088'
+      X-Ratelimit-Reset:
+      - '972'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 41728f223bc66d72-SJC
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "type": "https://stellar.org/horizon-errors/bad_request",
+          "title": "Bad Request",
+          "status": 400,
+          "detail": "The request you sent was invalid in some way",
+          "extras": {
+            "invalid_field": "id",
+            "reason": "strconv.ParseInt: parsing \"TEST\": invalid syntax"
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 07 May 2018 09:11:26 GMT
+recorded_with: VCR 4.0.0

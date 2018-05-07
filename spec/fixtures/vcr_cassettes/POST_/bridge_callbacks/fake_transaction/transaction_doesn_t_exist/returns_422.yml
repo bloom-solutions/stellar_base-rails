@@ -1,0 +1,137 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://horizon-testnet.stellar.org/operations/37587135708020737
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 07 May 2018 08:59:19 GMT
+      Content-Type:
+      - application/hal+json; charset=utf-8
+      Content-Length:
+      - '1149'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d1ed4930542a9381f64a9246b90ee112c1525683558; expires=Tue, 07-May-19
+        08:59:18 GMT; path=/; domain=.stellar.org; HttpOnly
+      Content-Disposition:
+      - inline
+      Vary:
+      - Origin
+      X-Ratelimit-Limit:
+      - '17200'
+      X-Ratelimit-Remaining:
+      - '17123'
+      X-Ratelimit-Reset:
+      - '1699'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 41727d635dbf6dc6-SJC
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "_links": {
+            "self": {
+              "href": "https://horizon-testnet.stellar.org/operations/37587135708020737"
+            },
+            "transaction": {
+              "href": "https://horizon-testnet.stellar.org/transactions/4685b3b43512be87586832214da1d3ccd45c4098c2d90b8e3539866debe9652f"
+            },
+            "effects": {
+              "href": "https://horizon-testnet.stellar.org/operations/37587135708020737/effects"
+            },
+            "succeeds": {
+              "href": "https://horizon-testnet.stellar.org/effects?order=desc\u0026cursor=37587135708020737"
+            },
+            "precedes": {
+              "href": "https://horizon-testnet.stellar.org/effects?order=asc\u0026cursor=37587135708020737"
+            }
+          },
+          "id": "37587135708020737",
+          "paging_token": "37587135708020737",
+          "source_account": "GDORX35OXMJXSYI6HXO2URB5K3GW7UPVB5WR7YC36HAMS2EQEQGDIRKT",
+          "type": "payment",
+          "type_i": 1,
+          "created_at": "2018-05-02T11:25:57Z",
+          "transaction_hash": "4685b3b43512be87586832214da1d3ccd45c4098c2d90b8e3539866debe9652f",
+          "asset_type": "native",
+          "from": "GDORX35OXMJXSYI6HXO2URB5K3GW7UPVB5WR7YC36HAMS2EQEQGDIRKT",
+          "to": "GAIS4X5I2YBA2JHSESCYCDT7SKYBPTA5S22WAFHWOPTEMLRWD66GBQW2",
+          "amount": "200.0000000"
+        }
+    http_version: 
+  recorded_at: Mon, 07 May 2018 08:59:19 GMT
+- request:
+    method: get
+    uri: https://horizon-testnet.stellar.org/transactions/TRANSACTION_ID_1234
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Mon, 07 May 2018 08:59:20 GMT
+      Content-Type:
+      - application/problem+json; charset=utf-8
+      Content-Length:
+      - '325'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=df007808095c616a18c3b21eed5171cdb1525683559; expires=Tue, 07-May-19
+        08:59:19 GMT; path=/; domain=.stellar.org; HttpOnly
+      Vary:
+      - Origin
+      X-Ratelimit-Limit:
+      - '17200'
+      X-Ratelimit-Remaining:
+      - '17122'
+      X-Ratelimit-Reset:
+      - '1698'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 41727d6928ba9699-SJC
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "type": "https://stellar.org/horizon-errors/not_found",
+          "title": "Resource Missing",
+          "status": 404,
+          "detail": "The resource at the url requested was not found.  This is usually occurs for one of two reasons:  The url requested is not valid, or no data in our database could be found with the parameters provided."
+        }
+    http_version: 
+  recorded_at: Mon, 07 May 2018 08:59:20 GMT
+recorded_with: VCR 4.0.0
