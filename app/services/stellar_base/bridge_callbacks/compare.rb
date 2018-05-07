@@ -25,7 +25,7 @@ module StellarBase
 
         if result.any?
           message = [result.join(", "), "value isn't the same"].join(" ")
-        elsif transaction["id"] != operation["transaction_id"]
+        elsif transaction["id"] != operation["transaction_hash"]
           message = "Operation#transaction_id and transaction_id not the same"
         end
 
