@@ -172,14 +172,17 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
     end
 
     let(:encoded_payload) do
-      payload = OpenSSL::HMAC.digest("SHA256", mac_key, params.to_json)
+      payload = OpenSSL::HMAC.digest("SHA256", decoded_mac_key, params.to_query)
       Base64.encode64(payload)
+    end
+    let(:decoded_mac_key) do
+      Stellar::Util::StrKey.check_decode(:seed, mac_key)
     end
 
     let(:headers) { { "HTTP_X_PAYLOAD_MAC" => encoded_payload } }
 
     context "doesn't match" do
-      let(:mac_key) { "1234" }
+      let(:mac_key) { "SCGXDVN7C6M7SVLBICB4DBBMHD4VE3NUAQQYTZIGWZPOBC36JY3M4TKF" }
 
       it "renders 422" do
         post uri, params: params, headers: headers
@@ -190,7 +193,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
     end
 
     context "it matches" do
-      let(:mac_key) { "SDYOGCQL6HLTPZUDYDH7E3YST2AGZR3PJZXED62N42FJA6AWXDP3FSCA" }
+      let(:mac_key) { StellarBase.configuration.bridge_callbacks_mac_key }
 
       it "continues to process the payload" do
         post uri, params: params, headers: headers

@@ -1,6 +1,7 @@
 module StellarBase
   class BridgeCallbacksController < ApplicationController
     skip_before_action :verify_authenticity_token
+    before_action :verify_mac_payload, if: :check_mac_payload?
 
     def create
       op = BridgeCallbacks::Operations::Process.(bridge_callback: callback_params)
@@ -10,7 +11,9 @@ module StellarBase
           if op.success?
             head :ok
           else
-            log_unsuccessful_callback(op)
+            contract = op["contract.default"]
+            log_unsuccessful_callback(contract.errors.full_messages)
+
             head :unprocessable_entity
           end
         end
@@ -19,11 +22,13 @@ module StellarBase
 
     private
 
-    def log_unsuccessful_callback(op)
-      Rails.logger.warn("Unsuccessful bridge callback #{callback_params.to_s}")
+    def check_mac_payload?
+      StellarBase.configuration.check_bridge_callbacks_mac_payload
+    end
 
-      error_messages = op["contract.default"].errors.full_messages
-      Rails.logger.warn("Details: #{error_messages}")
+    def log_unsuccessful_callback(error_message)
+      Rails.logger.warn("Unsuccessful bridge callback #{callback_params.to_s}")
+      Rails.logger.warn("Details: #{error_message}")
     end
 
     def callback_params
@@ -44,7 +49,7 @@ module StellarBase
     def verify_mac_payload
       callback_mac_payload = request.headers["HTTP_X_PAYLOAD_MAC"]
 
-      result = BridgeCallbacks::VerifyMacPayload.execute(
+      result = BridgeCallbacks::VerifyMacPayload.(
         callback_params: callback_params,
         callback_mac_payload: callback_mac_payload,
       )
