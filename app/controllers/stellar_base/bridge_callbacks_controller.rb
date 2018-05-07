@@ -40,5 +40,20 @@ module StellarBase
         :transaction_id,
       )
     end
+
+    def verify_mac_payload
+      callback_mac_payload = request.headers["HTTP_X_PAYLOAD_MAC"]
+
+      result = BridgeCallbacks::VerifyMacPayload.execute(
+        callback_params: callback_params,
+        callback_mac_payload: callback_mac_payload,
+      )
+
+      if result.failure?
+        log_unsuccessful_callback result.message
+        head :bad_request
+      end
+    end
+
   end
 end
