@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stellar_base-rails (0.1.2)
+    stellar_base-rails (0.2.0)
       dry-types
       gem_config
       httparty
