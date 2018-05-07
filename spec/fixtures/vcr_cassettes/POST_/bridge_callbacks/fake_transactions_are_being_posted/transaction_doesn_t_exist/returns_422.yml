@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 May 2018 08:59:19 GMT
+      - Mon, 07 May 2018 15:22:04 GMT
       Content-Type:
       - application/hal+json; charset=utf-8
       Content-Length:
@@ -27,8 +27,8 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=d1ed4930542a9381f64a9246b90ee112c1525683558; expires=Tue, 07-May-19
-        08:59:18 GMT; path=/; domain=.stellar.org; HttpOnly
+      - __cfduid=dd206058f3b5ef4372a398a523b5d19111525706524; expires=Tue, 07-May-19
+        15:22:04 GMT; path=/; domain=.stellar.org; HttpOnly
       Content-Disposition:
       - inline
       Vary:
@@ -36,15 +36,15 @@ http_interactions:
       X-Ratelimit-Limit:
       - '17200'
       X-Ratelimit-Remaining:
-      - '17123'
+      - '17118'
       X-Ratelimit-Reset:
-      - '1699'
+      - '1438'
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Cf-Ray:
-      - 41727d635dbf6dc6-SJC
+      - 4174ae0f887a928e-SJC
     body:
       encoding: UTF-8
       string: |-
@@ -79,7 +79,7 @@ http_interactions:
           "amount": "200.0000000"
         }
     http_version: 
-  recorded_at: Mon, 07 May 2018 08:59:19 GMT
+  recorded_at: Mon, 07 May 2018 15:22:03 GMT
 - request:
     method: get
     uri: https://horizon-testnet.stellar.org/transactions/TRANSACTION_ID_1234
@@ -99,7 +99,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Mon, 07 May 2018 08:59:20 GMT
+      - Mon, 07 May 2018 15:22:05 GMT
       Content-Type:
       - application/problem+json; charset=utf-8
       Content-Length:
@@ -107,22 +107,22 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=df007808095c616a18c3b21eed5171cdb1525683559; expires=Tue, 07-May-19
-        08:59:19 GMT; path=/; domain=.stellar.org; HttpOnly
+      - __cfduid=d72341512a349528932a816963ab273481525706525; expires=Tue, 07-May-19
+        15:22:05 GMT; path=/; domain=.stellar.org; HttpOnly
       Vary:
       - Origin
       X-Ratelimit-Limit:
       - '17200'
       X-Ratelimit-Remaining:
-      - '17122'
+      - '17116'
       X-Ratelimit-Reset:
-      - '1698'
+      - '1429'
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Cf-Ray:
-      - 41727d6928ba9699-SJC
+      - 4174ae16dd1493cc-SJC
     body:
       encoding: UTF-8
       string: |-
@@ -133,5 +133,5 @@ http_interactions:
           "detail": "The resource at the url requested was not found.  This is usually occurs for one of two reasons:  The url requested is not valid, or no data in our database could be found with the parameters provided."
         }
     http_version: 
-  recorded_at: Mon, 07 May 2018 08:59:20 GMT
+  recorded_at: Mon, 07 May 2018 15:22:04 GMT
 recorded_with: VCR 4.0.0

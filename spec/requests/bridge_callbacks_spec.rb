@@ -62,7 +62,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
     end
   end
 
-  context "fake transaction" do
+  context "fake transactions are being posted" do
     before do
       StellarBase.configure do |c|
         c.check_bridge_callbacks_authenticity = true
@@ -128,7 +128,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
           amount: "200.0000000",
           asset_code: "",
           asset_issuer: "",
-          memo_type: "text",
+          memo_type: "id",
           memo: "BX857D13E",
           data: "",
           transaction_id: "4685b3b43512be87586832214da1d3ccd45c4098c2d90b8e3539866debe9652f",
