@@ -6,6 +6,8 @@ module StellarBase
       promises :operation_response
 
       executed do |c|
+        c.fail_and_return! unless c.operation_id.present?
+
         id = c.operation_id
         response = c.client.get_operation(id)
 
