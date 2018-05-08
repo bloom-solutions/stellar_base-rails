@@ -1,4 +1,5 @@
 require "gem_config"
+require "stellar-base"
 require "light-service"
 require "virtus"
 require "httparty"
@@ -15,8 +16,11 @@ module StellarBase
   with_configuration do
     has :horizon_url, default: "https://horizon.stellar.org"
     has :modules, default: [:bridge_callbacks]
-    has :check_bridge_callbacks_authenticity, default: false
+
     has :on_bridge_callback
+    has :check_bridge_callbacks_authenticity, default: false
+    has :check_bridge_callbacks_mac_payload, default: false
+    has :bridge_callbacks_mac_key, default: false
   end
 
   def self.included_module?(module_name)

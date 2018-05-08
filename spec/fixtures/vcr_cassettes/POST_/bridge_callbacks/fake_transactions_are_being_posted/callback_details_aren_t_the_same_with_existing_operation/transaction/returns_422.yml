@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 May 2018 10:45:13 GMT
+      - Mon, 07 May 2018 15:22:06 GMT
       Content-Type:
       - application/hal+json; charset=utf-8
       Content-Length:
@@ -27,8 +27,8 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=dfe68e48022a20125e965bf486a576f871525689912; expires=Tue, 07-May-19
-        10:45:12 GMT; path=/; domain=.stellar.org; HttpOnly
+      - __cfduid=da370fcf0764b50dc609422628d4c560e1525706526; expires=Tue, 07-May-19
+        15:22:06 GMT; path=/; domain=.stellar.org; HttpOnly
       Content-Disposition:
       - inline
       Vary:
@@ -36,15 +36,15 @@ http_interactions:
       X-Ratelimit-Limit:
       - '17200'
       X-Ratelimit-Remaining:
-      - '17164'
+      - '17115'
       X-Ratelimit-Reset:
-      - '2577'
+      - '1427'
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Cf-Ray:
-      - 4173188439c195ef-SJC
+      - 4174ae1bdca193a8-SJC
     body:
       encoding: UTF-8
       string: |-
@@ -79,7 +79,7 @@ http_interactions:
           "amount": "200.0000000"
         }
     http_version: 
-  recorded_at: Mon, 07 May 2018 10:45:12 GMT
+  recorded_at: Mon, 07 May 2018 15:22:05 GMT
 - request:
     method: get
     uri: https://horizon-testnet.stellar.org/transactions/4685b3b43512be87586832214da1d3ccd45c4098c2d90b8e3539866debe9652f
@@ -99,7 +99,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 May 2018 10:45:14 GMT
+      - Mon, 07 May 2018 15:22:07 GMT
       Content-Type:
       - application/hal+json; charset=utf-8
       Content-Length:
@@ -107,8 +107,8 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=da7879059189872ca64994f2bb7e04e0c1525689913; expires=Tue, 07-May-19
-        10:45:13 GMT; path=/; domain=.stellar.org; HttpOnly
+      - __cfduid=d9d86b78ffb09aa9a79ff116ed999e0331525706527; expires=Tue, 07-May-19
+        15:22:07 GMT; path=/; domain=.stellar.org; HttpOnly
       Content-Disposition:
       - inline
       Vary:
@@ -116,15 +116,15 @@ http_interactions:
       X-Ratelimit-Limit:
       - '17200'
       X-Ratelimit-Remaining:
-      - '17155'
+      - '17114'
       X-Ratelimit-Reset:
-      - '2622'
+      - '1427'
       Expect-Ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Cf-Ray:
-      - 41731889cd429625-SJC
+      - 4174ae228f66963d-SJC
     body:
       encoding: UTF-8
       string: |-
@@ -174,5 +174,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Mon, 07 May 2018 10:45:13 GMT
+  recorded_at: Mon, 07 May 2018 15:22:06 GMT
 recorded_with: VCR 4.0.0

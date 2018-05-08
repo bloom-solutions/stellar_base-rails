@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "light-service"
   s.add_dependency "rails", "~> 5.1"
   s.add_dependency "dry-types"
+  s.add_dependency "stellar-base", "0.14.0"
   s.add_dependency "trailblazer", "~> 2.0"
   s.add_dependency "trailblazer-rails"
   s.add_dependency "httparty"
