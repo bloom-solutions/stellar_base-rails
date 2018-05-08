@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.0]
+### Added
+- Added `c.check_bridge_callbacks_mac_payload` configuration option to flag if `/bridge_callbacks` will check for the `X_PAYLOAD_MAC` header that comes from the bridge server
+- Added `c.bridge_callbacks_mac_key` configuration
+- Added `StellarBase::BridgeCallbacks::VerifyMacPayload` service object to check if the callback is authentic
+
 ## [0.2.1]
 ### Added
 - Added `BridgeCallbacks::Compare` step to check callback contents against operation/transaction details from Horizon
