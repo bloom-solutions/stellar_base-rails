@@ -44,3 +44,31 @@ end
 - Value(s): Any Stellar Private Key, it should be the same as the mac_key configured in your bridge server
 - Default: None
 - This is used to verify the contents of `X_PAYLOAD_MAC` by encoding the raw request body with the decoded `bridge_callback_mac_key` as the key
+
+# Withdraw
+
+Activate this by specifying `withdraw` in the `modules` configuration.
+
+This will mount the `/withdraw` endpoint.
+
+To detect incoming payments of Stellar assets, you need to have bridge setup for this to work. The quickest way would be to use the `bridge_callbacks` module:
+
+```ruby
+StellarBase.configure do |c|
+  c.modules = %i[bridge_callbacks withdraw]
+  c.on_bridge_callback = "ProcessBridgeCallback"
+end
+
+class ProcessBridgeCallback
+  def self.call(bridge_callback)
+    # You can do other things
+    StellarBase::Withdrawal::Process.(bridge_callback)
+  end
+end
+```
+
+You can also just pass in `StellarBase::Withdrawal::Process` directly into `on_bridge_callback` if you don't need to do anything else.
+
+## c.withdraw
+- Value: path to a YAML configuration file describing what can be withdrawn. See below.
+- Required
