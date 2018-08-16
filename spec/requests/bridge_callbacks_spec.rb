@@ -6,6 +6,12 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
   end
 
   context "successful callback class" do
+    before do
+      StellarBase.configure do |c|
+        c.on_bridge_callback = "ProcessBridgeCallback"
+      end
+    end
+
     it "triggers the configured .on_bridge_callback class" do
       params = {
         id: "OPERATION_ID_1234",

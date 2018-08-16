@@ -3,10 +3,10 @@ require "spec_helper"
 module StellarBase
   module BridgeCallbacks
     module Contracts
-      describe Process do
+      describe Create do
         let(:params) do
           {
-            id: "OPERATION_ID_1234",
+            operation_id: "OPERATION_ID_1234",
             from: "GABCSENDERXLMADDRESS",
             route: "RECIPIENTROUTE",
             amount: 100.00,
@@ -23,7 +23,7 @@ module StellarBase
           contract = described_class.new(BridgeCallback.new)
           contract.validate(params)
 
-          expect(contract.id).to eq "OPERATION_ID_1234"
+          expect(contract.operation_id).to eq "OPERATION_ID_1234"
           expect(contract.from).to eq "GABCSENDERXLMADDRESS"
           expect(contract.route).to eq "RECIPIENTROUTE"
           expect(contract.amount).to eq 100.00
@@ -41,8 +41,7 @@ module StellarBase
             contract = described_class.new(BridgeCallback.new)
             contract.validate({})
 
-            expect(contract.errors[:id])
-              .to include "can't be blank"
+            expect(contract.errors[:operation_id]).to include "can't be blank"
           end
         end
 
@@ -64,7 +63,18 @@ module StellarBase
             {
               operation_id: "OPERATION_ID_1234",
               transaction_id: "TRANSACTION_ID_1234",
-              params: params,
+              params: {
+                id: "OPERATION_ID_1234",
+                from: "GABCSENDERXLMADDRESS",
+                route: "RECIPIENTROUTE",
+                amount: 100.00,
+                asset_code: "XLM",
+                asset_issuer: "GABCASSETISSUER",
+                memo_type: "id",
+                memo: "2",
+                data: "DATAHASH",
+                transaction_id: "TRANSACTION_ID_1234",
+              },
             }
           end
           let(:result) { double(LightService::Context) }

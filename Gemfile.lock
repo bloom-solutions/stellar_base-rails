@@ -105,6 +105,11 @@ GEM
       dry-logic (~> 0.4, >= 0.4.2)
     equalizer (0.0.11)
     erubi (1.7.1)
+    factory_bot (4.10.0)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.10.0)
+      factory_bot (~> 4.10.0)
+      railties (>= 3.0.0)
     ffi (1.9.23)
     gem_config (0.3.1)
     globalid (0.4.1)
@@ -251,6 +256,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  factory_bot_rails
   pry-byebug
   rspec-rails
   sqlite3
@@ -259,4 +265,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.1
+   1.16.3
