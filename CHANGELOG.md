@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - BridgeCallbacks (migration required) are saved in the database and uniqueness on the operation id is handled automatically.
+- `c.withdraw` should configure file path containing withdrawable assets.
+- Added /withdraw endpoint.
 
 ## [0.3.0]
 ### Added

@@ -70,5 +70,5 @@ end
 You can also just pass in `StellarBase::Withdrawal::Process` directly into `on_bridge_callback` if you don't need to do anything else.
 
 ## c.withdraw
-- Value: path to a YAML configuration file describing what can be withdrawn. See below.
+- Value: path to a YAML configuration file describing what can be withdrawn. See the [list](docs/withdraw.yml).
 - Required
