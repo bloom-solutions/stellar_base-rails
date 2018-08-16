@@ -2,15 +2,19 @@ module StellarBase
   module BridgeCallbacks
     module Operations
       class Create < ApplicationOperation
-        step :model!
+        step :find_model!
+        step Model(BridgeCallback, :new)
         step :assign_operation_id!
         step Contract::Build(constant: Contracts::Create)
         step Contract::Validate(key: :bridge_callback)
         step Contract::Persist()
         step :process!
 
-        def model!(options, **)
-          options["model"] = BridgeCallback.new
+        def find_model!(options, params:, **)
+          operation_id = params[:bridge_callback][:operation_id]
+          bridge_callback = BridgeCallback.find_by(operation_id: operation_id)
+          options["model"] = bridge_callback
+          bridge_callback.present? ? Railway.pass_fast! : true
         end
 
         def assign_operation_id!(options, params:, **)
