@@ -32,7 +32,7 @@ end
 #### c.modules
 You can supply what endpoints you want to activate with the gem
 
-- Value(s): array of symbols. See the [modules documentation][docs/modules] for more details.
+- Value(s): array of symbols. See the [modules documentation](docs/modules.md) for more details.
 - Default: `%i(bridge_callbacks)`
 
 #### c.horizon_url

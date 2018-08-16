@@ -1,0 +1,12 @@
+---
+- type: crypto
+  network: BTC
+  asset_code: BTCT # you can name the token something else
+  issuer: G-issuer-on-stellar
+  fee_fixed: 0.01
+  fee_percent: 10.0
+- type: crypto
+  network: ETH
+  asset_code: ETH
+  issuer: G-issuer-on-stellar
+  # if no fee is specified, it is 0
