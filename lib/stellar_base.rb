@@ -15,8 +15,8 @@ module StellarBase
 
   with_configuration do
     has :horizon_url, default: "https://horizon.stellar.org"
-    has :modules, default: [:bridge_callbacks]
-
+    has :modules, default: [:bridge_callbacks, :withdraw]
+    has :withdraw
     has :on_bridge_callback
     has :check_bridge_callbacks_authenticity, default: false
     has :check_bridge_callbacks_mac_payload, default: false
