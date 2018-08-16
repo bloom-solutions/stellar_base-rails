@@ -3,7 +3,7 @@ require "spec_helper"
 module StellarBase
   module BridgeCallbacks
     module Operations
-      RSpec.describe Process do
+      RSpec.describe Create do
         it "processes a bridge server callback" do
           expect(BridgeCallbacks::Process).to receive(:call).and_return(true)
 

@@ -3,7 +3,7 @@ require "spec_helper"
 module StellarBase
   module BridgeCallbacks
     module Contracts
-      describe Process do
+      describe Create do
         let(:params) do
           {
             id: "OPERATION_ID_1234",

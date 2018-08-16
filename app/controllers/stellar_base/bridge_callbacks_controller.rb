@@ -4,7 +4,7 @@ module StellarBase
     before_action :verify_mac_payload, if: :check_mac_payload?
 
     def create
-      op = BridgeCallbacks::Operations::Process.(bridge_callback: callback_params)
+      op = BridgeCallbacks::Operations::Create.(bridge_callback: callback_params)
 
       respond_to do |f|
         f.json do

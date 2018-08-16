@@ -1,9 +1,9 @@
 module StellarBase
   module BridgeCallbacks
     module Operations
-      class Process < ApplicationOperation
+      class Create < ApplicationOperation
         step :model!
-        step Contract::Build(constant: Contracts::Process)
+        step Contract::Build(constant: Contracts::Create)
         step Contract::Validate(key: :bridge_callback)
         step Contract::Persist(method: :sync)
         step :process!

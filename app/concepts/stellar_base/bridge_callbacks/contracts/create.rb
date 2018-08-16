@@ -1,7 +1,7 @@
 module StellarBase
   module BridgeCallbacks
     module Contracts
-      class Process < ApplicationContract
+      class Create < ApplicationContract
 
         property :id
         property :from
