@@ -45,7 +45,7 @@ end
 - Default: None
 - This is used to verify the contents of `X_PAYLOAD_MAC` by encoding the raw request body with the decoded `bridge_callback_mac_key` as the key
 
-# Withdraw
+# [Withdraw](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#withdraw)
 
 Activate this by specifying `withdraw` in the `modules` configuration.
 
@@ -70,5 +70,35 @@ end
 You can also just pass in `StellarBase::Withdrawal::Process` directly into `on_bridge_callback` if you don't need to do anything else.
 
 ## c.withdraw
-- Value: path to a YAML configuration file describing what can be withdrawn. See below.
+- Value:
+  - path to a YAML configuration file describing what can be withdrawn (see below), or
+  - JSON: array of JSON objects following the YAML but in JSON format, or
+  - Ruby array of hashes
 - Required
+
+## c.on_withdraw
+- Value:
+  - object that responds to `.call` accepts the arguments:
+    - `withdrawal_request`
+    - `bridge_callback`
+- Required
+
+Example:
+
+```ruby
+StellarBase.configure do |c|
+  # ....
+  c.on_withdraw = ProcessWithdrawal
+  c.on_withdraw = "ProcessWithdrawal" # constantize will be called on this when a request is received
+
+  c.on_withdraw = ->(withdrawal_request, bridge_callback) do
+    # contact hot wallet here
+  end
+end
+
+class ProcessWithdrawal
+  def self.call(withdrawal_request, bridge_callback)
+    # Contact hot wallet here
+  end
+end
+```

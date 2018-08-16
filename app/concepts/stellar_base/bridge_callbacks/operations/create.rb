@@ -2,9 +2,9 @@ module StellarBase
   module BridgeCallbacks
     module Operations
       class Create < ApplicationOperation
+        step :assign_operation_id!
         step :find_model!
         step Model(BridgeCallback, :new)
-        step :assign_operation_id!
         step Contract::Build(constant: Contracts::Create)
         step Contract::Validate(key: :bridge_callback)
         step Contract::Persist()

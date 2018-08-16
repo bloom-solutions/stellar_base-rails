@@ -39,7 +39,7 @@ module StellarBase
         end
 
         context "operation id has been received before" do
-          before do
+          let!(:bridge_callback) do
             create(:stellar_base_bridge_callback, operation_id: "213")
           end
 
@@ -60,6 +60,7 @@ module StellarBase
             })
 
             expect(op).to be_success
+            expect(op["model"]).to eq bridge_callback
           end
         end
 

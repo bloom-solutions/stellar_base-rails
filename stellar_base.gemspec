@@ -31,5 +31,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'vcr', '~> 4.0'
   s.add_development_dependency 'webmock'
   s.add_development_dependency 'factory_bot_rails'
+  s.add_development_dependency "stellar-sdk"
 
 end

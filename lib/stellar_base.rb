@@ -17,15 +17,45 @@ module StellarBase
     has :horizon_url, default: "https://horizon.stellar.org"
     has :modules, default: [:bridge_callbacks]
 
+    has :distribution_account, classes: [NilClass, String]
+
     has :on_bridge_callback
     has :check_bridge_callbacks_authenticity, default: false
     has :check_bridge_callbacks_mac_payload, default: false
     has :bridge_callbacks_mac_key, default: false
+
+    has :withdraw, classes: [NilClass, Array, String, Pathname]
+    has :on_withdraw
+  end
+
+  after_configuration_change do
+    self.convert_config_withdraw!
   end
 
   def self.included_module?(module_name)
     self.configuration.modules&.include?(module_name)
   end
+
+  def self.convert_config_withdraw!
+    withdraw_config = self.configuration.withdraw
+    return if withdraw_config.is_a?(Array) || withdraw_config.nil?
+
+    array_of_hashes = try_from_yaml_file_path(withdraw_config) ||
+      try_from_json(withdraw_config)
+
+    self.configuration.withdraw = array_of_hashes.map(&:with_indifferent_access)
+  end
+
+  def self.try_from_json(str)
+    JSON.parse(str)
+  rescue JSON::ParserError
+  end
+
+  def self.try_from_yaml_file_path(str)
+    YAML.load_file(str.to_s)
+  rescue Errno::ENOENT
+  end
+
 end
 
 require "stellar_base/horizon_client"
