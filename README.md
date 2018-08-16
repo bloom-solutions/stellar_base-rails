@@ -11,6 +11,11 @@ Adding modules to your routes:
 mount StellarBase::Engine => "/stellar_base"
 ```
 
+```sh
+rails stellar_base:install:migrations
+rails db:migrate
+```
+
 ### Configuration
 Create an initializer in your rails application:
 

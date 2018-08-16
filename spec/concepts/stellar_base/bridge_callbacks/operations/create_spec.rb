@@ -25,8 +25,7 @@ module StellarBase
           expect(op).to be_success
 
           callback = op["model"]
-
-          expect(callback.id).to eq "OPERATION_ID_1234"
+          expect(callback.operation_id).to eq "OPERATION_ID_1234"
           expect(callback.from).to eq "GABCSENDERXLMADDRESS"
           expect(callback.route).to eq "RECIPIENTROUTE"
           expect(callback.amount).to eq 100.00

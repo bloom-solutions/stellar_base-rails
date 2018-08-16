@@ -3,7 +3,7 @@ module StellarBase
     module Contracts
       class Create < ApplicationContract
 
-        property :id
+        property :operation_id
         property :from
         property :route
         property :amount
@@ -14,7 +14,7 @@ module StellarBase
         property :data
         property :transaction_id
 
-        validates :id, presence: true
+        validates :operation_id, presence: true
         validates :transaction_id, presence: true
         validates :from, presence: true
         validates :amount, presence: true
@@ -27,10 +27,10 @@ module StellarBase
           end
 
           result = BridgeCallbacks::Check.({
-            operation_id: id,
+            operation_id: operation_id,
             transaction_id: transaction_id,
             params: {
-              id: id,
+              id: operation_id,
               from: from,
               route: route,
               amount: amount,

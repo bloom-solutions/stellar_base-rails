@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- BridgeCallback model uses `operation_id` instead of `id`
+
+### Added
+- BridgeCallbacks (migration required) are saved in the database and uniqueness on the operation id is handled automatically.
+
 ## [0.3.0]
 ### Added
 - Added `c.check_bridge_callbacks_mac_payload` configuration option to flag if `/bridge_callbacks` will check for the `X_PAYLOAD_MAC` header that comes from the bridge server
