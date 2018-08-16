@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180816110314) do
+ActiveRecord::Schema.define(version: 20180816135847) do
 
   create_table "stellar_base_bridge_callbacks", force: :cascade do |t|
     t.string "operation_id", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180816110314) do
     t.datetime "updated_at", null: false
     t.index ["asset_code", "asset_issuer"], name: "index_stellar_base_bridge_callbacks_on_asset"
     t.index ["memo"], name: "index_stellar_base_bridge_callbacks_on_memo"
-    t.index ["operation_id"], name: "index_stellar_base_bridge_callbacks_on_operation_id"
+    t.index ["operation_id"], name: "index_stellar_base_bridge_callbacks_on_operation_id", unique: true
     t.index ["transaction_id"], name: "index_stellar_base_bridge_callbacks_on_transaction_id"
   end
 
