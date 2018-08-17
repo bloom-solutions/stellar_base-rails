@@ -19,7 +19,9 @@ module StellarBase
           details = withdraw_config.find do |e|
             e[:asset_code] == params[:withdrawal_request][:asset_code]
           end
-          # Railway.fail_fast! unless withdraw_config
+
+          return Railway.fail_fast! if details.nil?
+
           options["withdrawal_asset_details"] = details
           return true
         end

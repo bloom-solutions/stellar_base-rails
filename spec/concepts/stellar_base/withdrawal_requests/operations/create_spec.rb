@@ -40,6 +40,18 @@ module StellarBase
           expect(withdrawal_request.fee_network).to eq 0.0005
         end
 
+        context "an asset that cannot be withdrawn" do
+          it "is not successful" do
+            op = described_class.(withdrawal_request: {
+              type: "crypto",
+              asset_code: "BCHT",
+              dest: "my-bch-addr",
+            })
+
+            expect(op).to_not be_success
+          end
+        end
+
       end
     end
   end
