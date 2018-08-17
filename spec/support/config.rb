@@ -5,7 +5,7 @@ RSpec.configure do |c|
 
   c.before(:each) do
     StellarBase.configure do |c|
-      c.modules = %i(bridge_callbacks)
+      c.modules = %i(bridge_callbacks withdraw)
       c.horizon_url = "https://horizon-testnet.stellar.org"
 
       c.distribution_account = "G-DISTRO-ACCOUNT"

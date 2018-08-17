@@ -1,5 +1,5 @@
 module StellarBase
-  class WithdrawsController < ApplicationController
+  class WithdrawController < ApplicationController
 
     WITHDRAWAL_REQUEST_PARAMS = %i[
       type

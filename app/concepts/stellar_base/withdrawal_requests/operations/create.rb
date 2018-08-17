@@ -5,6 +5,7 @@ module StellarBase
 
         DEFAULT_ETA = (10 * 60).freeze
 
+        step self::Policy::Pundit(WithdrawalRequestPolicy, :create?)
         step Model(WithdrawalRequest, :new)
         step :find_withdrawal_asset_details!
         success :set_defaults!

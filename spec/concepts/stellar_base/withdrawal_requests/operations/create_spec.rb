@@ -52,6 +52,24 @@ module StellarBase
           end
         end
 
+        context "bridge_callbacks module is not loaded" do
+          before do
+            StellarBase.configuration.modules = %i()
+          end
+
+          it "creates a withdrawal request" do
+            op = described_class.(withdrawal_request: {
+              type: "crypto",
+              asset_code: "BTCT",
+              dest: "my-btc-addr",
+              dest_extra: "pls",
+              fee_network: 0.0005,
+            })
+
+            expect(op).to_not be_success
+          end
+        end
+
       end
     end
   end

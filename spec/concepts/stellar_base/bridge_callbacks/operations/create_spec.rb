@@ -64,6 +64,33 @@ module StellarBase
           end
         end
 
+        context "module is not enabled" do
+          before do
+            StellarBase.configuration.modules = %i()
+          end
+
+          it "fails" do
+            op = described_class.({
+              bridge_callback: {
+                id: "OPERATION_ID_1234",
+                from: "GABCSENDERXLMADDRESS",
+                route: "RECIPIENTROUTE",
+                amount: 100.00,
+                asset_code: "XLM",
+                asset_issuer: "GABCASSETISSUER",
+                memo_type: "id",
+                memo: "2",
+                data: "DATAHASH",
+                transaction_id: "TRANSACTION_ID_1234",
+              },
+            })
+
+            expect(op).to_not be_success
+            expect(BridgeCallback.exists?(operation_id: "OPERATION_ID_1234")).
+              to be false
+          end
+        end
+
       end
     end
   end

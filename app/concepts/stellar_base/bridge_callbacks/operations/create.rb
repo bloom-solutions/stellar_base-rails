@@ -2,6 +2,7 @@ module StellarBase
   module BridgeCallbacks
     module Operations
       class Create < ApplicationOperation
+        step Policy::Pundit(BridgeCallbackPolicy, :create?)
         step :assign_operation_id!
         step :find_model!
         step Model(BridgeCallback, :new)
