@@ -62,12 +62,12 @@ end
 class ProcessBridgeCallback
   def self.call(bridge_callback)
     # You can do other things
-    StellarBase::Withdrawal::Process.(bridge_callback)
+    StellarBase::WithdrawalRequests::Process.(bridge_callback)
   end
 end
 ```
 
-You can also just pass in `StellarBase::Withdrawal::Process` directly into `on_bridge_callback` if you don't need to do anything else.
+You can also just pass in `StellarBase::WithdrawalRequests::Process` directly into `on_bridge_callback` if you don't need to do anything else.
 
 ## c.withdraw
 - Value:
