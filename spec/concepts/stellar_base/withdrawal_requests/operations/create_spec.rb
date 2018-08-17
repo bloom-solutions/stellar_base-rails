@@ -10,7 +10,7 @@ module StellarBase
           expect(DetermineFee).to receive(:call).with(0.01).and_return(0.01)
           expect(DetermineFee).to receive(:call).with(nil).
             and_return(0.0)
-          expect(DetermineFee).to receive(:network).with(0.0005).
+          expect(DetermineFee).to receive(:network).with("bitcoin", 0.0005).
             and_return(0.0005)
 
           op = described_class.(withdrawal_request: {

@@ -25,8 +25,10 @@ module StellarBase
         end
 
         def set_defaults!(options, withdrawal_asset_details:, params:, **)
-          network_fee = DetermineFee.
-            network(params[:withdrawal_request][:fee_network])
+          network_fee = DetermineFee.network(
+            withdrawal_asset_details[:network],
+            params[:withdrawal_request][:fee_network],
+          )
           params[:withdrawal_request].merge!({
             asset_type: params[:withdrawal_request][:type],
             issuer: withdrawal_asset_details[:issuer],

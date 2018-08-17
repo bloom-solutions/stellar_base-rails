@@ -18,7 +18,7 @@ RSpec.configure do |c|
       c.withdraw = [
         {
           type: "crypto",
-          network: "BTC",
+          network: "bitcoin",
           asset_code: "BTCT",
           issuer: CONFIG[:issuer_address],
           fee_fixed: 0.01,

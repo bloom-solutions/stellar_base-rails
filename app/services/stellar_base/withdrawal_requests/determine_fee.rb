@@ -3,14 +3,17 @@ module StellarBase
     class DetermineFee
 
       DEFAULT = 0.0
-      DEFAULT_NETWORK = 0.0001
+      # NOTE: Hard-code default network fees for now.
+      DEFAULT_NETWORK = {
+        bitcoin: 0.0001,
+      }.with_indifferent_access.freeze
 
       def self.call(v)
         v || DEFAULT
       end
 
-      def self.network(v)
-        v || DEFAULT_NETWORK
+      def self.network(network, v)
+        v || DEFAULT_NETWORK.fetch(network)
       end
 
     end
