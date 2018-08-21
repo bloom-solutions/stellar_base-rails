@@ -11,6 +11,9 @@ describe "GET /withdraw", type: :request, vcr: {record: :once} do
       @withdrawal_request = withdrawal_request
       @bridge_callback = bridge_callback
     end
+    StellarBase.configuration.on_bridge_callback = ->(bridge_callback) do
+      StellarBase::WithdrawalRequests::Process.(bridge_callback)
+    end
   end
 
   context "payment for an asset that can be withdrawn" do
@@ -18,31 +21,36 @@ describe "GET /withdraw", type: :request, vcr: {record: :once} do
       build_stubbed(:stellar_base_bridge_callback, {
         amount: 0.5,
         asset_code: "BTCT",
-        asset_issuer: CONFIG[:asset_address],
+        asset_issuer: CONFIG[:issuer_address],
+        memo_type: json_response[:memo_type],
+        memo: json_response[:memo],
       })
     end
-
-    it "executes the given class" do
+    let(:json_response) do
       get(uri, {
         params: {
           type: "crypto",
           asset_code: "BTCT",
           dest: "my-btc-address",
-          network_fee: 0.001,
-        }
+          fee_network: 0.001,
+          format: :json,
+        },
       })
 
       expect(response).to be_success
-      json_response = JSON.parse(response.body).with_indifferent_access
-      expect(response[:type]).to eq "crypto"
-      expect(response[:asset_code]).to eq "BTCT"
-      expect(response[:dest]).to eq "my-btc-address"
-      expect(response[:fee_fixed]).to eq 0.01
-      expect(response[:fee_percent]).to be_zero
-      expect(response[:network_fee]).to eq 0.001
-      expect(response[:memo_type]).to "text"
-      expect(response[:memo]).to be_present
+      JSON.parse(response.body).with_indifferent_access
+    end
 
+    it "executes the given instructions" do
+      # NOTE: see WithdrawalRequestRepresenter spec for detailed specs
+      expect(json_response[:account_id]).
+        to eq StellarBase.configuration.distribution_account
+      expect(json_response[:memo]).to be_present
+
+      # Execute bridge callback
+      StellarBase::BridgeCallbacks::Process.(bridge_callback)
+
+      expect(@withdrawal_request).to be_present
       expect(@withdrawal_request.account_id).
         to eq StellarBase.configuration.distribution_account
       expect(@withdrawal_request.asset_type).to eq "crypto"
@@ -51,8 +59,8 @@ describe "GET /withdraw", type: :request, vcr: {record: :once} do
       expect(@withdrawal_request.dest).to eq "my-btc-address"
       expect(@withdrawal_request.fee_fixed).to eq 0.01
       expect(@withdrawal_request.fee_percent).to be_zero
-      expect(@withdrawal_request.network_fee).to eq 0.001
-      expect(@withdrawal_request.memo_type).to "text"
+      expect(@withdrawal_request.fee_network).to eq 0.001
+      expect(@withdrawal_request.memo_type).to eq "text"
       expect(@withdrawal_request.memo).to be_present
 
       expect(@bridge_callback).to eq bridge_callback

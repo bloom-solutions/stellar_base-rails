@@ -15,6 +15,7 @@ class CreateStellarBaseWithdrawalRequests < ActiveRecord::Migration[5.1]
       t.decimal :fee_fixed, null: false, default: 0.0
       t.decimal :fee_percent, null: false, default: 0.0
       t.decimal :fee_network, null: false, default: 0.0
+      t.string :extra_info
       t.index([:asset_type, :asset_code], {
         name: :index_stellar_base_withdrawal_requests_on_asset,
       })

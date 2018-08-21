@@ -5,7 +5,7 @@ class UniqueStellarBaseBridgeCallbacksOperationId < ActiveRecord::Migration[5.1]
   end
 
   def down
-    remove_index :stellar_base_bridge_callbacks, :operation_id, unique: true
+    remove_index :stellar_base_bridge_callbacks, :operation_id
     add_index :stellar_base_bridge_callbacks, :operation_id
   end
 end

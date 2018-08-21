@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module StellarBase
   module WithdrawalRequests
-    RSpec.describe Process do
+    RSpec.describe self::Process do
 
       context "payment matches a withdrawal_request and memo" do
         let!(:withdrawal_request) do

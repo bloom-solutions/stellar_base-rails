@@ -2,7 +2,12 @@ module StellarBase
   module WithdrawalRequests
     class Process
 
-      def self.call(bridge_callback, on_withdraw: StellarBase.on_withdraw)
+      extend LightService::Organizer
+
+      def self.call(
+        bridge_callback,
+        on_withdraw: StellarBase.configuration.on_withdraw
+      )
         with(
           bridge_callback: bridge_callback,
           on_withdraw: on_withdraw,
@@ -15,7 +20,7 @@ module StellarBase
           CallOnWithdraw,
         ]
       end
-      private_method :actions
+      private_class_method :actions
 
     end
   end

@@ -25,6 +25,9 @@ Gem::Specification.new do |s|
   s.add_dependency "trailblazer", "~> 2.0"
   s.add_dependency "trailblazer-rails"
   s.add_dependency "httparty"
+  s.add_dependency "disposable"
+  s.add_dependency "representable"
+  s.add_dependency "multi_json" # required by representable json
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"

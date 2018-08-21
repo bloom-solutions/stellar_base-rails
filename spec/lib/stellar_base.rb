@@ -5,7 +5,7 @@ RSpec.describe StellarBase do
   describe "configuration" do
     describe "withdraw" do
       it "accepts a Ruby hash" do
-        described_class.configuration.withdraw = [
+        described_class.configuration.withdrawable_assets = [
           {
             type: "crypto",
             network: "ETH",
@@ -20,7 +20,7 @@ RSpec.describe StellarBase do
       end
 
       it "accepts JSON" do
-        described_class.configuration.withdraw = [
+        described_class.configuration.withdrawable_assets = [
           {
             type: "crypto",
             network: "ETH",
@@ -35,10 +35,10 @@ RSpec.describe StellarBase do
       end
 
       it "accepts a YAML file path" do
-        described_class.configuration.withdraw =
+        described_class.configuration.withdrawable_assets =
           ROOT_DIR.join("docs/withdraw.yml")
 
-        config = described_class.configuration.withdraw
+        config = described_class.configuration.withdrawable_assets
         expect(config[1][:issuer]).to eq "G-issuer-on-stellar"
       end
     end

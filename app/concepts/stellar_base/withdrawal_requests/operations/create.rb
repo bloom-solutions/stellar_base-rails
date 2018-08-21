@@ -16,8 +16,8 @@ module StellarBase
         private
 
         def find_withdrawal_asset_details!(options, params:, **)
-          withdraw_config = StellarBase.configuration.withdraw
-          details = withdraw_config.find do |e|
+          withdrawable_assets = StellarBase.configuration.withdrawable_assets
+          details = withdrawable_assets.find do |e|
             e[:asset_code] == params[:withdrawal_request][:asset_code]
           end
 
@@ -28,7 +28,7 @@ module StellarBase
         end
 
         def set_defaults!(options, withdrawal_asset_details:, params:, **)
-          network_fee = DetermineFee.network(
+          fee_network = DetermineFee.network(
             withdrawal_asset_details[:network],
             params[:withdrawal_request][:fee_network],
           )
@@ -43,7 +43,7 @@ module StellarBase
             max_amount: nil,
             fee_fixed: DetermineFee.(withdrawal_asset_details[:fee_fixed]),
             fee_percent: DetermineFee.(withdrawal_asset_details[:fee_percent]),
-            fee_network: network_fee,
+            fee_network: fee_network,
           })
         end
 

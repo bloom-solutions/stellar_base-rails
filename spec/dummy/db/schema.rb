@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180816135847) do
     t.decimal "fee_fixed", default: "0.0", null: false
     t.decimal "fee_percent", default: "0.0", null: false
     t.decimal "fee_network", default: "0.0", null: false
+    t.string "extra_info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_type", "asset_code"], name: "index_stellar_base_withdrawal_requests_on_asset"

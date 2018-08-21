@@ -6,6 +6,7 @@ module StellarBase
       asset_code
       dest
       dest_extra
+      fee_network
     ]
 
     def create
@@ -14,7 +15,9 @@ module StellarBase
       respond_to do |f|
         f.json do
           if op.success?
-            head :ok
+            twin = WithdrawalRequestTwin.new(op["model"])
+            representer = WithdrawalRequestRepresenter.new(twin)
+            render json: representer
           else
             head :unprocessable_entity
           end

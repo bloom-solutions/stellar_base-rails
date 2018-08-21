@@ -5,8 +5,10 @@ require "virtus"
 require "httparty"
 require "trailblazer-rails"
 require "disposable"
+require "multi_json"
 require "reform"
 require "reform/form/coercion"
+require "representable"
 
 require "stellar_base/engine"
 
@@ -24,7 +26,7 @@ module StellarBase
     has :check_bridge_callbacks_mac_payload, default: false
     has :bridge_callbacks_mac_key, default: false
 
-    has :withdraw, classes: [NilClass, Array, String, Pathname]
+    has :withdrawable_assets, classes: [NilClass, Array, String, Pathname]
     has :on_withdraw
   end
 
@@ -37,13 +39,14 @@ module StellarBase
   end
 
   def self.convert_config_withdraw!
-    withdraw_config = self.configuration.withdraw
-    return if withdraw_config.is_a?(Array) || withdraw_config.nil?
+    withdrawable_assets = self.configuration.withdrawable_assets
+    return if withdrawable_assets.is_a?(Array) || withdrawable_assets.nil?
 
-    array_of_hashes = try_from_yaml_file_path(withdraw_config) ||
-      try_from_json(withdraw_config)
+    array_of_hashes = try_from_yaml_file_path(withdrawable_assets) ||
+      try_from_json(withdrawable_assets)
 
-    self.configuration.withdraw = array_of_hashes.map(&:with_indifferent_access)
+    self.configuration.withdrawable_assets =
+      array_of_hashes.map(&:with_indifferent_access)
   end
 
   def self.try_from_json(str)

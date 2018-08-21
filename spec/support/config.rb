@@ -1,5 +1,5 @@
 CONFIG = YAML.load_file(SPEC_DIR.join("config.yml")).with_indifferent_access
-CONFIG[:issuer_account] = Stellar::Account.random
+CONFIG[:issuer_address] = Stellar::Account.random.address
 
 RSpec.configure do |c|
 
@@ -15,7 +15,7 @@ RSpec.configure do |c|
       c.check_bridge_callbacks_mac_payload = false
       c.bridge_callbacks_mac_key = "sample"
 
-      c.withdraw = [
+      c.withdrawable_assets = [
         {
           type: "crypto",
           network: "bitcoin",
