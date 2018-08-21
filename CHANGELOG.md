@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - BridgeCallbacks (migration required) are saved in the database and uniqueness on the operation id is handled automatically.
+- `on_bridge_callback` can be a proc or class itself (as long as it responds to call)
 
 ## [0.3.0]
 ### Added
