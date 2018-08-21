@@ -40,6 +40,11 @@ You can supply what endpoints you want to activate with the gem
 - Value(s): array of symbols. See the [modules documentation](docs/modules.md) for more details.
 - Default: `%i(bridge_callbacks)`
 
+#### c.distribution_account
+This is the same distribution account that is setup in bridge. Currently, it is used in the `/withdraw` endpoint -- to tell the user to send the assets there.
+
+- Value: Stellar account address
+
 #### c.horizon_url
 - Value(s): String, url to horizon
 - Default: https://horizon.stellar.org
@@ -58,7 +63,12 @@ $ bundle
 ```
 
 ## Contributing
-Contribution directions go here.
+
+```ruby
+cp spec/config.yml{.sample,}
+```
+
+Edit the `spec/config.yml` file.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

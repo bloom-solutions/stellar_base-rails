@@ -5,12 +5,44 @@ module StellarBase
     RSpec.describe self::Process do
       let(:callback) { BridgeCallback.new }
 
-      context ".bridge_on_receive is configured" do
+      context ".bridge_on_receive is a string" do
+        before do
+          StellarBase.configuration.on_bridge_callback =
+            ProcessBridgeCallback.to_s
+        end
+
         it "triggers that callback class" do
           expect(ProcessBridgeCallback).to receive(:call)
             .with(callback).and_return(true)
 
           described_class.(callback)
+        end
+      end
+
+      context ".bridge_on_receive is a class" do
+        before do
+          StellarBase.configuration.on_bridge_callback = ProcessBridgeCallback
+        end
+
+        it "triggers that callback class" do
+          expect(ProcessBridgeCallback).to receive(:call)
+            .with(callback).and_return(true)
+
+          described_class.(callback)
+        end
+      end
+
+      context ".bridge_on_receive is a proc" do
+        before do
+          @bridge_callback = nil
+          StellarBase.configuration.on_bridge_callback = ->(bridge_callback) do
+            @bridge_callback = bridge_callback
+          end
+        end
+
+        it "triggers that callback class" do
+          described_class.(callback)
+          expect(@bridge_callback).to eq callback
         end
       end
 
