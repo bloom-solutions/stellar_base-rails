@@ -72,18 +72,19 @@ end
 
 You can also just pass in `StellarBase::WithdrawalRequests::Process` directly into `on_bridge_callback` if you don't need to do anything else.
 
-## c.withdraw
-- Value:
+## c.withdrawable_assets
+- Value(s):
   - path to a YAML configuration file describing what can be withdrawn (see below), or
   - JSON: array of JSON objects following the YAML but in JSON format, or
   - Ruby array of hashes
 - Required
 
 ## c.on_withdraw
-- Value:
+- Value(s):
   - object that responds to `.call` accepts the arguments:
     - `withdrawal_request`
     - `bridge_callback`
+  - String version of the object
 - Required
 
 Example:
