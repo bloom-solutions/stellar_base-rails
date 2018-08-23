@@ -7,7 +7,10 @@ Activate this by specifying `bridge_callbacks` in the `modules` configuration.
 This will mount the `/bridge_callbacks` endpoint. Make sure you setup `on_bridge_callback` like below.
 
 ## c.on_bridge_callback
-- Value(s): Class
+- Value(s): 
+  - object that responds to `.call` accepts the argument:
+    - `bridge_callback`
+  - String version of the object
 - Default: None
 - Once the bridge_receive endpoint receives a callback, the class will be called with .call
 - The class will be passed with the bridge server callback payload contained in a `StellarBase::BridgeCallback` object.
@@ -69,18 +72,19 @@ end
 
 You can also just pass in `StellarBase::WithdrawalRequests::Process` directly into `on_bridge_callback` if you don't need to do anything else.
 
-## c.withdraw
-- Value:
+## c.withdrawable_assets
+- Value(s):
   - path to a YAML configuration file describing what can be withdrawn (see below), or
   - JSON: array of JSON objects following the YAML but in JSON format, or
   - Ruby array of hashes
 - Required
 
 ## c.on_withdraw
-- Value:
+- Value(s):
   - object that responds to `.call` accepts the arguments:
     - `withdrawal_request`
     - `bridge_callback`
+  - String version of the object
 - Required
 
 Example:
