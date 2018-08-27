@@ -4,13 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.4.0]
 ### Changed
 - BridgeCallback model uses `operation_id` instead of `id`
 
 ### Added
 - BridgeCallbacks (migration required) are saved in the database and uniqueness on the operation id is handled automatically.
 - `on_bridge_callback` can be a proc or class itself (as long as it responds to call)
+- Add factory bot definitions to `stellar_base/factories`
 
 ## [0.3.0]
 ### Added
