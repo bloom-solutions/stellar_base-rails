@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Show errors when unable to create withdraw request
+
 ## [0.4.0]
 ### Changed
 - BridgeCallback model uses `operation_id` instead of `id`
