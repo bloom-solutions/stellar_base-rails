@@ -69,8 +69,8 @@ describe "GET /withdraw", type: :request, vcr: {record: :once} do
 
   context "payment for an asset that cannot be withdrawn" do
     it "does nothing" do
-      expect(@withdrawal_request).to be false
-      expect(@callback_called).to be false
+      expect(@withdrawal_request).to be_nil
+      expect(@callback_called).to be_nil
     end
   end
 end
