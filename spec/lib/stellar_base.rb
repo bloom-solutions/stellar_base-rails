@@ -15,7 +15,7 @@ RSpec.describe StellarBase do
           }
         ]
 
-        config = described_class.configuration.withdraw
+        config = described_class.configuration.withdrawable_assets
         expect(config[0][:issuer]).to eq "issuer-address"
       end
 
@@ -30,7 +30,7 @@ RSpec.describe StellarBase do
           }
         ].to_json
 
-        config = described_class.configuration.withdraw
+        config = described_class.configuration.withdrawable_assets
         expect(config[0][:issuer]).to eq "issuer-address"
       end
 
