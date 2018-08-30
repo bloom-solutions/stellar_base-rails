@@ -28,6 +28,8 @@ module StellarBase
 
     has :withdrawable_assets, classes: [NilClass, Array, String, Pathname]
     has :on_withdraw
+
+    has :stellar_toml, classes: Hash
   end
 
   after_configuration_change do
@@ -58,7 +60,7 @@ module StellarBase
     YAML.load_file(str.to_s)
   rescue Errno::ENOENT
   end
-
 end
 
 require "stellar_base/horizon_client"
+require "stellar_base/rails/routes"

@@ -8,7 +8,7 @@ When building Rails apps, we’d always implement /.well-known/stellar and other
 Adding modules to your routes:
 
 ```
-mount StellarBase::Engine => "/stellar_base"
+mount StellarBase::Engine => "/stellar"
 ```
 
 ```sh
@@ -33,7 +33,6 @@ StellarBase.configure do |c|
 end
 ```
 
-
 #### c.modules
 You can supply what endpoints you want to activate with the gem
 
@@ -50,6 +49,23 @@ This is the same distribution account that is setup in bridge. Currently, it is 
 - Default: https://horizon.stellar.org
 - This is where the engine will check bridge callbacks if `c.check_bridge_callbacks_authenticity` is turned on
 
+### c.stellar_toml
+- Value(s): Hash, follow Stellar's [documentation](https://www.stellar.org/developers/guides/concepts/stellar-toml.html) for `stellar.toml`
+- Example:
+```
+c.stellar_toml = {
+  TRANSFER_SERVER: ...,
+  FEDERATION_SERVER: ...,
+  AUTH_SERVER: ...,
+}
+```
+- Default:
+```
+c.stellar_toml = {
+  TRANSFER_SERVER: # if withdraw module is set, this is automatically set to the withdraw_endpoint unless overridden
+}
+```
+
 ## Installation
 Add this line to your application's Gemfile:
 
@@ -62,13 +78,21 @@ And then execute:
 $ bundle
 ```
 
-## Contributing
+## Development
 
 ```ruby
 cp spec/config.yml{.sample,}
 ```
 
 Edit the `spec/config.yml` file.
+
+```sh
+cd spec/dummy
+rails db:migrate
+rails db:migrate RAILS_ENV=test
+```
+
+Now you can run `rspec spec`
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
