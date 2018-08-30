@@ -9,6 +9,9 @@ Adding modules to your routes:
 
 ```
 mount StellarBase::Engine => "/stellar"
+
+# Optionally, you can mount /.well-known/stellar
+mount_stellar_base_well_known
 ```
 
 ```sh
