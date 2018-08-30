@@ -2,10 +2,9 @@ CONFIG = YAML.load_file(SPEC_DIR.join("config.yml")).with_indifferent_access
 CONFIG[:issuer_address] = Stellar::Account.random.address
 
 RSpec.configure do |c|
-
   c.before(:each) do
     StellarBase.configure do |c|
-      c.modules = %i(bridge_callbacks withdraw)
+      c.modules = %i[bridge_callbacks withdraw]
       c.horizon_url = "https://horizon-testnet.stellar.org"
 
       c.distribution_account = "G-DISTRO-ACCOUNT"
@@ -22,10 +21,12 @@ RSpec.configure do |c|
           asset_code: "BTCT",
           issuer: CONFIG[:issuer_address],
           fee_fixed: 0.01,
-        }
+        },
       ]
       c.on_withdraw = ProcessWithdrawal.to_s
+      c.stellar_toml = {
+        TRANSFER_SERVER: "http://example.com/.well-known/stellar",
+      }
     end
   end
-
 end
