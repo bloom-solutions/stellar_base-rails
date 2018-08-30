@@ -6,7 +6,7 @@ module StellarBase
       end
 
       def create?
-        StellarBase.included_module?(:withdraw)
+        StellarBase.included_module?(:bridge_callbacks)
       end
 
     end
