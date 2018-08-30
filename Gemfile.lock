@@ -11,6 +11,7 @@ PATH
       rails (~> 5.1)
       representable
       stellar-base (= 0.14.0)
+      tomlrb (~> 1.0)
       trailblazer (~> 2.0)
       trailblazer-rails
       virtus
@@ -257,6 +258,7 @@ GEM
     thread_safe (0.3.6)
     toml-rb (1.1.1)
       citrus (~> 3.0, > 3.0)
+    tomlrb (1.2.7)
     trailblazer (2.0.7)
       declarative
       reform (>= 2.2.0, < 3.0.0)
