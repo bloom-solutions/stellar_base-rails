@@ -227,6 +227,10 @@ GEM
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
     safe_yaml (1.0.4)
+    spring (2.0.2)
+      activesupport (>= 4.2)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -294,6 +298,8 @@ DEPENDENCIES
   factory_bot_rails
   pry-byebug
   rspec-rails
+  spring
+  spring-commands-rspec
   sqlite3
   stellar-sdk
   stellar_base-rails!
@@ -301,4 +307,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.3
+   1.16.4

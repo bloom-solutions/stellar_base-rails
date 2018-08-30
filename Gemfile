@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 # Declare your gem's dependencies in stellar_base.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -11,4 +11,6 @@ gemspec
 # your gem to rubygems.org.
 
 # To use a debugger
-gem 'pry-byebug', group: [:development, :test]
+gem "pry-byebug", group: %i[development test]
+gem "spring"
+gem "spring-commands-rspec"
