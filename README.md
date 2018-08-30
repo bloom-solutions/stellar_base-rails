@@ -52,7 +52,7 @@ This is the same distribution account that is setup in bridge. Currently, it is 
 - Default: https://horizon.stellar.org
 - This is where the engine will check bridge callbacks if `c.check_bridge_callbacks_authenticity` is turned on
 
-### c.stellar_toml
+#### c.stellar_toml
 - Value(s): Hash, follow Stellar's [documentation](https://www.stellar.org/developers/guides/concepts/stellar-toml.html) for `stellar.toml`
 - Example:
 ```
