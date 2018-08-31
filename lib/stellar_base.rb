@@ -9,6 +9,7 @@ require "multi_json"
 require "reform"
 require "reform/form/coercion"
 require "representable"
+require "toml-rb"
 
 require "stellar_base/engine"
 
@@ -29,7 +30,7 @@ module StellarBase
     has :withdrawable_assets, classes: [NilClass, Array, String, Pathname]
     has :on_withdraw
 
-    has :stellar_toml, classes: Hash
+    has :stellar_toml, classes: Hash, default: {}
   end
 
   after_configuration_change do

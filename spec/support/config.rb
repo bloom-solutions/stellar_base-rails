@@ -24,9 +24,7 @@ RSpec.configure do |c|
         },
       ]
       c.on_withdraw = ProcessWithdrawal.to_s
-      c.stellar_toml = {
-        TRANSFER_SERVER: "http://example.com/.well-known/stellar",
-      }
+      c.stellar_toml = { TRANSFER_SERVER: "http://example.com/stellar" }
     end
   end
 end

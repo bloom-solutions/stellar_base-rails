@@ -9,7 +9,7 @@ module StellarBase
 
       respond_to do |f|
         f.toml do
-          render plain: TomlRB.dump(stellar_toml.to_hash)
+          render plain: ::TomlRB.dump(stellar_toml.to_hash)
         end
       end
     end

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Change `tomlrb` to `toml-rb`
+- Fix bug in implicitly referred `TRANSFER_SERVER` route in `StellarToml`
+
 ## [0.5.2]
 ### Changed
 - Added `tomlrb` in gemspec to fix errors in `/.well-known/stellar`
