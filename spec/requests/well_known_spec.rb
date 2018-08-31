@@ -8,7 +8,6 @@ describe "GET /.well-known/stellar", type: :request do
 
     toml_hash = TomlRB.parse(response.body)
 
-    expect(toml_hash["TRANSFER_SERVER"])
-      .to eq "http://example.com/.well-known/stellar"
+    expect(toml_hash["TRANSFER_SERVER"]).to eq "http://example.com/stellar"
   end
 end

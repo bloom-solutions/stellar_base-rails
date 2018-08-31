@@ -65,7 +65,7 @@ c.stellar_toml = {
 - Default:
 ```
 c.stellar_toml = {
-  TRANSFER_SERVER: # if withdraw module is set, this is automatically set to the withdraw_endpoint unless overridden
+  TRANSFER_SERVER: ...,
 }
 ```
 
