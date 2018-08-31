@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Added `tomlrb` in gemspec to fix errors in `/.well-known/stellar`
+
 ## [0.5.1] - 2018-08-31
 ### Fixed
 - BridgeCallbacks operation should check if `bridge_callbacks` is included.
