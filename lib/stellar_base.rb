@@ -9,6 +9,7 @@ require "multi_json"
 require "reform"
 require "reform/form/coercion"
 require "representable"
+require "toml-rb"
 
 require "stellar_base/engine"
 
