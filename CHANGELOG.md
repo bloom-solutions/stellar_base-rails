@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.5.3]
 ### Changed
 - Change `tomlrb` to `toml-rb`
 - Fix bug in implicitly referred `TRANSFER_SERVER` route in `StellarToml`
