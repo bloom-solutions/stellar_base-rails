@@ -56,17 +56,17 @@ This is the same distribution account that is setup in bridge. Currently, it is 
 - Value(s): Hash, follow Stellar's [documentation](https://www.stellar.org/developers/guides/concepts/stellar-toml.html) for `stellar.toml`
 - Example:
 ```
-c.stellar_toml = {
-  TRANSFER_SERVER: ...,
-  FEDERATION_SERVER: ...,
-  AUTH_SERVER: ...,
-}
+c.stellar_toml = { TRANSFER_SERVER: ... }
 ```
-- Default:
+- When adding the URL of the transfer server, make sure not to add `/` at the end as described in the Stellar documentation:
 ```
-c.stellar_toml = {
-  TRANSFER_SERVER: ...,
-}
+# Correct:
+https://example.com/stellar
+https://example.com
+
+# Bad:
+https://example.com/stellar/
+https://example.com/
 ```
 
 ## Installation
