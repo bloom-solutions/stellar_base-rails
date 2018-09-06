@@ -49,6 +49,11 @@ module StellarBase
             })
 
             expect(op).to_not be_success
+
+            contract = op["contract.default"]
+
+            expect(contract.errors[:asset_code])
+              .to include "invalid asset_code. Valid asset_codes: BTCT"
           end
         end
 
