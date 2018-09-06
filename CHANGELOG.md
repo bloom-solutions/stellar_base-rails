@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Add errors in `/withdraw` to include errors for invalid asset codes instead of silently failing
+
 ## [0.5.4]
 ### Fixed
 - Loosen version restriction of stellar-base gem

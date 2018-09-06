@@ -7,30 +7,32 @@ module StellarBase
         property :asset_code
         property :dest
         property :dest_extra
-        property :issuer
-        property :account_id
-        property :memo_type
-        property :memo
-        property :eta
-        property :min_amount
-        property :max_amount
-        property :fee_fixed
-        property :fee_percent
         property :fee_network
 
         validates(
-          *%i[
-            asset_type
-            asset_code
-            dest
-            issuer
-            account_id
-            fee_network
-            fee_fixed
-            fee_percent
-          ],
-          presence: true
+          :asset_type,
+          :asset_code,
+          :dest,
+          :fee_network,
+          presence: true,
         )
+        validate :check_valid_asset_code
+
+        def check_valid_asset_code
+          asset_codes = StellarBase
+            .configuration
+            .withdrawable_assets
+            &.map do |asset|
+              asset[:asset_code]
+            end
+
+          return if asset_codes.include? asset_code
+
+          errors.add(
+            :asset_code,
+            "invalid asset_code. Valid asset_codes: #{asset_codes.join(', ')}",
+          )
+        end
 
       end
     end

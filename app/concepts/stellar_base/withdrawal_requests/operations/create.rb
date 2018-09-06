@@ -7,13 +7,21 @@ module StellarBase
 
         step self::Policy::Pundit(WithdrawalRequestPolicy, :create?)
         step Model(WithdrawalRequest, :new)
-        step :find_withdrawal_asset_details!
-        success :set_defaults!
+        step :setup_params!
         step Contract::Build(constant: Contracts::Create)
         step Contract::Validate(key: :withdrawal_request)
-        step Contract::Persist()
+        step Contract::Persist(method: :sync)
+        step :find_withdrawal_asset_details!
+        success :set_defaults!
+        step Contract::Persist(method: :save)
 
         private
+
+        def setup_params!(options, params:, **)
+          params[:withdrawal_request].merge!({
+            asset_type: params[:withdrawal_request][:type],
+          })
+        end
 
         def find_withdrawal_asset_details!(options, params:, **)
           withdrawable_assets = StellarBase.configuration.withdrawable_assets
@@ -21,30 +29,30 @@ module StellarBase
             e[:asset_code] == params[:withdrawal_request][:asset_code]
           end
 
-          return Railway.fail_fast! if details.nil?
-
-          options["withdrawal_asset_details"] = details
-          return true
+          params[:withdrawal_asset_details] = details.presence || {}
         end
 
-        def set_defaults!(options, withdrawal_asset_details:, params:, **)
+        def set_defaults!(options, params:, **)
+          withdrawal_asset_details = params[:withdrawal_asset_details]
+
           fee_network = DetermineFee.network(
             withdrawal_asset_details[:network],
             params[:withdrawal_request][:fee_network],
           )
-          params[:withdrawal_request].merge!({
-            asset_type: params[:withdrawal_request][:type],
-            issuer: withdrawal_asset_details[:issuer],
-            account_id: StellarBase.configuration.distribution_account,
-            memo_type: "text",
-            memo: GenMemo.(),
-            eta: DEFAULT_ETA,
-            min_amount: 0.0,
-            max_amount: nil,
-            fee_fixed: DetermineFee.(withdrawal_asset_details[:fee_fixed]),
-            fee_percent: DetermineFee.(withdrawal_asset_details[:fee_percent]),
-            fee_network: fee_network,
-          })
+
+          options["model"].issuer = withdrawal_asset_details[:issuer]
+          options["model"].account_id =
+            StellarBase.configuration.distribution_account
+          options["model"].memo_type = "text"
+          options["model"].memo = GenMemo.()
+          options["model"].eta = DEFAULT_ETA
+          options["model"].min_amount = 0.0
+          options["model"].max_amount = nil
+          options["model"].fee_fixed =
+            DetermineFee.(withdrawal_asset_details[:fee_fixed])
+          options["model"].fee_percent =
+            DetermineFee.(withdrawal_asset_details[:fee_percent])
+          options["model"].fee_network = fee_network
         end
 
       end
