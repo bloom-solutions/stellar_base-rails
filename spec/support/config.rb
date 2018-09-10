@@ -21,6 +21,7 @@ RSpec.configure do |c|
           asset_code: "BTCT",
           issuer: CONFIG[:issuer_address],
           fee_fixed: 0.01,
+          max_amount_from: GetMaxAmount.to_s,
         },
       ]
       c.on_withdraw = ProcessWithdrawal.to_s

@@ -1,5 +1,7 @@
 class GetMaxAmount
 
-  def self.call; end
+  def self.call
+    1
+  end
 
 end
