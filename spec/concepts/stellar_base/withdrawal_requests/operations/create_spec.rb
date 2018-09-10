@@ -4,14 +4,14 @@ module StellarBase
   module WithdrawalRequests
     module Operations
       RSpec.describe Create do
-
         it "creates a withdrawal request" do
           expect(GenMemo).to receive(:call).and_return("MEMO")
+          expect(DetermineMaxAmount).to receive(:call).and_return(10)
           expect(DetermineFee).to receive(:call).with(0.01).and_return(0.01)
-          expect(DetermineFee).to receive(:call).with(nil).
-            and_return(0.0)
-          expect(DetermineFee).to receive(:network).with("bitcoin", 0.0005).
-            and_return(0.0005)
+          expect(DetermineFee).to receive(:call).with(nil)
+            .and_return(0.0)
+          expect(DetermineFee).to receive(:network).with("bitcoin", 0.0005)
+            .and_return(0.0005)
 
           op = described_class.(withdrawal_request: {
             type: "crypto",
@@ -28,13 +28,13 @@ module StellarBase
           expect(withdrawal_request.dest).to eq "my-btc-addr"
           expect(withdrawal_request.dest_extra).to eq "pls"
           expect(withdrawal_request.issuer).to eq CONFIG[:issuer_address]
-          expect(withdrawal_request.account_id).
-            to eq StellarBase.configuration.distribution_account
+          expect(withdrawal_request.account_id)
+            .to eq StellarBase.configuration.distribution_account
           expect(withdrawal_request.memo_type).to eq "text"
           expect(withdrawal_request.memo).to be_present
           expect(withdrawal_request.eta).to be_an Integer
           expect(withdrawal_request.min_amount).to be_a BigDecimal
-          expect(withdrawal_request.max_amount).to be_nil
+          expect(withdrawal_request.max_amount).to eq 10
           expect(withdrawal_request.fee_fixed).to eq 0.01
           expect(withdrawal_request.fee_percent).to be_zero
           expect(withdrawal_request.fee_network).to eq 0.0005
@@ -59,7 +59,7 @@ module StellarBase
 
         context "bridge_callbacks module is not loaded" do
           before do
-            StellarBase.configuration.modules = %i()
+            StellarBase.configuration.modules = %i[]
           end
 
           it "creates a withdrawal request" do
@@ -74,7 +74,6 @@ module StellarBase
             expect(op).to_not be_success
           end
         end
-
       end
     end
   end
