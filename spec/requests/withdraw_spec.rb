@@ -7,10 +7,13 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
 
   before do
     @withdraw_request = @bridge_callback = nil
-    StellarBase.configuration.on_withdraw = -> (withdrawal_request, bridge_callback) do
-      @withdrawal_request = withdrawal_request
-      @bridge_callback = bridge_callback
-    end
+
+    StellarBase.configuration.on_withdraw =
+      -> (withdrawal_request, bridge_callback) do
+        @withdrawal_request = withdrawal_request
+        @bridge_callback = bridge_callback
+      end
+
     StellarBase.configuration.on_bridge_callback = -> (bridge_callback) do
       StellarBase::WithdrawalRequests::Process.(bridge_callback)
     end
@@ -62,12 +65,13 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
       expect(@withdrawal_request.fee_network).to eq 0.001
       expect(@withdrawal_request.memo_type).to eq "text"
       expect(@withdrawal_request.memo).to be_present
+      expect(@withdrawal_request.max_amount).to eq 1
 
       expect(@bridge_callback).to eq bridge_callback
     end
   end
 
-  context "payment for an invalid asset" do
+  context "requesting withdrawal details for an invalid asset" do
     it "returns an error" do
       get(uri, {
         params: {

@@ -19,9 +19,7 @@ module StellarBase
         validate :check_valid_asset_code
 
         def check_valid_asset_code
-          asset_codes = StellarBase
-            .configuration
-            .withdrawable_assets
+          asset_codes = StellarBase.configuration.withdrawable_assets
             &.map do |asset|
               asset[:asset_code]
             end

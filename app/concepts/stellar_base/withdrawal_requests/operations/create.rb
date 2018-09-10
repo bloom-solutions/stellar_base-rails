@@ -24,10 +24,8 @@ module StellarBase
         end
 
         def find_withdrawal_asset_details!(options, params:, **)
-          withdrawable_assets = StellarBase.configuration.withdrawable_assets
-          details = withdrawable_assets.find do |e|
-            e[:asset_code] == params[:withdrawal_request][:asset_code]
-          end
+          details = FindWithdrawableAsset
+            .(params[:withdrawal_request][:asset_code])
 
           params[:withdrawal_asset_details] = details.presence || {}
         end
@@ -47,12 +45,21 @@ module StellarBase
           options["model"].memo = GenMemo.()
           options["model"].eta = DEFAULT_ETA
           options["model"].min_amount = 0.0
-          options["model"].max_amount = nil
+          options["model"].max_amount =
+            DetermineMaxAmount.(withdrawal_asset_details[:max_amount_from])
           options["model"].fee_fixed =
             DetermineFee.(withdrawal_asset_details[:fee_fixed])
           options["model"].fee_percent =
             DetermineFee.(withdrawal_asset_details[:fee_percent])
           options["model"].fee_network = fee_network
+        end
+
+        def get_balance_from(balance_checker_class)
+          if balance_checker_present?
+            return balance_checker_class.constantize.send(:call)
+          end
+
+          nil
         end
 
       end

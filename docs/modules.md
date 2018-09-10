@@ -1,13 +1,13 @@
 # Modules
 
-# Bridge Callbacks
+## Bridge Callbacks
 
 Activate this by specifying `bridge_callbacks` in the `modules` configuration.
 
 This will mount the `/bridge_callbacks` endpoint. Make sure you setup `on_bridge_callback` like below.
 
-## c.on_bridge_callback
-- Value(s): 
+#### c.on_bridge_callback
+- Value(s):
   - object that responds to `.call` accepts the argument:
     - `bridge_callback`
   - String version of the object
@@ -33,22 +33,22 @@ class ProcessBridgeCallback
 end
 ```
 
-## c.check_bridge_callbacks_authenticity
+#### c.check_bridge_callbacks_authenticity
 - Value(s): `true` or `false`
 - Default: `false`
 - This secures the `/bridge_callbacks` endpoint from fake transactions by checking the transaction ID and it's contents against the Stellar Blockchain. If it doesn't add up, `/bridge_callbacks` endpoint will respond with a 422
 
-## c.check_bridge_callbacks_mac_payload
+#### c.check_bridge_callbacks_mac_payload
 - Value(s): `true` or `false`
 - Default: `false`
 - This secures the `/bridge_callbacks` endpoint from fake transactions by checking the `X_PAYLOAD_MAC` header for 1.) existence and 2.) if it matches the HMAC-SH256 encoded raw request body
 
-## c.bridge_callbacks_mac_key
+####  c.bridge_callbacks_mac_key
 - Value(s): Any Stellar Private Key, it should be the same as the mac_key configured in your bridge server
 - Default: None
 - This is used to verify the contents of `X_PAYLOAD_MAC` by encoding the raw request body with the decoded `bridge_callback_mac_key` as the key
 
-# [Withdraw](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#withdraw)
+## [Withdraw](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#withdraw)
 
 Activate this by specifying `withdraw` in the `modules` configuration.
 
@@ -72,20 +72,25 @@ end
 
 You can also just pass in `StellarBase::WithdrawalRequests::Process` directly into `on_bridge_callback` if you don't need to do anything else.
 
-## c.withdrawable_assets
+#### c.withdrawable_assets
 - Value(s):
   - path to a YAML configuration file describing what can be withdrawn (see below), or
   - JSON: array of JSON objects following the YAML but in JSON format, or
   - Ruby array of hashes
+  - Sample [withdrawal.yml](docs/withdraw.yml)
 - Required
+- Notes: `max_amount_from` is a class that you define that will run whenever a withdrawal for that asset is requested. It'll populate the `max_amount` response field. If you don't define anything, it won't run that class and will return `nil`
+  - The `max_amount_from` class is expected a `BigDecimal` return.
+  - The `max_amount_from` class is expected to implement a `self.call` method. It won't be passed any parameters
 
-## c.on_withdraw
+#### c.on_withdraw
 - Value(s):
   - object that responds to `.call` accepts the arguments:
     - `withdrawal_request`
     - `bridge_callback`
   - String version of the object
 - Required
+- Notes: This is run when a `GET /withdraw` is received and has passed validations
 
 Example:
 

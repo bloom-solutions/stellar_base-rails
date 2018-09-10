@@ -5,8 +5,10 @@
   issuer: G-issuer-on-stellar
   fee_fixed: 0.01
   fee_percent: 10.0
+  max_amount_from: "Withdraw:Bitcoin::GetBalance"
 - type: crypto
   network: ethereum
   asset_code: ETH
   issuer: G-issuer-on-stellar
+  max_amount_from: "Withdraw:Ethereum::GetBalance"
   # if no fee is specified, it is 0
