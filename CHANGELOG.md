@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Add `max_amount_from` configuration for `c.withdrawable_assets` to properly populate `WithdrawalRequest#max_amount`
+
 ## [0.5.5]
 ### Added
 - Add errors in `/withdraw` to include errors for invalid asset codes instead of silently failing
