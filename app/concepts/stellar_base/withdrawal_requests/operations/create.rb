@@ -4,8 +4,10 @@ module StellarBase
       class Create < ApplicationOperation
 
         DEFAULT_ETA = (10 * 60).freeze
+        POLICY_ERROR_MESSAGE = "You are unauthorized to request withdrawal details"
 
         step self::Policy::Pundit(WithdrawalRequestPolicy, :create?)
+        failure :set_policy_error!
         step Model(WithdrawalRequest, :new)
         step :setup_params!
         step Contract::Build(constant: Contracts::Create)
@@ -16,6 +18,10 @@ module StellarBase
         step Contract::Persist(method: :save)
 
         private
+
+        def set_policy_error!(options, params:, **)
+          options["result.policy.message"] = POLICY_ERROR_MESSAGE
+        end
 
         def setup_params!(options, params:, **)
           params[:withdrawal_request].merge!({
