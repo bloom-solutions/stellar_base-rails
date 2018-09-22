@@ -54,14 +54,6 @@ module StellarBase
           options["model"].fee_network = fee_network
         end
 
-        def get_balance_from(balance_checker_class)
-          if balance_checker_present?
-            return balance_checker_class.constantize.send(:call)
-          end
-
-          nil
-        end
-
       end
     end
   end
