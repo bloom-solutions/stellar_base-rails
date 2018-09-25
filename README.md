@@ -36,6 +36,8 @@ StellarBase.configure do |c|
 end
 ```
 
+To use the public network, ensure that you set the `Stellar` network to the [appropriate value](https://github.com/stellar/ruby-stellar-sdk#usage).
+
 #### c.modules
 You can supply what endpoints you want to activate with the gem
 
