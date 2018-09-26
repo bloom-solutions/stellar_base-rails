@@ -111,3 +111,35 @@ class ProcessWithdrawal
   end
 end
 ```
+
+## [Deposit](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#deposit)
+
+Activate this by specifying `deposit` in the `modules` configuration.
+
+This will mount the `/deposit` endpoint.
+
+#### `StellarBase::Deposits::Trigger`
+
+This engine gives you a class called `StellarBase::Deposits::Trigger` you call this in your application once you've received the asset in your system. This will send the appropriate token to the Stellar Account of the requester.
+
+- Parameters:
+  - network, deposit_address, tx_id, amount
+    - `network` - this would be matched on the networks available on the `depositable_assets`
+    - `deposit_address` - where it was deposited
+    - `tx_id` - the Transaction ID in that network
+    - `amount` - amount of that asset received. It will send the same amount of the corresponding Stellar Asset to the requester.
+
+#### c.depositable_assets
+- Value(s):
+  - path to a YAML configuration file describing what can be deposited (see below), or
+  - JSON: array of JSON objects following the YAML but in JSON format, or
+  - Ruby array of hashes
+  - Sample [deposit.yml](docs/deposit.yml)
+- Required
+- Notes:
+  - `max_amount_from` is a class that you define that will run whenever a deposit for that asset is requested. Typically this should tell the API user the maximum amount of the specific asset you have that you can send to a users wallet. It'll populate the `max_amount` response field. If you don't define anything, it won't run that class and will return `nil` for the `max_amount`
+    - The `max_amount_from` class is expected a `BigDecimal` return.
+    - The `max_amount_from` class is expected to implement a `self.call` method. It won't be passed any parameters
+  - `how_from` is a class that you define that will run whenever a deposit for that asset is requested. It'll populate the `how` response field. If you don't define anything, it won't run that class and will return `nil` for the `how`
+    - The `how_from` class is expected a `String` return.
+    - The `how_from` class is expected to implement a `self.call` method. It won't be passed any parameters

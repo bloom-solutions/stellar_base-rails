@@ -1,0 +1,18 @@
+---
+- type: crypto
+  network: bitcoin
+  asset_code: BTCT # you can name the token something else
+  issuer: G-issuer-on-stellar # issuer of the BTCT
+
+  # So that the engine can create a send_payment and send the deposit
+  # equivalent of the asset
+  distributor: G-distributor-on-stellar # distributor of the BTCT
+  distributor_seed: <%= ENV["STELLAR_BTC_DISTRIBUTOR_SEED"] %>
+
+  # Max amount a user can deposit
+  max_amount_from: "GetStellarBitcoinAssetBalance"
+  how_from: "FetchBitcoinAddress"
+
+  # Fees for depositing
+  fee_fixed: 0.0
+  fee_percentage: 0.0
