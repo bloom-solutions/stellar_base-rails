@@ -24,6 +24,18 @@ RSpec.configure do |c|
           max_amount_from: GetMaxAmount.to_s,
         },
       ]
+      c.depositable_assets = [
+        {
+          type: "crypto",
+          network: "bitcoin",
+          asset_code: "BTCT",
+          issuer: CONFIG[:issuer_address],
+          distributor: "G-DISTRO-ACCOUNT",
+          distributor_seed: "S-DISTRO_ACCOUNT_SEED",
+          how_from: GetHow.to_s,
+          max_amount_from: GetMaxAmount.to_s,
+        }
+      ]
       c.on_withdraw = ProcessWithdrawal.to_s
       c.stellar_toml = { TRANSFER_SERVER: "http://example.com/stellar" }
     end
