@@ -5,7 +5,8 @@ module StellarBase
     module Operations
       RSpec.describe Create do
         it "creates a withdrawal request" do
-          expect(GenMemo).to receive(:call).and_return("MEMO")
+          expect(GenMemoFor).to receive(:call).with(WithdrawalRequest)
+            .and_return("MEMO")
           expect(DetermineMaxAmount).to receive(:call).and_return(10)
           expect(DetermineFee).to receive(:call).with(0.01).and_return(0.01)
           expect(DetermineFee).to receive(:call).with(nil)
