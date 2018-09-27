@@ -4,7 +4,7 @@ CONFIG[:issuer_address] = Stellar::Account.random.address
 RSpec.configure do |c|
   c.before(:each) do
     StellarBase.configure do |c|
-      c.modules = %i[bridge_callbacks withdraw]
+      c.modules = %i[bridge_callbacks withdraw deposit]
       c.horizon_url = "https://horizon-testnet.stellar.org"
 
       c.distribution_account = "G-DISTRO-ACCOUNT"
@@ -34,7 +34,7 @@ RSpec.configure do |c|
           distributor_seed: "S-DISTRO_ACCOUNT_SEED",
           how_from: GetHow.to_s,
           max_amount_from: GetMaxAmount.to_s,
-        }
+        },
       ]
       c.on_withdraw = ProcessWithdrawal.to_s
       c.stellar_toml = { TRANSFER_SERVER: "http://example.com/stellar" }
