@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Add `depositable_assets` configuration
+- Add `DepositRequest` model, operations, contracts and services
+- Add `/deposit` API endpoint
+
 ## [0.5.6]
 ### Added
 - Add `max_amount_from` configuration for `c.withdrawable_assets` to properly populate `WithdrawalRequest#max_amount`

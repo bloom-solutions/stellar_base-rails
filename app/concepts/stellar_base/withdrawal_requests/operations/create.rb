@@ -42,7 +42,7 @@ module StellarBase
           options["model"].account_id =
             StellarBase.configuration.distribution_account
           options["model"].memo_type = "text"
-          options["model"].memo = GenMemo.()
+          options["model"].memo = GenMemoFor.(WithdrawalRequest)
           options["model"].eta = DEFAULT_ETA
           options["model"].min_amount = 0.0
           options["model"].max_amount =

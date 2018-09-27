@@ -52,5 +52,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.default_url_options = { host: "example.com" }
+  config.active_record.sqlite3.represent_boolean_as_integer = true
 end
 

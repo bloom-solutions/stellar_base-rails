@@ -4,7 +4,7 @@ CONFIG[:issuer_address] = Stellar::Account.random.address
 RSpec.configure do |c|
   c.before(:each) do
     StellarBase.configure do |c|
-      c.modules = %i[bridge_callbacks withdraw]
+      c.modules = %i[bridge_callbacks withdraw deposit]
       c.horizon_url = "https://horizon-testnet.stellar.org"
 
       c.distribution_account = "G-DISTRO-ACCOUNT"
@@ -21,6 +21,18 @@ RSpec.configure do |c|
           asset_code: "BTCT",
           issuer: CONFIG[:issuer_address],
           fee_fixed: 0.01,
+          max_amount_from: GetMaxAmount.to_s,
+        },
+      ]
+      c.depositable_assets = [
+        {
+          type: "crypto",
+          network: "bitcoin",
+          asset_code: "BTCT",
+          issuer: CONFIG[:issuer_address],
+          distributor: "G-DISTRO-ACCOUNT",
+          distributor_seed: "S-DISTRO_ACCOUNT_SEED",
+          how_from: GetHow.to_s,
           max_amount_from: GetMaxAmount.to_s,
         },
       ]

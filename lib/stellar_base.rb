@@ -30,26 +30,44 @@ module StellarBase
     has :withdrawable_assets, classes: [NilClass, Array, String, Pathname]
     has :on_withdraw
 
+    has :depositable_assets, classes: [NilClass, Array, String, Pathname]
+
     has :stellar_toml, classes: Hash, default: {}
   end
 
   after_configuration_change do
     self.convert_config_withdraw!
+    self.convert_config_deposit!
   end
+
 
   def self.included_module?(module_name)
     self.configuration.modules&.include?(module_name)
+  end
+
+  def self.convert_config_deposit!
+    depositable_assets = self.configuration.depositable_assets
+    return if depositable_assets.is_a?(Array) || depositable_assets.nil?
+
+    self.configuration.depositable_assets =
+      convert_config!(depositable_assets)
   end
 
   def self.convert_config_withdraw!
     withdrawable_assets = self.configuration.withdrawable_assets
     return if withdrawable_assets.is_a?(Array) || withdrawable_assets.nil?
 
-    array_of_hashes = try_from_yaml_file_path(withdrawable_assets) ||
-      try_from_json(withdrawable_assets)
-
     self.configuration.withdrawable_assets =
-      array_of_hashes.map(&:with_indifferent_access)
+      convert_config!(withdrawable_assets)
+  end
+
+  private
+
+  def self.convert_config!(asset_config)
+    array_of_hashes = try_from_yaml_file_path(asset_config) ||
+      try_from_json(asset_config)
+
+    array_of_hashes.map(&:with_indifferent_access)
   end
 
   def self.try_from_json(str)

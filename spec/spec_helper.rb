@@ -3,7 +3,7 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "pry"
 require "vcr"
-require 'rspec/rails'
+require "rspec/rails"
 require "stellar-sdk"
 
 SPEC_DIR = Pathname.new(File.dirname(__FILE__))
