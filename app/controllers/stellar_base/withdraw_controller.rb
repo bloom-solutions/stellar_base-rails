@@ -2,7 +2,8 @@ module StellarBase
   class WithdrawController < ApplicationController
 
     def create
-      op = WithdrawalRequests::Operations::Create.(withdrawal_request: params)
+      op = WithdrawalRequests::Operations::Create
+        .(withdrawal_request: withdraw_params)
 
       respond_to do |f|
         f.json do
@@ -18,6 +19,18 @@ module StellarBase
           end
         end
       end
+    end
+
+    private
+
+    def withdraw_params
+      params.permit(
+        :asset_code,
+        :dest,
+        :dest_extra,
+        :fee_network,
+        :type,
+      ).to_hash.with_indifferent_access
     end
 
   end
