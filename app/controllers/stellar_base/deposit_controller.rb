@@ -2,7 +2,8 @@ module StellarBase
   class DepositController < ApplicationController
 
     def create
-      op = DepositRequests::Operations::Create.(deposit_request: params)
+      op = DepositRequests::Operations::Create
+        .(deposit_request: deposit_params)
 
       respond_to do |f|
         f.json do
@@ -18,6 +19,19 @@ module StellarBase
           end
         end
       end
+    end
+
+    private
+
+    def deposit_params
+      params.permit(
+        :account,
+        :asset_code,
+        :memo,
+        :memo_type,
+        :type,
+        :email_address,
+      ).to_hash.with_indifferent_access
     end
 
   end

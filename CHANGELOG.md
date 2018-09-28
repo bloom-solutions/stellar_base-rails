@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Use 0 if `max_amount_from` in `DepositRequests::Operations::Create`
+
 ## [0.6.0]
 ### Added
 - Add `depositable_assets` configuration

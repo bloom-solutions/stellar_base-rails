@@ -26,7 +26,6 @@ module StellarBase
         def find_withdrawal_asset_details!(options, params:, **)
           details = FindWithdrawableAsset
             .(params[:withdrawal_request][:asset_code])
-
           params[:withdrawal_asset_details] = details.presence || {}
         end
 
