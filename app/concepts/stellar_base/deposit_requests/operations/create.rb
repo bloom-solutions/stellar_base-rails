@@ -42,7 +42,7 @@ module StellarBase
         def determine_max_amount!(options, params:, **)
           details = params[:deposit_asset_details]
           options["model"].max_amount =
-            ConfiguredClassRunner.(details[:max_amount_from])
+            ConfiguredClassRunner.(details[:max_amount_from]) || 0
         end
 
         def set_defaults!(options, params:, **)
