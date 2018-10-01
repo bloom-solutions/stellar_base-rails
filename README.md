@@ -83,6 +83,16 @@ And then execute:
 $ bundle
 ```
 
+If you're using `StellarBase.on_deposit_trigger` you'll need to install:
+
+```
+# Gemfile
+gem("stellar-sdk", {
+  github: "bloom-solutions/ruby-stellar-sdk",
+  branch: "payment-memo",
+})
+```
+
 ## Development
 
 ```ruby

@@ -118,9 +118,9 @@ Activate this by specifying `deposit` in the `modules` configuration.
 
 This will mount the `/deposit` endpoint.
 
-#### `StellarBase::Deposits::Trigger`
+#### `StellarBase.on_deposit_trigger`
 
-This engine gives you a class called `StellarBase::Deposits::Trigger` you call this in your application once you've received the asset in your system. This will send the appropriate token to the Stellar Account of the requester.
+This engine gives you a method called `StellarBase.on_deposit_trigger` you call this in your application once you've received the asset in your system. This will send the appropriate token to the Stellar Account of the requester.
 
 - Parameters:
   - network, deposit_address, tx_id, amount
