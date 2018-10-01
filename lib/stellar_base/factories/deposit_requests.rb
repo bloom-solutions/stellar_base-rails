@@ -1,7 +1,7 @@
 FactoryBot.define do
-
   factory :stellar_base_deposit_request, class: "StellarBase::DepositRequest" do
     deposit_address { "dep-addr" }
+    asset_type { "crypto" }
     issuer { "issuer-addr" }
     memo_type { "text" }
     memo { "ABAC" }
@@ -13,5 +13,4 @@ FactoryBot.define do
     fee_fixed { 0 }
     fee_percent { 0 }
   end
-
 end
