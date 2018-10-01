@@ -1,5 +1,6 @@
 CONFIG = YAML.load_file(SPEC_DIR.join("config.yml")).with_indifferent_access
 CONFIG[:issuer_address] = Stellar::Account.random.address
+CONFIG[:distributor] = Stellar::Account.random
 
 RSpec.configure do |c|
   c.before(:each) do
@@ -30,8 +31,8 @@ RSpec.configure do |c|
           network: "bitcoin",
           asset_code: "BTCT",
           issuer: CONFIG[:issuer_address],
-          distributor: "G-DISTRO-ACCOUNT",
-          distributor_seed: "S-DISTRO_ACCOUNT_SEED",
+          distributor: CONFIG[:distributor].address,
+          distributor_seed: CONFIG[:distributor].keypair.seed,
           how_from: GetHow.to_s,
           max_amount_from: GetMaxAmount.to_s,
         },
