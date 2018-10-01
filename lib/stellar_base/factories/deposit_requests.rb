@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :stellar_base_deposit_request, class: "StellarBase::DepositRequest" do
     deposit_address { "dep-addr" }
+    asset_code { "BTCT" }
     asset_type { "crypto" }
     issuer { "issuer-addr" }
     memo_type { "text" }
