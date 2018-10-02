@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Add `StellarBase.on_deposit_trigger`
+- Add `StellarBase.configuration.stellar_network`
+
 ## [0.6.1]
 ### Changed
 - Use 0 if `max_amount_from` in `DepositRequests::Operations::Create`
