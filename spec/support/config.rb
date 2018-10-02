@@ -31,7 +31,7 @@ RSpec.configure do |c|
           network: "bitcoin",
           asset_code: "BTCT",
           issuer: CONFIG[:issuer_address],
-          distributor: CONFIG[:distributor],
+          distributor: CONFIG[:distributor_address],
           distributor_seed: CONFIG[:distributor_seed],
           how_from: GetHow.to_s,
           max_amount_from: GetMaxAmount.to_s,
