@@ -8,7 +8,7 @@ module StellarBase
       promises :deposit_config
 
       executed do |c|
-        depositable_assets = StellarBase.configuration.depositable_assets.dup
+        depositable_assets = StellarBase.configuration.depositable_assets
         c.deposit_config = depositable_assets.find do |asset|
           asset[:network] == c.network
         end
