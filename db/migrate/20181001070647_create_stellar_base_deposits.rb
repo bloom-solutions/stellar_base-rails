@@ -5,7 +5,7 @@ class CreateStellarBaseDeposits < ActiveRecord::Migration[5.2]
       t.integer :deposit_request_id, index: true
       t.string :tx_id, index: true
       t.decimal :amount
-      t.string :stellar_operation_id
+      t.string :stellar_tx_id
 
       t.timestamps
     end

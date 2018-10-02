@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2018_10_01_070647) do
     t.integer "deposit_request_id"
     t.string "tx_id"
     t.decimal "amount"
-    t.string "stellar_operation_id"
+    t.string "stellar_tx_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deposit_request_id"], name: "index_stellar_base_deposits_on_deposit_request_id"
