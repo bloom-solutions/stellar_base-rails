@@ -1,6 +1,5 @@
 CONFIG = YAML.load_file(SPEC_DIR.join("config.yml")).with_indifferent_access
 CONFIG[:issuer_address] = Stellar::Account.random.address
-CONFIG[:distributor] = Stellar::Account.random
 
 RSpec.configure do |c|
   c.before(:each) do
@@ -14,6 +13,7 @@ RSpec.configure do |c|
       c.on_bridge_callback = "ProcessBridgeCallback"
       c.on_withdraw = ProcessWithdrawal.to_s
       c.stellar_toml = { TRANSFER_SERVER: "http://example.com/stellar" }
+      c.stellar_network = "testnet"
 
       c.withdrawable_assets = [
         {
@@ -31,8 +31,8 @@ RSpec.configure do |c|
           network: "bitcoin",
           asset_code: "BTCT",
           issuer: CONFIG[:issuer_address],
-          distributor: CONFIG[:distributor].address,
-          distributor_seed: CONFIG[:distributor].keypair.seed,
+          distributor: CONFIG[:distributor],
+          distributor_seed: CONFIG[:distributor_seed],
           how_from: GetHow.to_s,
           max_amount_from: GetMaxAmount.to_s,
         },
