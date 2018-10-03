@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.8.1]
 ### Changed
 - Change error lifting for `StellarBase.on_deposit_trigger`. Raising exception is too expensive
 
