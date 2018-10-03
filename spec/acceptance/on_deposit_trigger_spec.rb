@@ -3,27 +3,27 @@ require "spec_helper"
 describe "StellarBase.on_deposit_trigger" do
   context "deposit_config not found" do
     it "skips remaining actions and fails" do
-      expect {
-        StellarBase.on_deposit_trigger(
-          network: "eth",
-          deposit_address: "1bc",
-          tx_id: "",
-          amount: 0.5,
-        )
-      }.to raise_error StandardError, "No depositable_asset config for eth"
+      result = StellarBase.on_deposit_trigger(
+        network: "eth",
+        deposit_address: "1bc",
+        tx_id: "",
+        amount: 0.5,
+      )
+      expect(result).to be_failure
+      expect(result.message).to eq "No depositable_asset config for eth"
     end
   end
 
   context "deposit_request doesn't exist" do
     it "skips remaining actions" do
-      expect {
-        StellarBase.on_deposit_trigger(
-          network: "bitcoin",
-          deposit_address: "1bc",
-          tx_id: "",
-          amount: 0.5,
-        )
-      }.to raise_error StandardError, "No DepositRequest found for BTCT:1bc"
+      result = StellarBase.on_deposit_trigger(
+        network: "bitcoin",
+        deposit_address: "1bc",
+        tx_id: "",
+        amount: 0.5,
+      )
+      expect(result).to be_skip_remaining
+      expect(result.message).to eq "No DepositRequest found for BTCT:1bc"
     end
   end
 
@@ -51,6 +51,8 @@ describe "StellarBase.on_deposit_trigger" do
         amount: 0.5,
       )
 
+      expect(result).to be_skip_remaining
+      expect(result.message).to eq "Deposit trigger previously made, skipping"
       expect(result.deposit.amount).to eq 0.35
       expect(result.deposit.stellar_tx_id).to eq "s12"
       expect(result.deposit.tx_id).to eq "def"

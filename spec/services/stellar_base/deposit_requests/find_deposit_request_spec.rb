@@ -35,7 +35,7 @@ module StellarBase
             deposit_address: "1bc",
           )
 
-          expect(result).to be_failure
+          expect(result).to be_skip_remaining
           expect(result.message).to eq "No DepositRequest found for BTCT:1bc"
 
           deposit_request = result.deposit_request

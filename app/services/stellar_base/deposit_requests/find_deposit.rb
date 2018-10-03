@@ -13,7 +13,9 @@ module StellarBase
           tx_id: c.tx_id,
         )
 
-        c.skip_remaining! if c.deposit.present?
+        if c.deposit.present?
+          c.skip_remaining!("Deposit trigger previously made, skipping")
+        end
       end
 
     end

@@ -17,7 +17,7 @@ module StellarBase
         )
 
         if c.deposit_request.blank?
-          c.fail_and_return! "No DepositRequest found for " +
+          c.skip_remaining! "No DepositRequest found for " +
             [asset_code, deposit_address].join(":")
         end
       end
