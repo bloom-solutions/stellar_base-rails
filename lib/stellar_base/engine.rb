@@ -9,8 +9,9 @@ module StellarBase
     end
 
     initializer "register.mime_types" do
-      return if Mime::Type.lookup_by_extension("toml").present?
-      Mime::Type.register "application/toml", :toml
+      if Mime::Type.lookup_by_extension("toml").blank?
+        Mime::Type.register "application/toml", :toml
+      end
     end
 
     config.generators do |g|
