@@ -24,15 +24,20 @@ module StellarBase
 
         Rails.logger.info(msg)
 
-        # TODO: handle when this fails
-        response = c.stellar_sdk_client.send_payment(
-          from: c.distribution_account,
-          to: c.recipient_account,
-          amount: c.stellar_amount,
-          memo: c.deposit_request.memo,
-        )
+        begin
+          response = c.stellar_sdk_client.send_payment(
+            from: c.distribution_account,
+            to: c.recipient_account,
+            amount: c.stellar_amount,
+            memo: c.deposit_request.memo,
+          )
 
-        c.stellar_tx_id = response.to_hash["hash"]
+          c.stellar_tx_id = response.to_hash["hash"]
+        rescue Faraday::ClientError => e
+          c.fail!
+          c.skip_remaining! "Error sending the asset. " \
+            "Faraday::ClientError: #{e.message}"
+        end
       end
 
     end
