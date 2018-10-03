@@ -1,8 +1,41 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe StellarBase do
-
   describe "configuration" do
+    describe "stellar_network" do
+      context "no supplied network" do
+        it "defaults to testnet" do
+          expect(Stellar.current_network).to eq Stellar::Networks::TESTNET
+        end
+      end
+
+      context "invalid network" do
+        after do
+          described_class.configuration.stellar_network = "testnet"
+        end
+
+        it "raises error" do
+          expect {
+            described_class.configuration.stellar_network = "etc"
+          }.to raise_error(
+            ArgumentError,
+            "'etc' not a valid stellar_network config",
+          )
+        end
+      end
+
+      context "supplied network" do
+        after do
+          described_class.configuration.stellar_network = "testnet"
+        end
+
+        it "defaults to testnet" do
+          described_class.configuration.stellar_network = "public"
+          expect(Stellar.current_network).to eq Stellar::Networks::PUBLIC
+        end
+      end
+    end
+
     describe "withdraw" do
       it "accepts a Ruby hash" do
         described_class.configuration.withdrawable_assets = [
@@ -12,7 +45,7 @@ RSpec.describe StellarBase do
             asset_code: "ETH",
             issuer: "issuer-address",
             fee_fixed: 0.1,
-          }
+          },
         ]
 
         config = described_class.configuration.withdrawable_assets
@@ -27,7 +60,7 @@ RSpec.describe StellarBase do
             asset_code: "ETH",
             issuer: "issuer-address",
             fee_fixed: 0.1,
-          }
+          },
         ].to_json
 
         config = described_class.configuration.withdrawable_assets
@@ -43,5 +76,4 @@ RSpec.describe StellarBase do
       end
     end
   end
-
 end

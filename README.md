@@ -54,6 +54,11 @@ This is the same distribution account that is setup in bridge. Currently, it is 
 - Default: https://horizon.stellar.org
 - This is where the engine will check bridge callbacks if `c.check_bridge_callbacks_authenticity` is turned on
 
+#### c.stellar_network
+- Values(s): "public" or "testnet"
+- Default: testnet
+- This tells stellar_base-rails what network it will use to send assets/lumens with. Currently used by the deposit module. If someone deposits a real asset, stellar_base sends the corresponding token to the requester.
+
 #### c.stellar_toml
 - Value(s): Hash, follow Stellar's [documentation](https://www.stellar.org/developers/guides/concepts/stellar-toml.html) for `stellar.toml`
 - Example:
@@ -81,6 +86,16 @@ gem 'stellar_base-rails'
 And then execute:
 ```bash
 $ bundle
+```
+
+If you're using `StellarBase.on_deposit_trigger` you'll need to install:
+
+```
+# Gemfile
+gem("stellar-sdk", {
+  github: "bloom-solutions/ruby-stellar-sdk",
+  branch: "payment-memo",
+})
 ```
 
 ## Development

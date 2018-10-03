@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_045927) do
+ActiveRecord::Schema.define(version: 2018_10_01_070647) do
 
   create_table "stellar_base_bridge_callbacks", force: :cascade do |t|
     t.string "operation_id", null: false
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 2018_09_25_045927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_type", "asset_code"], name: "index_stellar_base_deposit_requests_on_asset"
+  end
+
+  create_table "stellar_base_deposits", force: :cascade do |t|
+    t.integer "deposit_request_id"
+    t.string "tx_id"
+    t.decimal "amount"
+    t.string "stellar_tx_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deposit_request_id"], name: "index_stellar_base_deposits_on_deposit_request_id"
+    t.index ["tx_id"], name: "index_stellar_base_deposits_on_tx_id"
   end
 
   create_table "stellar_base_withdrawal_requests", force: :cascade do |t|

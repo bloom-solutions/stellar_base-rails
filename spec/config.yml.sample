@@ -1,5 +1,4 @@
 ---
 source_seed: change me to a seed with lumens on the testnet
 source_address: change mt to the address of the seed above
-issuer_seed: this is the issuer of assets that tests will run against. Make sure it's funded on the testnet
 issuer_address: this is the isser public address
