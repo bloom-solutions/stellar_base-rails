@@ -45,9 +45,7 @@ module StellarBase
   end
 
   def self.on_deposit_trigger(network:, deposit_address:, tx_id:, amount:)
-    result = DepositRequests::Trigger.(network, deposit_address, tx_id, amount)
-    raise StandardError, result.message if result.failure?
-    result
+    DepositRequests::Trigger.(network, deposit_address, tx_id, amount)
   end
 
   def self.included_module?(module_name)
