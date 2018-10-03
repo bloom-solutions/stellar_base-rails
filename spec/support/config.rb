@@ -14,6 +14,8 @@ RSpec.configure do |c|
       c.on_withdraw = ProcessWithdrawal.to_s
       c.stellar_toml = { TRANSFER_SERVER: "http://example.com/stellar" }
       c.stellar_network = "testnet"
+      c.on_account_event = ->(address, tx, op) do
+      end
 
       c.withdrawable_assets = [
         {

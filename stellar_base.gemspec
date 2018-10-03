@@ -22,6 +22,10 @@ Gem::Specification.new do |s|
   s.add_dependency "httparty"
   s.add_dependency "light-service"
   s.add_dependency "multi_json" # required by representable json
+  s.add_dependency "addressable"
+  s.add_dependency "sidekiq", "~> 5.1"
+  s.add_dependency "sidekiq-cron"
+  s.add_dependency "sidekiq-unique-jobs"
   s.add_dependency "rails", "~> 5.1"
   s.add_dependency "representable"
   s.add_dependency "stellar-base", ">= 0.14.0"
@@ -36,5 +40,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_bot_rails'
   s.add_development_dependency 'vcr', '~> 4.0'
   s.add_development_dependency 'webmock'
+  s.add_development_dependency "rspec-sidekiq"
 
 end

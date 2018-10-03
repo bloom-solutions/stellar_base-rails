@@ -1,5 +1,37 @@
 # Modules
 
+## Subscribing to Account Operations
+
+Enable this if you want to receive operations on specific accounts. You will probably only either this or the bridge callback functionality, not both at the same time.
+
+Enqueue the Sidekiq schedule:
+
+```
+stellar_horizon_events:
+  cron: "*/10 * * * * *"
+  class: "StellarBase::EnqueueSubscribeAccountsJob"
+```
+
+And configure:
+
+```ruby
+StellarBase.configure do |c|
+  c.modules = %i[account_operations]
+  c.subscribe_to_accounts = %w(STELLAR_ADDR_1 STELLAR_ADDR_2)
+  c.on_account_event = ->(address, tx, op) do
+    puts "There is a #{op} for #{address} in the tx #{tx}"
+  end
+
+  # Note: you can also specify the class directly, as long as it responds to `.call`:
+  c.on_account_event = MyProcessor
+end
+```
+
+If you need to watch addresses created on the fly, make sure that you create the address (for example, when you bring on a new customer):
+
+```ruby
+StellarBase::AccountSubscription.create(address: "G-STELLAR_ADDRESS")
+```
 ## Bridge Callbacks
 
 Activate this by specifying `bridge_callbacks` in the `modules` configuration.

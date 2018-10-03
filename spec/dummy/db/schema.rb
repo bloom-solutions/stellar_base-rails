@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_01_070647) do
+ActiveRecord::Schema.define(version: 2018_10_03_072138) do
+
+  create_table "stellar_base_account_subscriptions", force: :cascade do |t|
+    t.string "address", null: false
+    t.string "cursor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address"], name: "index_stellar_base_account_subscriptions_on_address", unique: true
+  end
 
   create_table "stellar_base_bridge_callbacks", force: :cascade do |t|
     t.string "operation_id", null: false

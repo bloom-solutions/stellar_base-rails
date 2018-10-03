@@ -1,3 +1,4 @@
+require "addressable"
 require "gem_config"
 require "stellar-base"
 require "light-service"
@@ -10,6 +11,9 @@ require "reform"
 require "reform/form/coercion"
 require "representable"
 require "toml-rb"
+require "sidekiq"
+require "sidekiq-cron"
+require "sidekiq-unique-jobs"
 
 require "stellar_base/engine"
 
@@ -25,6 +29,8 @@ module StellarBase
     has :modules, default: [:bridge_callbacks]
     has :on_bridge_callback
     has :on_withdraw
+    has :on_account_event
+    has :subscribe_to_accounts, classes: [NilClass, Array]
     has :stellar_network, classes: String, default: "testnet"
     has :stellar_toml, classes: Hash, default: {}
     has :depositable_assets, classes: [NilClass, Array, String, Pathname]
@@ -35,6 +41,7 @@ module StellarBase
     convert_config_withdraw!
     convert_config_deposit!
     set_stellar_network!
+    configure_sidekiq_death_handler!
   end
 
   def self.on_deposit_trigger(network:, deposit_address:, tx_id:, amount:)
@@ -98,6 +105,15 @@ module StellarBase
   rescue Errno::ENOENT
   end
   private_class_method :try_from_yaml_file_path
+
+  def self.configure_sidekiq_death_handler!
+    Sidekiq.configure_server do |config|
+      config.death_handlers << ->(job, _ex) do
+        return unless job['unique_digest']
+        SidekiqUniqueJobs::Digests.del(digest: job['unique_digest'])
+      end
+    end
+  end
 end
 
 require "stellar_base/horizon_client"
