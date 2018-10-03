@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    stellar_base-rails (0.7.0)
+    stellar_base-rails (0.7.1)
       disposable
       dry-types
       gem_config
