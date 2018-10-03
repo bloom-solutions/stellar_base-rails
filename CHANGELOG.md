@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Add all attributes for a complete stellar_toml file
+
+### Fixed
+- Fix `LocalJumpError` issues for Rails apps that already have the `toml` mime type registered
+
 ## [0.7.0]
 ### Added
 - Add `StellarBase.on_deposit_trigger`
