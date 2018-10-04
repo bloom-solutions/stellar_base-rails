@@ -29,7 +29,7 @@ module StellarBase
     has :on_bridge_callback
     has :on_withdraw
     has :on_account_event
-    has :subscribe_to_accounts, classes: [NilClass, Array]
+    has :subscribe_to_accounts, classes: [Array], default: []
     has :stellar_network, classes: String, default: "testnet"
     has :stellar_toml, classes: Hash, default: {}
     has :depositable_assets, classes: [NilClass, Array, String, Pathname]
