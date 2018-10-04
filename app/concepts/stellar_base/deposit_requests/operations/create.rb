@@ -36,7 +36,7 @@ module StellarBase
         def determine_how!(options, params:, **)
           details = params[:deposit_asset_details]
           options["model"].deposit_address =
-            ConfiguredClassRunner.(details[:how_from])
+            DetermineHow.(details[:how_from], params[:deposit_request])
         end
 
         def determine_max_amount!(options, params:, **)
@@ -67,6 +67,7 @@ module StellarBase
           return GenMemoFor.(DepositRequest) if params[:memo].blank?
           params[:memo]
         end
+
       end
     end
   end
