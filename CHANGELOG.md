@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Remove dependency sidekiq-cron
 
+### Fixed
+- `#subscribe_to_accounts` config defaults to an empty array
+
 ## [0.8.1]
 ### Changed
 - Change error lifting for `StellarBase.on_deposit_trigger`. Raising exception is too expensive
