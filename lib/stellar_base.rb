@@ -12,7 +12,6 @@ require "reform/form/coercion"
 require "representable"
 require "toml-rb"
 require "sidekiq"
-require "sidekiq-cron"
 require "sidekiq-unique-jobs"
 
 require "stellar_base/engine"

@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   s.add_dependency "multi_json" # required by representable json
   s.add_dependency "addressable"
   s.add_dependency "sidekiq", "~> 5.1"
-  s.add_dependency "sidekiq-cron"
   s.add_dependency "sidekiq-unique-jobs"
   s.add_dependency "rails", "~> 5.1"
   s.add_dependency "representable"

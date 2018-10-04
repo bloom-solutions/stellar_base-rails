@@ -4,7 +4,7 @@
 
 Enable this if you want to receive operations on specific accounts. You will probably only either this or the bridge callback functionality, not both at the same time.
 
-Enqueue the Sidekiq schedule:
+Enqueue the Sidekiq schedule with something like [sidekiq-cron](https://github.com/ondrejbartas/sidekiq-cron):
 
 ```
 stellar_horizon_events:
