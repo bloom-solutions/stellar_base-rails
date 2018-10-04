@@ -174,4 +174,4 @@ This engine gives you a method called `StellarBase.on_deposit_trigger` you call 
     - The `max_amount_from` class is expected to implement a `self.call` method. It won't be passed any parameters
   - `how_from` is a class that you define that will run whenever a deposit for that asset is requested. It'll populate the `how` response field. If you don't define anything, it won't run that class and will return `nil` for the `how`
     - The `how_from` class is expected a `String` return.
-    - The `how_from` class is expected to implement a `self.call` method. It won't be passed any parameters
+    - The `how_from` class is expected to implement a `self.call` method. You can implement the `self.call` to accept parameters and it'll be passed the request parameters from `GET /deposit`, the parameters will be in a form of a `Hash`

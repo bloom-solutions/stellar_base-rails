@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "spec_helper"
 
 module StellarBase
   RSpec.describe AccountSubscription, type: :model do

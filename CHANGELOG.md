@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Pass in `GET /deposit` params in `how_from` class
+
 ## [0.9.0] - 2018-10-04
 ### Changed
 - Remove dependency sidekiq-cron

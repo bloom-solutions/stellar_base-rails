@@ -10,7 +10,15 @@ module StellarBase
               .and_return("MEMO")
             expect(ConfiguredClassRunner).to receive(:call)
               .with(GetMaxAmount.to_s).and_return(100)
-            expect(ConfiguredClassRunner).to receive(:call).with(GetHow.to_s)
+            expect(DetermineHow).to receive(:call)
+              .with(GetHow.to_s, {
+                asset_code: "BTCT",
+                account: "G-STELLAR-ACCOUNT",
+                account_id: "G-STELLAR-ACCOUNT",
+                deposit_type: nil,
+                memo: "MEMO",
+                memo_type: "text",
+              })
               .and_return("BTCADDR")
 
             op = described_class.(deposit_request: {
@@ -25,7 +33,8 @@ module StellarBase
             expect(deposit.asset_type).to eq "crypto"
             expect(deposit.asset_code).to eq "BTCT"
             expect(deposit.account_id).to eq "G-STELLAR-ACCOUNT"
-            expect(deposit.deposit_address).to eq "BTCADDR"
+            expect(deposit.deposit_address)
+              .to eq "BTCADDR"
             expect(deposit.eta).to be_an Integer
             expect(deposit.issuer).to eq CONFIG[:issuer_address]
             expect(deposit.memo_type).to eq "text"
