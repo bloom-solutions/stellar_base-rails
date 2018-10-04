@@ -25,7 +25,6 @@ PATH
       rails (~> 5.1)
       representable
       sidekiq (~> 5.1)
-      sidekiq-cron
       sidekiq-unique-jobs
       stellar-base (>= 0.14.0)
       toml-rb (~> 1.0)
@@ -133,8 +132,6 @@ GEM
       dry-logic (~> 0.4, >= 0.4.2)
     equalizer (0.0.11)
     erubi (1.7.1)
-    et-orbi (1.1.6)
-      tzinfo
     excon (0.62.0)
     factory_bot (4.10.0)
       activesupport (>= 3.0.0)
@@ -151,9 +148,6 @@ GEM
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
     ffi (1.9.25)
-    fugit (1.1.6)
-      et-orbi (~> 1.1, >= 1.1.6)
-      raabro (~> 1.1)
     gem_config (0.3.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -199,7 +193,6 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     public_suffix (3.0.2)
-    raabro (1.1.6)
     rack (2.0.5)
     rack-protection (2.0.4)
       rack
@@ -270,9 +263,6 @@ GEM
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
-    sidekiq-cron (1.0.4)
-      fugit (~> 1.1)
-      sidekiq (>= 4.2.1)
     sidekiq-unique-jobs (6.0.6)
       concurrent-ruby (~> 1.0, >= 1.0.5)
       sidekiq (>= 4.0, < 6.0)
