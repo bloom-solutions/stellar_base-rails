@@ -5,10 +5,13 @@ module StellarBase
     OPERATION_LIMIT = 200
 
     def self.call(account_subscription, operation_limit: OPERATION_LIMIT)
-      with(
+      result = with(
         account_subscription: account_subscription,
         operation_limit: operation_limit,
       ).reduce(actions)
+
+      Rails.logger.warn result.message if result.failure?
+      result
     end
 
     def self.actions
@@ -19,8 +22,8 @@ module StellarBase
         iterate(:operations, [
           AccountSubscriptions::GetTx,
           AccountSubscriptions::ExecuteCallback,
-          AccountSubscriptions::SaveCursor,
         ]),
+        AccountSubscriptions::SaveCursor,
       ]
     end
 

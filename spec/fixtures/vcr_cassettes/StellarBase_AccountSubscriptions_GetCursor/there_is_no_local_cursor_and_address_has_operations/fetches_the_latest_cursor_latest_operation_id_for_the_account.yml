@@ -23,15 +23,15 @@ http_interactions:
       Content-Type:
       - application/hal+json; charset=utf-8
       Date:
-      - Mon, 08 Oct 2018 02:37:50 GMT
+      - Mon, 08 Oct 2018 08:59:04 GMT
       Vary:
       - Origin
       X-Ratelimit-Limit:
       - '17200'
       X-Ratelimit-Remaining:
-      - '17188'
+      - '17194'
       X-Ratelimit-Reset:
-      - '3037'
+      - '2206'
       Content-Length:
       - '1572'
       Connection:
@@ -78,14 +78,14 @@ http_interactions:
           },
           "horizon_version": "0.14.2-4c30d59b86f551475a3ac60e5555c0c86ff3cb75",
           "core_version": "stellar-core 10.0.0-dbg (1fc018b4f52e8c7e716b023ccf30600af5b4f66d)",
-          "history_latest_ledger": 62536,
+          "history_latest_ledger": 66831,
           "history_elder_ledger": 1,
-          "core_latest_ledger": 62536,
+          "core_latest_ledger": 66832,
           "network_passphrase": "Test SDF Network ; September 2015",
           "protocol_version": 10
         }
     http_version: 
-  recorded_at: Mon, 08 Oct 2018 02:37:51 GMT
+  recorded_at: Mon, 08 Oct 2018 08:59:03 GMT
 - request:
     method: get
     uri: https://horizon-testnet.stellar.org/accounts/GDLBSJG2GIA6OX3TBI7K7BUIZD762NBNKTX5YFJR3WVWQAIUUM23RW3R
@@ -109,15 +109,15 @@ http_interactions:
       Content-Type:
       - application/hal+json; charset=utf-8
       Date:
-      - Mon, 08 Oct 2018 02:37:52 GMT
+      - Mon, 08 Oct 2018 08:59:06 GMT
       Vary:
       - Origin
       X-Ratelimit-Limit:
       - '17200'
       X-Ratelimit-Remaining:
-      - '17187'
+      - '17191'
       X-Ratelimit-Reset:
-      - '3035'
+      - '1805'
       Content-Length:
       - '2347'
       Connection:
@@ -192,7 +192,7 @@ http_interactions:
           "data": {}
         }
     http_version: 
-  recorded_at: Mon, 08 Oct 2018 02:37:52 GMT
+  recorded_at: Mon, 08 Oct 2018 08:59:05 GMT
 - request:
     method: get
     uri: https://horizon-testnet.stellar.org/accounts/GDLBSJG2GIA6OX3TBI7K7BUIZD762NBNKTX5YFJR3WVWQAIUUM23RW3R/operations?limit=1&order=desc
@@ -216,15 +216,15 @@ http_interactions:
       Content-Type:
       - application/hal+json; charset=utf-8
       Date:
-      - Mon, 08 Oct 2018 02:37:53 GMT
+      - Mon, 08 Oct 2018 08:59:12 GMT
       Vary:
       - Origin
       X-Ratelimit-Limit:
       - '17200'
       X-Ratelimit-Remaining:
-      - '17186'
+      - '17193'
       X-Ratelimit-Reset:
-      - '3034'
+      - '2199'
       Content-Length:
       - '1967'
       Connection:
@@ -279,5 +279,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Mon, 08 Oct 2018 02:37:53 GMT
+  recorded_at: Mon, 08 Oct 2018 08:59:11 GMT
 recorded_with: VCR 4.0.0
