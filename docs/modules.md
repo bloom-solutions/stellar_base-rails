@@ -32,6 +32,21 @@ If you need to watch addresses created on the fly, make sure that you create the
 ```ruby
 StellarBase::AccountSubscription.create(address: "G-STELLAR_ADDRESS")
 ```
+
+### Sidekiq Unique Jobs
+
+This gem uses [SidekiqUniqueJobs](https://github.com/mhenrixon/sidekiq-unique-jobs) to ensure that only one job is enqueued at a time that fetches information about the accounts. If your Sidekiq process dies prematurely, it is possible that locks will not be removed. When this occurs and the Sidekiq process boots up, none of the locked jobs will be enqueued. Consider putting something like this in your apps:
+
+```ruby
+if Sidekiq.server?
+  SidekiqUniqueJobs::Digests.all.each do |d|
+    SidekiqUniqueJobs::Digests.del(digest: d)
+  end
+end
+```
+
+This will delete all digests every time your Sidekiq process is started. If you have more than one Sidekiq process and the one of them enqueues jobs before the other, then a lock may be deleted for a job that is currently running. This should be a safe method if you only have one Sidekiq process running.
+
 ## Bridge Callbacks
 
 Activate this by specifying `bridge_callbacks` in the `modules` configuration.
