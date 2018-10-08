@@ -20,6 +20,9 @@ module StellarBase
           c.skip_remaining! "No operations found " \
             "for #{c.account_subscription.address}"
         end
+      rescue Faraday::ClientError => e
+        c.fail_and_return! "Skipping fetching operations of #{address} " \
+          "due to #{e.inspect}"
       end
 
     end
