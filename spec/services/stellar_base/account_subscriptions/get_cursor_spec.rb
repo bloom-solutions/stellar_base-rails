@@ -24,15 +24,31 @@ module StellarBase
         end
       end
 
-      context "there is no local cursor" do
+      context "account does not exist", vcr: {record: :once} do
+        let(:account_subscription) do
+          create(:stellar_base_account_subscription, address: "ABC")
+        end
+
+        it "skips the rest of the actions" do
+          resulting_ctx = described_class.execute(
+            account_subscription: account_subscription,
+            stellar_sdk_client: client,
+          )
+
+          expect(resulting_ctx).to be_failure
+        end
+      end
+
+      context "there is no local cursor and address has operations" do
+        # NOTE: This is an account that was created manually on testnet
         let!(:account_subscription) do
           create(:stellar_base_account_subscription, {
-            address: "GAPHLLK32DRM73KYIUMKKTTV5XVG5JND5PAHW7ZBPUW5BVPGJJFWBIMP",
+            address: "GDLBSJG2GIA6OX3TBI7K7BUIZD762NBNKTX5YFJR3WVWQAIUUM23RW3R",
             cursor: nil,
           })
         end
 
-        it "fetches the latest cursor (latest operation id) for the account", vcr: {record: :once} do
+        it "fetches the latest cursor (latest operation id) for the account", vcr: {record: :all} do
           resulting_ctx = described_class.execute(
             account_subscription: account_subscription,
             stellar_sdk_client: client,
