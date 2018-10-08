@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Fixed
 - Do not blow up when fetching cursors of non-existent accounts
+- Do not blow up when saving cursor of an empty operation set
 
 ## [0.9.2] - 2018-10-08
 ### Fixed
