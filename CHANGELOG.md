@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.9.3] - 2018-10-08
 ### Fixed
 - Do not blow up when fetching cursors of non-existent accounts
 - Do not blow up when saving cursor of an empty operation set
