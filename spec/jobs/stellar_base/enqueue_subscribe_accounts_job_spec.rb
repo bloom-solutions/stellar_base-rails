@@ -6,6 +6,7 @@ module StellarBase
     let!(:account_subscription) do
       create(:stellar_base_account_subscription, address: "GABC")
     end
+
     it "creates AccountSubscription records for the hard-coded accounts then enqueues a job for each AccountSubscription" do
       StellarBase.configuration.subscribe_to_accounts = %w(GB)
 
