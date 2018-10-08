@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.3] - 2018-10-08
+### Fixed
+- Do not blow up when fetching cursors of non-existent accounts
+- Do not blow up when saving cursor of an empty operation set
+
 ## [0.9.2] - 2018-10-08
 ### Fixed
 - SubscriptionWorker retry is `0` so death handlers are executed
