@@ -17,7 +17,7 @@ module StellarBase
           .operations(order: "asc", limit: c.operation_limit).records
 
         if c.operations.empty?
-          c.skip_remaining! "No operations found " \
+          c.fail_and_return! "No operations found " \
             "for #{c.account_subscription.address}"
         end
       rescue Faraday::ClientError => e
