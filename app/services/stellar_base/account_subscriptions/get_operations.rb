@@ -12,9 +12,14 @@ module StellarBase
       promises :operations
 
       executed do |c|
-        c.operations = c.stellar_sdk_client.horizon.
-          account(account_id: c.account_subscription.address).
-          operations(order: "asc", limit: c.operation_limit).records
+        c.operations = c.stellar_sdk_client.horizon
+          .account(account_id: c.account_subscription.address)
+          .operations(order: "asc", limit: c.operation_limit).records
+
+        if c.operations.empty?
+          c.skip_remaining! "No operations found " \
+            "for #{c.account_subscription.address}"
+        end
       end
 
     end
