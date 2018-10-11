@@ -1,5 +1,4 @@
 CONFIG = YAML.load_file(SPEC_DIR.join("config.yml")).with_indifferent_access
-CONFIG[:issuer_address] = Stellar::Account.random.address
 
 RSpec.configure do |c|
   c.before(:each) do
