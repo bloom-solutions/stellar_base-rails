@@ -59,8 +59,7 @@ module StellarBase
           )
 
           expect(result).to be_failure
-          expect(result.message)
-            .to eq "Error sending the asset. Faraday::ClientError: message"
+          expect(result.message).to include "Error sending the asset."
         end
       end
     end
