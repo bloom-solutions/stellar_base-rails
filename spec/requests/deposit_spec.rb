@@ -35,7 +35,7 @@ describe "GET /deposit", type: :request, vcr: { record: :once } do
           },
         })
 
-        expect(response).to be_success
+        expect(response).to be_successful
 
         json = JSON.parse(response.body).with_indifferent_access
 
@@ -70,7 +70,7 @@ describe "GET /deposit", type: :request, vcr: { record: :once } do
         },
       })
 
-      expect(response).not_to be_success
+      expect(response).not_to be_successful
       json = JSON.parse(response.body).with_indifferent_access
 
       expect(json["error"]).to be_present
