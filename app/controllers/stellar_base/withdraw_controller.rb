@@ -13,7 +13,7 @@ module StellarBase
             render json: representer
           else
             render(
-              json: { error: op["contract.default"].errors },
+              json: { error: op["result.policy.message"] || op["contract.default"].errors },
               status: :unprocessable_entity,
             )
           end

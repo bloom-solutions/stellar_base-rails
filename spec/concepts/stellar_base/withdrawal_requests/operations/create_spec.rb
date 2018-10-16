@@ -4,7 +4,7 @@ module StellarBase
   module WithdrawalRequests
     module Operations
       RSpec.describe Create do
-        it "creates a withdrawal request" do
+        it "Can request withdrawal" do
           expect(GenMemoFor).to receive(:call).with(WithdrawalRequest)
             .and_return("MEMO")
           expect(DetermineMaxAmount).to receive(:call).and_return(10)
@@ -40,40 +40,62 @@ module StellarBase
           expect(withdrawal_request.fee_percent).to be_zero
           expect(withdrawal_request.fee_network).to eq 0.0005
         end
+      end
 
-        context "an asset that cannot be withdrawn" do
-          it "is not successful" do
-            op = described_class.(withdrawal_request: {
-              type: "crypto",
-              asset_code: "BCHT",
-              dest: "my-bch-addr",
-            })
-
-            expect(op).to_not be_success
-
-            contract = op["contract.default"]
-
-            expect(contract.errors[:asset_code])
-              .to include "invalid asset_code. Valid asset_codes: BTCT"
+      context "Cannot request withdrawal" do
+        before do
+          StellarBase.configure do |c|
+            c.modules = %w[bridge_callbacks]
           end
         end
 
-        context "bridge_callbacks module is not loaded" do
-          before do
-            StellarBase.configuration.modules = %i[]
-          end
+        it "returns a policy error message" do
+          op = described_class.(withdrawal_request: {
+            type: "crypto",
+            asset_code: "BTCT",
+            dest: "my-btc-addr",
+            dest_extra: "pls",
+            fee_network: 0.0005,
+          })
 
-          it "creates a withdrawal request" do
-            op = described_class.(withdrawal_request: {
-              type: "crypto",
-              asset_code: "BTCT",
-              dest: "my-btc-addr",
-              dest_extra: "pls",
-              fee_network: 0.0005,
-            })
+          expect(op).to_not be_success
+          expect(op["result.policy.default"]).to_not be_success
+          expect(op["result.policy.message"]).to eq described_class::POLICY_ERROR_MESSAGE
+        end
+      end
 
-            expect(op).to_not be_success
-          end
+      context "an asset that cannot be withdrawn" do
+        it "is not successful" do
+          op = described_class.(withdrawal_request: {
+            type: "crypto",
+            asset_code: "BCHT",
+            dest: "my-bch-addr",
+          })
+
+          expect(op).to_not be_success
+
+          contract = op["contract.default"]
+
+          expect(contract.errors[:asset_code])
+            .to include "invalid asset_code. Valid asset_codes: BTCT"
+        end
+      end
+
+      context "bridge_callbacks module is not loaded" do
+        before do
+          StellarBase.configuration.modules = %i[]
+        end
+
+        it "creates a withdrawal request" do
+          op = described_class.(withdrawal_request: {
+            type: "crypto",
+            asset_code: "BTCT",
+            dest: "my-btc-addr",
+            dest_extra: "pls",
+            fee_network: 0.0005,
+          })
+
+          expect(op).to_not be_success
         end
       end
     end

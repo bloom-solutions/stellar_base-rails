@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Fixed
 - Missing local variable `address` when `StellarBase::AccountSubscriptions::GetOperations` rescues `Faraday::ClientError` exception
+- Add error message in `/withdraw` if a failed policy occurred.
 
 ## [0.9.4] - 2018-10-08
 ### Fixed

@@ -98,4 +98,27 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
       expect(@callback_called).to be_nil
     end
   end
+
+  context "requesting withdrawal details without the `withdraw` module" do
+    before do
+      StellarBase.configuration.modules = %w[bridge_callbacks]
+    end
+
+    it "denies access" do
+      get(uri, {
+        params: {
+          type: "crypto",
+          asset_code: "BTCT",
+          dest: "my-btc-address",
+          fee_network: 0.001,
+          format: :json,
+        },
+      })
+
+      json = JSON.parse(response.body).with_indifferent_access
+
+      expect(response).to_not be_success
+      expect(json["error"]).to_not be_empty
+    end
+  end
 end
