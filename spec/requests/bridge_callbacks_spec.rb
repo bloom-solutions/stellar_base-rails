@@ -28,7 +28,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
 
       post uri, params: params
 
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.code.to_i).to eq 200
     end
   end
@@ -63,7 +63,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
 
       post uri, params: params
 
-      expect(response.success?).to eq false
+      expect(response).to_not be_successful
       expect(response.code.to_i).to eq 422
     end
   end
@@ -98,7 +98,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
 
         post uri, params: params
 
-        expect(response.success?).to eq false
+        expect(response).to_not be_successful
         expect(response.code.to_i).to eq 422
       end
     end
@@ -120,7 +120,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
 
         post uri, params: params
 
-        expect(response.success?).to eq false
+        expect(response).to_not be_successful
         expect(response.code.to_i).to eq 422
       end
     end
@@ -142,7 +142,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
 
         post uri, params: params
 
-        expect(response.success?).to eq false
+        expect(response).to_not be_successful
         expect(response.code.to_i).to eq 422
       end
     end
@@ -193,7 +193,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
       it "renders 422" do
         post uri, params: params, headers: headers
 
-        expect(response.success?).to eq false
+        expect(response).to_not be_successful
         expect(response.code).to eq "400"
       end
     end
@@ -204,7 +204,7 @@ describe "POST /bridge_callbacks", type: :request, vcr: { record: :once } do
       it "continues to process the payload" do
         post uri, params: params, headers: headers
 
-        expect(response.success?).to eq true
+        expect(response).to be_successful
         expect(response.code).to eq "200"
       end
 

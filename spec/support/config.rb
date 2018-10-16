@@ -1,8 +1,9 @@
 CONFIG = YAML.load_file(SPEC_DIR.join("config.yml")).with_indifferent_access
-CONFIG[:issuer_address] = Stellar::Account.random.address
 
 RSpec.configure do |c|
   c.before(:each) do
+    SidekiqUniqueJobs.config.enabled = false
+
     StellarBase.configure do |c|
       c.bridge_callbacks_mac_key = "sample"
       c.check_bridge_callbacks_authenticity = false

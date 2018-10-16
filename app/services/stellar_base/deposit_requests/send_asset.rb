@@ -34,9 +34,8 @@ module StellarBase
 
           c.stellar_tx_id = response.to_hash["hash"]
         rescue Faraday::ClientError => e
-          c.fail!
-          c.skip_remaining! "Error sending the asset. " \
-            "Faraday::ClientError: #{e.message}"
+          c.fail_and_return! "Error sending the asset. " \
+            "Faraday::ClientError: #{e.inspect}"
         end
       end
 

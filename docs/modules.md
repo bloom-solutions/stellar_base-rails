@@ -175,6 +175,9 @@ This engine gives you a method called `StellarBase.on_deposit_trigger` you call 
     - `deposit_address` - where it was deposited
     - `tx_id` - the Transaction ID in that network
     - `amount` - amount of that asset received. It will send the same amount of the corresponding Stellar Asset to the requester.
+- Returns an object that:
+  - has the method to `#success?` (and `#failure?` which is the opposite Boolean value). When it is not successful, the reason may be taken from `#message`.
+  - contains the `Deposit` (accessed via `#deposit`). This is useful to fetch when you want to know the Stellar transaction id (`Deposit#stellar_tx_id`) and the memo, via `Deposit#deposit_request`'s `#memo`.
 
 #### c.depositable_assets
 - Value(s):
