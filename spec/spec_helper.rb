@@ -6,6 +6,7 @@ require "vcr"
 require "rspec/rails"
 require "stellar-sdk"
 require "rspec-sidekiq"
+require "stellar_spectrum"
 
 SPEC_DIR = Pathname.new(File.dirname(__FILE__))
 ROOT_DIR = SPEC_DIR.join("..")

@@ -9,7 +9,7 @@ module StellarBase
           FindConfig,
           FindDepositRequest,
           FindOrCreateDeposit,
-          InitStellarClient,
+          InitAssetSendingClient,
           InitStellarIssuerAccount,
           InitStellarRecipientAccount,
           InitStellarDistributionAccount,
@@ -24,13 +24,18 @@ module StellarBase
           deposit_address: "btc-address",
           tx_id: "1b3",
           amount: 1.0,
+          horizon_url: "horizon.com",
+          sending_strategy: [:stellar_sdk],
         )
 
         actions.each do |action|
           expect(action).to receive(:execute).with(ctx).and_return(ctx)
         end
 
-        described_class.("bitcoin", "btc-address", "1b3", 1.0)
+        described_class.("bitcoin", "btc-address", "1b3", 1.0, {
+          horizon_url: "horizon.com",
+          sending_strategy: [:stellar_sdk],
+        })
       end
     end
 

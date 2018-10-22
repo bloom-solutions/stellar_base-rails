@@ -75,5 +75,30 @@ RSpec.describe StellarBase do
         expect(config[1][:issuer]).to eq "G-issuer-on-stellar"
       end
     end
+
+    describe "#sending_strategy" do
+      it "defaults to `:stellar_sdk`" do
+        expect(described_class.configuration.sending_strategy).
+          to match_array([:stellar_sdk])
+      end
+
+      it "can be configured to stellar_sdk" do
+        described_class.configuration.sending_strategy = :stellar_sdk
+
+        expect(described_class.configuration.sending_strategy).
+          to match_array([:stellar_sdk])
+      end
+
+      it "can be configured to stellar_spectrum" do
+        described_class.configuration.sending_strategy = [
+          :stellar_sdk,
+          {
+            redis_url: "redis://localhost",
+            seeds: ["S1", "S2"],
+          }
+        ]
+        expect(described_class.sending_strategy).to eq `:stellar_sdk`
+      end
+    end
   end
 end

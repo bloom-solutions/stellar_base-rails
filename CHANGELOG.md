@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Upgrade stellar-base to `>= 0.18.0`
 
+### Added
+- Optionally use [StellarSpectrum](https://github.com/bloom-solutions/stellar_spectrum-ruby) to send assets
+
 ## [0.10.0] - 2018-11-23
 ### Added
 - Add `balances` module. Which mounts a `/balance/:asset_code` endpoint that returns the `max_amount` of a withdrawable asset

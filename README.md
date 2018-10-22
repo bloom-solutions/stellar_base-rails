@@ -76,6 +76,21 @@ https://example.com/stellar/
 https://example.com/
 ```
 
+#### c.sending_strategy
+
+By default, this engine uses [ruby-stellar-sdk](https://github.com/stellar/ruby-stellar-sdk) to send assets. This does not have support for multi-process friendly distribution of assets.
+
+One may opt to use [stellar_spectrum](https://github.com/bloom-solutions/stellar_spectrum-ruby) that allows sending of assets through multiple payment channels.
+
+To configure this:
+
+```ruby
+config = {redis_url: "redis://redis", seeds: %w(S1 S2)}
+c.sending_strategy = [:stellar_spectrum, config]
+```
+
+In the code above, `config` is the [configuration in StellarSpectrum](https://github.com/bloom-solutions/stellar_spectrum-ruby#usage), **except** the `horizon_url`. The value for `horizon_url` will be taken from `c.horizon_url`.
+
 ## Installation
 Add this line to your application's Gemfile:
 

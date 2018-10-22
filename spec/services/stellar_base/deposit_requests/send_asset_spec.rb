@@ -33,7 +33,7 @@ module StellarBase
             issuer_account: issuer_account,
             recipient_account: recipient_account,
             stellar_amount: stellar_amount,
-            stellar_sdk_client: client,
+            asset_sending_client: client,
           )
         end
       end
@@ -55,7 +55,7 @@ module StellarBase
             issuer_account: issuer_account,
             recipient_account: recipient_account,
             stellar_amount: stellar_amount,
-            stellar_sdk_client: client,
+            asset_sending_client: client,
           )
 
           expect(result).to be_failure
