@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    stellar_base-rails (0.9.5)
+    stellar_base-rails (0.9.6)
       addressable
       disposable
       dry-types

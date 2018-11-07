@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.6] - 2018-11-07
+### Fixed
+- `DepositRequests::Trigger` skipping of sending assets when `SendAsset` fails
+
 ## [0.9.5] - 2018-10-19
 ### Fixed
 - Missing local variable `address` when `StellarBase::AccountSubscriptions::GetOperations` rescues `Faraday::ClientError` exception
