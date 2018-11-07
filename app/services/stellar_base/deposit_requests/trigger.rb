@@ -17,8 +17,7 @@ module StellarBase
         [
           FindConfig,
           FindDepositRequest,
-          FindDeposit,
-          CreateDeposit,
+          FindOrCreateDeposit,
           InitStellarClient,
           InitStellarIssuerAccount,
           InitStellarRecipientAccount,
@@ -26,7 +25,7 @@ module StellarBase
           InitStellarAsset,
           InitStellarAmount,
           SendAsset,
-          UpdateDeposit, # save the stellar operation id on it
+          UpdateDeposit,
         ]
       end
 
