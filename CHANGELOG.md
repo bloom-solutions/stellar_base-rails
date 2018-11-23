@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.10.0] - 2018-11-23
 ### Added
 - Add `balances` module. Which mounts a `/balance/:asset_code` endpoint that returns the `max_amount` of a withdrawable asset
 
