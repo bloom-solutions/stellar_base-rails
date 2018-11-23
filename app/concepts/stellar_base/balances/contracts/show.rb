@@ -1,7 +1,7 @@
 module StellarBase
   module Balances
     module Contracts
-      class Create < ApplicationContract
+      class Show < ApplicationContract
 
         property :asset_code
 

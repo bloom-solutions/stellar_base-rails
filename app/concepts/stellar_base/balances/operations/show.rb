@@ -5,14 +5,18 @@ module StellarBase
 
         step self::Policy::Pundit(BalancesPolicy, :show?)
         failure :set_policy_error!
-        step Model(Balance, :new)
-        step Contract::Build(constant: Contracts::Create)
+        step :setup_model!
+        step Contract::Build(constant: Contracts::Show)
         step Contract::Validate(key: :balance)
         step Contract::Persist(method: :sync)
         step :find_asset_details!
         success :set_amount!
 
         private
+
+        def setup_model!(options)
+          options["model"] = Balance.new
+        end
 
         def set_policy_error!(options, params:, **)
           options["result.policy.message"] = "Not authorized to check balances"
