@@ -36,10 +36,11 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "stellar-sdk"
+  s.add_development_dependency "stellar-sdk", ">= 0.6.0"
   s.add_development_dependency 'factory_bot_rails'
   s.add_development_dependency 'vcr', '~> 4.0'
   s.add_development_dependency 'webmock'
   s.add_development_dependency "rspec-sidekiq"
+  s.add_development_dependency "stellar_spectrum", "~> 1.0"
 
 end

@@ -9,7 +9,7 @@ module StellarBase
         :issuer_account,
         :recipient_account,
         :stellar_amount,
-        :stellar_sdk_client,
+        :asset_sending_client,
       )
       promises :stellar_tx_id
 
@@ -25,7 +25,7 @@ module StellarBase
         Rails.logger.info(msg)
 
         begin
-          response = c.stellar_sdk_client.send_payment(
+          response = c.asset_sending_client.send_payment(
             from: c.distribution_account,
             to: c.recipient_account,
             amount: c.stellar_amount,

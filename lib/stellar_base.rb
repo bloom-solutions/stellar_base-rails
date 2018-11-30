@@ -34,6 +34,7 @@ module StellarBase
     has :stellar_toml, classes: Hash, default: {}
     has :depositable_assets, classes: [NilClass, Array, String, Pathname]
     has :withdrawable_assets, classes: [NilClass, Array, String, Pathname]
+    has :sending_strategy, classes: [Array, Symbol], default: [:stellar_sdk]
   end
 
   after_configuration_change do
