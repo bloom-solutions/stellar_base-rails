@@ -27,10 +27,11 @@ Gem::Specification.new do |s|
   s.add_dependency "sidekiq-unique-jobs"
   s.add_dependency "rails", "~> 5.1"
   s.add_dependency "representable"
-  s.add_dependency "stellar-base", ">= 0.14.0"
+  s.add_dependency "stellar-base", ">= 0.18.0"
   s.add_dependency "toml-rb", "~> 1.0"
   s.add_dependency "trailblazer", "~> 2.0"
   s.add_dependency "trailblazer-rails"
+  s.add_dependency "reform-rails"
   s.add_dependency "virtus"
 
   s.add_development_dependency "rspec-rails"

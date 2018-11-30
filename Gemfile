@@ -14,7 +14,3 @@ gemspec
 gem "pry-byebug", group: %i[development test]
 gem "spring"
 gem "spring-commands-rspec"
-gem("stellar-sdk", {
-  github: "bloom-solutions/ruby-stellar-sdk",
-  branch: "payment-memo",
-})
