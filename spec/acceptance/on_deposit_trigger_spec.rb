@@ -52,7 +52,8 @@ describe "StellarBase.on_deposit_trigger" do
       )
 
       expect(result).to be_skip_remaining
-      expect(result.message).to eq "Deposit trigger previously made, skipping"
+      expect(result.message)
+        .to eq "Deposit previously made: stellar_tx_id s12, skipping"
       expect(result.deposit.amount).to eq 0.35
       expect(result.deposit.stellar_tx_id).to eq "s12"
       expect(result.deposit.tx_id).to eq "def"
