@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_03_072138) do
+ActiveRecord::Schema.define(version: 2018_12_10_043919) do
 
   create_table "stellar_base_account_subscriptions", force: :cascade do |t|
     t.string "address", null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2018_10_03_072138) do
     t.string "stellar_tx_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deposit_request_id", "tx_id"], name: "index_stellar_base_deposits_on_deposit_request_id_and_tx_id", unique: true
     t.index ["deposit_request_id"], name: "index_stellar_base_deposits_on_deposit_request_id"
     t.index ["tx_id"], name: "index_stellar_base_deposits_on_tx_id"
   end
