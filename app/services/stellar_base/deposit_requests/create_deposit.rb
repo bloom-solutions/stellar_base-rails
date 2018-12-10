@@ -1,6 +1,6 @@
 module StellarBase
   module DepositRequests
-    class FindOrCreateDeposit
+    class CreateDeposit
 
       extend LightService::Action
 

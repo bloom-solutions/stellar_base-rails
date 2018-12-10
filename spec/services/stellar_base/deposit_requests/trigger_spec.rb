@@ -8,7 +8,7 @@ module StellarBase
         actions = [
           FindConfig,
           FindDepositRequest,
-          FindOrCreateDeposit,
+          CreateDeposit,
           InitAssetSendingClient,
           InitStellarIssuerAccount,
           InitStellarRecipientAccount,

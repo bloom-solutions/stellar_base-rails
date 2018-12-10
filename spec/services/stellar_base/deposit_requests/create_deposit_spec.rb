@@ -2,7 +2,7 @@ require "spec_helper"
 
 module StellarBase
   module DepositRequests
-    RSpec.describe FindOrCreateDeposit do
+    RSpec.describe CreateDeposit do
       let!(:deposit_request) do
         create(:stellar_base_deposit_request, {
           asset_code: "BTCT",
