@@ -11,3 +11,5 @@ before_install:
   - sudo apt-get install -y libsodium-dev
 before_script:
   - bundle exec rake app:db:create app:db:test:prepare
+script:
+  - bundle exec rspec spec
