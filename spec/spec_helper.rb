@@ -7,11 +7,13 @@ require "rspec/rails"
 require "stellar-sdk"
 require "rspec-sidekiq"
 require "stellar_spectrum"
+require "dotenv"
 
 SPEC_DIR = Pathname.new(File.dirname(__FILE__))
 ROOT_DIR = SPEC_DIR.join("..")
 FIXTURES_DIR = SPEC_DIR.join("fixtures")
 
+Dotenv.load(".env.local", ".env")
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[StellarBase::Engine.root.join("spec/support/**/*.rb")].each do |f|

@@ -72,7 +72,7 @@ describe "StellarBase.on_deposit_trigger" do
       })
     end
     let(:recipient_account) { Stellar::Account.random }
-    let(:issuing_account) { Stellar::Account.from_seed(CONFIG[:issuer_seed]) }
+    let(:issuing_account) { Stellar::Account.from_seed(ENV["ISSUER_SEED"]) }
     let(:distribution_account) { Stellar::Account.random }
     let(:client) { Stellar::Client.default_testnet }
     let(:asset) { Stellar::Asset.alphanum4("BTCT", issuing_account.keypair) }

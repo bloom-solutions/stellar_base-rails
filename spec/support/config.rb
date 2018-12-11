@@ -1,5 +1,3 @@
-CONFIG = YAML.load_file(SPEC_DIR.join("config.yml")).with_indifferent_access
-
 RSpec.configure do |c|
   c.before(:each) do
     SidekiqUniqueJobs.config.enabled = false
@@ -23,7 +21,7 @@ RSpec.configure do |c|
           type: "crypto",
           network: "bitcoin",
           asset_code: "BTCT",
-          issuer: CONFIG[:issuer_address],
+          issuer: ENV["ISSUER_ADDRESS"],
           fee_fixed: 0.01,
           max_amount_from: GetMaxAmount.to_s,
         },
@@ -33,9 +31,9 @@ RSpec.configure do |c|
           type: "crypto",
           network: "bitcoin",
           asset_code: "BTCT",
-          issuer: CONFIG[:issuer_address],
-          distributor: CONFIG[:distributor_address],
-          distributor_seed: CONFIG[:distributor_seed],
+          issuer: ENV["ISSUER_ADDRESS"],
+          distributor: ENV["DISTRIBUTOR_ADDRESS"],
+          distributor_seed: ENV["DISTRIBUTOR_SEED"],
           how_from: GetHow.to_s,
           max_amount_from: GetMaxAmount.to_s,
         },
