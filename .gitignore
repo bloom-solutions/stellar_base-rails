@@ -8,3 +8,4 @@ spec/dummy/tmp/
 spec/config.yml
 tmp
 .rubocop.yml
+.env.local

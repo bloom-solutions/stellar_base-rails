@@ -98,6 +98,7 @@ GEM
       declarative-option (< 0.2.0)
       representable (>= 2.4.0, <= 3.1.0)
       uber (< 0.2.0)
+    dotenv (2.5.0)
     dry-configurable (0.7.0)
       concurrent-ruby (~> 1.0)
     dry-container (0.6.0)
@@ -329,6 +330,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   factory_bot_rails
   pry-byebug
   rspec-rails
