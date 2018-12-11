@@ -52,8 +52,7 @@ describe "StellarBase.on_deposit_trigger" do
       )
 
       expect(result).to be_failure
-      expect(result.message)
-        .to eq "Deposit already created for tx def"
+      expect(result.message).to include "Deposit already created for tx def"
       expect(result.deposit.amount).to eq 0.35
       expect(result.deposit.stellar_tx_id).to eq "s12"
       expect(result.deposit.tx_id).to eq "def"

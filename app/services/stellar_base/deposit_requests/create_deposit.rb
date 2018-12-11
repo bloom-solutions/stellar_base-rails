@@ -18,7 +18,9 @@ module StellarBase
 
         if deposit.present?
           c.deposit = deposit
-          c.fail_and_return! "Deposit already created for tx #{tx_id}"
+          message = "Deposit already created for tx #{tx_id}; " \
+            "it's possible that the asset has been sent out"
+          c.fail_and_return! message
         end
 
         c.deposit = Deposit.create(

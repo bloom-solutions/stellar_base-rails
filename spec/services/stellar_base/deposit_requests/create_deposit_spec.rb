@@ -30,7 +30,7 @@ module StellarBase
         it "fails the context" do
           result = described_class.execute(ctxt)
           expect(result).to be_failure
-          expect(result.message).to eq "Deposit already created for tx 2dc"
+          expect(result.message).to include "Deposit already created for tx 2dc"
           expect(result.deposit.id).to eq deposit.id
           expect(result.deposit.tx_id).to eq deposit.tx_id
           expect(result.deposit.amount).to eq 1
