@@ -97,7 +97,14 @@ RSpec.describe StellarBase do
             seeds: ["S1", "S2"],
           }
         ]
-        expect(described_class.sending_strategy).to eq `:stellar_sdk`
+
+        expect(described_class.configuration.sending_strategy).to match_array([
+          :stellar_sdk,
+          {
+            redis_url: "redis://localhost",
+            seeds: ["S1", "S2"],
+          }
+        ])
       end
     end
   end
