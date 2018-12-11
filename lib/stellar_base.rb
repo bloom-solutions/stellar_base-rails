@@ -42,6 +42,7 @@ module StellarBase
     convert_config_deposit!
     set_stellar_network!
     configure_sidekiq_death_handler!
+    configure_sending_strategy!
   end
 
   def self.on_deposit_trigger(network:, deposit_address:, tx_id:, amount:)
@@ -82,6 +83,12 @@ module StellarBase
 
     configuration.withdrawable_assets =
       convert_config!(withdrawable_assets)
+  end
+
+  def self.configure_sending_strategy!
+    sending_strategy = self.configuration.sending_strategy
+    return if !sending_strategy.is_a?(Symbol)
+    self.configuration.sending_strategy = Array(sending_strategy)
   end
 
   def self.convert_config!(asset_config)
