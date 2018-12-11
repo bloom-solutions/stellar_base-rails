@@ -29,7 +29,7 @@ module StellarBase
           expect(withdrawal_request.asset_code).to eq "BTCT"
           expect(withdrawal_request.dest).to eq "my-btc-addr"
           expect(withdrawal_request.dest_extra).to eq "pls"
-          expect(withdrawal_request.issuer).to eq CONFIG[:issuer_address]
+          expect(withdrawal_request.issuer).to eq ENV["ISSUER_ADDRESS"]
           expect(withdrawal_request.account_id)
             .to eq StellarBase.configuration.distribution_account
           expect(withdrawal_request.memo_type).to eq "text"

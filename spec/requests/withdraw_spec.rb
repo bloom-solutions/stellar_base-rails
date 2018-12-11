@@ -24,7 +24,7 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
       build_stubbed(:stellar_base_bridge_callback, {
         amount: 0.5,
         asset_code: "BTCT",
-        asset_issuer: CONFIG[:issuer_address],
+        asset_issuer: ENV["ISSUER_ADDRESS"],
         memo_type: json_response[:memo_type],
         memo: json_response[:memo],
       })
@@ -58,7 +58,7 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
         .to eq StellarBase.configuration.distribution_account
       expect(@withdrawal_request.asset_type).to eq "crypto"
       expect(@withdrawal_request.asset_code).to eq "BTCT"
-      expect(@withdrawal_request.issuer).to eq CONFIG[:issuer_address]
+      expect(@withdrawal_request.issuer).to eq ENV["ISSUER_ADDRESS"]
       expect(@withdrawal_request.dest).to eq "my-btc-address"
       expect(@withdrawal_request.fee_fixed).to eq 0.01
       expect(@withdrawal_request.fee_percent).to be_zero

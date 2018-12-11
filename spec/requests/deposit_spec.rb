@@ -17,7 +17,7 @@ describe "GET /deposit", type: :request, vcr: { record: :once } do
         type: "crypto",
         network: "bitcoin",
         asset_code: "BTCT",
-        issuer: CONFIG[:issuer_address],
+        issuer: ENV["ISSUER_ADDRESS"],
         distributor: distributor_account.address,
         distributor_seed: distributor_account.seed,
         how_from: GetHow.to_s,

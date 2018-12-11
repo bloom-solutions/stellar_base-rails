@@ -9,7 +9,7 @@ module StellarBase
           create(:stellar_base_withdrawal_request, {
             asset_type: "crypto",
             asset_code: "BTCT",
-            issuer: CONFIG[:issuer_address],
+            issuer: ENV["ISSUER_ADDRESS"],
             memo_type: "text",
             memo: "ABAKADA",
           })
@@ -18,7 +18,7 @@ module StellarBase
           create(:stellar_base_bridge_callback, {
             amount: 1.0,
             asset_code: "BTCT",
-            asset_issuer: CONFIG[:issuer_address],
+            asset_issuer: ENV["ISSUER_ADDRESS"],
             memo_type: "text",
             memo: "ABAKADA",
           })

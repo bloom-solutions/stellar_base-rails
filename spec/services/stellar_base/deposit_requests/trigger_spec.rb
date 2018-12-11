@@ -8,7 +8,7 @@ module StellarBase
         actions = [
           FindConfig,
           FindDepositRequest,
-          FindOrCreateDeposit,
+          CreateDeposit,
           InitAssetSendingClient,
           InitStellarIssuerAccount,
           InitStellarRecipientAccount,
@@ -43,8 +43,8 @@ module StellarBase
       let!(:deposit_request) do
         create(:stellar_base_deposit_request, {
           deposit_address: "btc-addr",
-          account_id: CONFIG[:source_address],
-          issuer: CONFIG[:issuer_address],
+          account_id: ENV["RECIPIENT_ADDRESS"],
+          issuer: ENV["ISSUER_ADDRESS"],
           asset_code: "BTCT",
           memo: "BB8",
         })
@@ -72,7 +72,7 @@ module StellarBase
         stellar_op = stellar_tx.operations.records.first
         expect(stellar_op.type).to eq "payment"
         expect(stellar_op.asset_code).to eq "BTCT"
-        expect(stellar_op.asset_issuer).to eq CONFIG[:issuer_address]
+        expect(stellar_op.asset_issuer).to eq ENV["ISSUER_ADDRESS"]
         expect(stellar_op.amount.to_f).to eq 1.5
       end
     end
@@ -82,7 +82,7 @@ module StellarBase
         create(:stellar_base_deposit_request, {
           deposit_address: "btc-addr",
           account_id: Stellar::Account.random.address,
-          issuer: CONFIG[:issuer_address],
+          issuer: ENV["ISSUER_ADDRESS"],
           asset_code: "BTCT",
           memo: "BB8",
         })

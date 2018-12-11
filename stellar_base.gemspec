@@ -42,5 +42,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'webmock'
   s.add_development_dependency "rspec-sidekiq"
   s.add_development_dependency "stellar_spectrum", "~> 1.0"
-
+  s.add_development_dependency "dotenv", "~> 2.5"
 end

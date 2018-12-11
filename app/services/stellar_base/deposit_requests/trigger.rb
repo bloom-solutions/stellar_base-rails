@@ -26,7 +26,7 @@ module StellarBase
         [
           FindConfig,
           FindDepositRequest,
-          FindOrCreateDeposit,
+          CreateDeposit,
           InitAssetSendingClient,
           InitStellarIssuerAccount,
           InitStellarRecipientAccount,

@@ -36,7 +36,7 @@ module StellarBase
             expect(deposit.deposit_address)
               .to eq "BTCADDR"
             expect(deposit.eta).to be_an Integer
-            expect(deposit.issuer).to eq CONFIG[:issuer_address]
+            expect(deposit.issuer).to eq ENV["ISSUER_ADDRESS"]
             expect(deposit.memo_type).to eq "text"
             expect(deposit.memo).to eq "MEMO"
             expect(deposit.eta).to be_an Integer

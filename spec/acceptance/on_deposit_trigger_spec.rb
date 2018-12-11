@@ -51,9 +51,8 @@ describe "StellarBase.on_deposit_trigger" do
         amount: 0.5,
       )
 
-      expect(result).to be_skip_remaining
-      expect(result.message)
-        .to eq "Deposit previously made: stellar_tx_id s12, skipping"
+      expect(result).to be_failure
+      expect(result.message).to include "Deposit already created for tx def"
       expect(result.deposit.amount).to eq 0.35
       expect(result.deposit.stellar_tx_id).to eq "s12"
       expect(result.deposit.tx_id).to eq "def"
@@ -72,7 +71,7 @@ describe "StellarBase.on_deposit_trigger" do
       })
     end
     let(:recipient_account) { Stellar::Account.random }
-    let(:issuing_account) { Stellar::Account.from_seed(CONFIG[:issuer_seed]) }
+    let(:issuing_account) { Stellar::Account.from_seed(ENV["ISSUER_SEED"]) }
     let(:distribution_account) { Stellar::Account.random }
     let(:client) { Stellar::Client.default_testnet }
     let(:asset) { Stellar::Asset.alphanum4("BTCT", issuing_account.keypair) }
