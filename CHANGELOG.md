@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+- Ensure that the same deposit's token is not sent multiple times given the same transaction [#42](https://github.com/bloom-solutions/stellar_base-rails/pull/42)
+
+### Changed
+- Only one deposit record can exist for per `tx_id` & `deposit_request_id` combination [#42](https://github.com/bloom-solutions/stellar_base-rails/pull/42)
+
 ## [1.0.0] - 2018-11-30
 ### Changed
 - Upgrade stellar-base to `>= 0.18.0`
