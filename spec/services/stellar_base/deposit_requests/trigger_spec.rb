@@ -43,7 +43,7 @@ module StellarBase
       let!(:deposit_request) do
         create(:stellar_base_deposit_request, {
           deposit_address: "btc-addr",
-          account_id: ENV["SOURCE_ADDRESS"],
+          account_id: ENV["RECIPIENT_ADDRESS"],
           issuer: ENV["ISSUER_ADDRESS"],
           asset_code: "BTCT",
           memo: "BB8",
