@@ -5,7 +5,9 @@ module StellarBase
     RSpec.describe GetTx do
 
       let(:operation) do
-        double(transaction_hash: "f6cc222697da5c453d2652a8088c20cab20a21bcbb50556b517b6b1ecd36cc77")
+        build(:stellar_base_stellar_operation, {
+          transaction_hash: "f6cc222697da5c453d2652a8088c20cab20a21bcbb50556b517b6b1ecd36cc77"
+        })
       end
       let(:client) { InitStellarClient.execute.stellar_sdk_client }
 

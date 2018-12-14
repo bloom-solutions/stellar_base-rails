@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Added `StellarOperation` and `StellarTransaction` models
+
+### Changed
+- Changed `StellarBase.configuration.on_account_event` to pass `StellarOperation` and `StellarTransaction` objects instead of hash objects
+
 ## [1.0.1] - 2018-12-11
 ### Fixed
 - Ensure that the same deposit's token is not sent multiple times given the same transaction [#42](https://github.com/bloom-solutions/stellar_base-rails/pull/42)

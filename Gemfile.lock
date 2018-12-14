@@ -315,6 +315,8 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    virtus-matchers (0.4.0)
+      virtus (~> 1.0.0)
     webmock (3.4.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -342,6 +344,7 @@ DEPENDENCIES
   stellar_base-rails!
   stellar_spectrum (~> 1.0)
   vcr (~> 4.0)
+  virtus-matchers (= 0.4.0)
   webmock
 
 BUNDLED WITH
