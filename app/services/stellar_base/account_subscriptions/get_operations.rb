@@ -14,9 +14,14 @@ module StellarBase
       executed do |c|
         address = c.account_subscription.address
 
-        c.operations = c.stellar_sdk_client.horizon
+        c.operations = c.stellar_sdk_client
+          .horizon
           .account(account_id: address)
-          .operations(order: "asc", limit: c.operation_limit).records
+          .operations(order: "asc", limit: c.operation_limit)
+          .records
+          .map do |op|
+            StellarOperation.new(op)
+          end
 
         if c.operations.empty?
           c.fail_and_return! "No operations found for #{address}"

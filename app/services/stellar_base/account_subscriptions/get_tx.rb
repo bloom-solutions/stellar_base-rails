@@ -8,7 +8,8 @@ module StellarBase
 
       executed do |c|
         hash = c.operation.transaction_hash
-        c.tx = c.stellar_sdk_client.horizon.transaction(hash: hash)
+        tx_json = c.stellar_sdk_client.horizon.transaction(hash: hash)
+        c.tx = StellarTransaction.new(tx_json)
       end
 
     end
