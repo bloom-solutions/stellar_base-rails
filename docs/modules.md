@@ -17,6 +17,7 @@ And configure:
 ```ruby
 StellarBase.configure do |c|
   c.modules = %i[account_operations]
+  c.horizon_url = "http://myhorizon.com"
   c.subscribe_to_accounts = %w(STELLAR_ADDR_1 STELLAR_ADDR_2)
   c.on_account_event = ->(address, tx, op) do
     puts "There is a #{op} for #{address} in the tx #{tx}"
