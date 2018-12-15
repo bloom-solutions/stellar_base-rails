@@ -54,6 +54,7 @@ module StellarBase
           )
 
           expect(resulting_ctx.cursor).to be_present
+          expect(account_subscription.cursor).to eq resulting_ctx.cursor
         end
       end
     end
