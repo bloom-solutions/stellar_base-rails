@@ -3,10 +3,10 @@ module StellarBase
     class ExecuteCallback
 
       extend LightService::Action
-      expects :account_subscription, :tx, :operation
+      expects :account_subscription, :tx, :operation, :on_account_event
 
       executed do |c|
-        StellarBase.configuration.on_account_event.(
+        c.on_account_event.(
           c.account_subscription.address,
           c.tx,
           c.operation,

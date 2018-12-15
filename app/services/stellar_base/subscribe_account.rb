@@ -4,10 +4,15 @@ module StellarBase
     extend LightService::Organizer
     OPERATION_LIMIT = 200
 
-    def self.call(account_subscription, operation_limit: OPERATION_LIMIT)
+    def self.call(
+      account_subscription,
+      operation_limit: OPERATION_LIMIT,
+      on_account_event: StellarBase.configuration.on_account_event
+    )
       result = with(
         account_subscription: account_subscription,
         operation_limit: operation_limit,
+        on_account_event: on_account_event,
       ).reduce(actions)
 
       Rails.logger.warn result.message if result.failure?
