@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.0-alpha.1]
 ### Changed
 - `StellarBase.on_withdraw` is triggered with different models and not a bridge callback. See `on_withdraw` documentation.
 
