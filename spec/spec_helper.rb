@@ -7,6 +7,7 @@ require "rspec/rails"
 require "stellar-sdk"
 require "rspec-sidekiq"
 require "virtus/matchers/rspec"
+require "shoulda-matchers"
 require "stellar_spectrum"
 require "dotenv"
 

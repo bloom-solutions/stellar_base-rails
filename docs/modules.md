@@ -135,12 +135,13 @@ You can also just pass in `StellarBase::WithdrawalRequests::Process` directly in
 - Value(s):
   - object that responds to `.call` which accepts, as arguments, instances of the following:
     - `WithdrawalRequest`
-    - `StellarTransaction`
     - `StellarOperation`
+      - call `#stellar_transaction` on this to get the Stellar Transaction
 - Required
 - Notes:
   - This is run when a payment is detected. You need to make sure that AccountSubscriptions is enabled by adding it to the schedule.
   - You should put code that will ensure that you don't double-send in case the callback is called multiple times.
+  - See the models `StellarTransaction` & `StellarPayment` for the attributes that can be accessed. Currently, only payment operations are reported. We will add more as needed.
 
 Example:
 

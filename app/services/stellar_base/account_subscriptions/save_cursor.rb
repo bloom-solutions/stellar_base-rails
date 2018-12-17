@@ -3,10 +3,11 @@ module StellarBase
     class SaveCursor
 
       extend LightService::Action
-      expects :account_subscription, :operations
+      expects :account_subscription, :remote_operations
 
       executed do |c|
-        c.account_subscription.update!(cursor: c.operations.last.id)
+        last_operation = c.remote_operations.last
+        c.account_subscription.update!(cursor: last_operation["id"])
       end
 
     end

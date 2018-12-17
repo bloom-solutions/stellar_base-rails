@@ -7,19 +7,17 @@ module StellarBase
       let(:account_subscription) do
         build_stubbed(:stellar_base_account_subscription)
       end
-      let(:tx) { build(:stellar_base_stellar_transaction) }
       let(:op) { build(:stellar_base_stellar_operation) }
 
       context "`.on_account_event` is present" do
         it "calls the callback" do
-          callback = ->(address, tx, op) {}
+          callback = ->(address, op) {}
           expect(callback).to receive(:call).
-            with(account_subscription.address, tx, op)
+            with(account_subscription.address, op)
 
           described_class.execute(
             account_subscription: account_subscription,
-            transaction: tx,
-            operation: op,
+            stellar_operation: op,
             on_account_event: callback,
           )
         end
@@ -29,8 +27,7 @@ module StellarBase
         it "does nothing" do
           result = described_class.execute(
             account_subscription: account_subscription,
-            transaction: tx,
-            operation: op,
+            stellar_operation: op,
             on_account_event: nil
           )
 

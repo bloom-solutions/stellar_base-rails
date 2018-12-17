@@ -13,6 +13,7 @@ require "representable"
 require "toml-rb"
 require "sidekiq"
 require "sidekiq-unique-jobs"
+require "storext"
 
 require "stellar_base/engine"
 

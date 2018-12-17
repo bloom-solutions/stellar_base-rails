@@ -16,9 +16,8 @@ module StellarBase
       last_stellar_address = last_tx = last_op = nil
       count = 0
 
-      on_account_event = ->(stellar_address, stellar_tx, stellar_op) do
+      on_account_event = ->(stellar_address, stellar_op) do
         last_stellar_address = stellar_address
-        last_tx = stellar_tx
         last_op = stellar_op
         count += 1
       end
@@ -29,11 +28,11 @@ module StellarBase
       })
 
       expect(last_stellar_address).to eq account_subscription.address
-      expect(last_tx.id)
+      expect(last_op.stellar_transaction.transaction_id)
         .to eq "ccc663dd094fa49fae89f63239186979ce5f95de6f31bdc8576e3473413b52d6"
-      expect(last_op.id).to eq "6077378727937"
+      expect(last_op.operation_id).to eq "6077378727937"
       expect(count).to eq 5
-      expect(account_subscription.cursor).to eq last_op.paging_token
+      expect(account_subscription.cursor).to eq last_op.operation_id
     end
 
   end

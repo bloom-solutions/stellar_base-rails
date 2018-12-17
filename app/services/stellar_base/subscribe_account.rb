@@ -23,9 +23,11 @@ module StellarBase
       [
         InitStellarClient,
         AccountSubscriptions::GetCursor,
-        AccountSubscriptions::GetOperations,
-        iterate(:operations, [
-          AccountSubscriptions::GetTx,
+        AccountSubscriptions::GetRemoteOperations,
+        iterate(:remote_operations, [
+          AccountSubscriptions::GetRemoteTransaction,
+          AccountSubscriptions::FindOrCreateTransaction,
+          AccountSubscriptions::FindOrCreateOperation,
           AccountSubscriptions::ExecuteAccountSubscriptionCallback,
         ]),
         AccountSubscriptions::SaveCursor,

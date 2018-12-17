@@ -1,6 +1,6 @@
 module StellarBase
   module AccountSubscriptions
-    class GetOperations
+    class GetRemoteOperations
 
       extend LightService::Action
       expects(
@@ -9,19 +9,18 @@ module StellarBase
         :stellar_sdk_client,
         :operation_limit,
       )
-      promises :operations
+      promises :remote_operations
 
       executed do |c|
         address = c.account_subscription.address
 
-        c.operations = c.stellar_sdk_client
+        c.remote_operations = c.stellar_sdk_client
           .horizon
           .account(account_id: address)
           .operations(order: "asc", cursor: c.cursor, limit: c.operation_limit)
-          .records
-          .map { |op| StellarOperation.new(raw: op) }
+          .records.map(&:to_hash)
 
-        if c.operations.empty?
+        if c.remote_operations.empty?
           c.fail_and_return! "No operations found for #{address}"
         end
       rescue Faraday::ClientError => e
