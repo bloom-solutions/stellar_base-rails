@@ -1,3 +1,3 @@
 module StellarBase
-  VERSION = "1.1.2".freeze
+  VERSION = "2.0.0-alpha.1".freeze
 end

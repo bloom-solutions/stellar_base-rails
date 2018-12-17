@@ -5,7 +5,7 @@ module StellarBase
     RSpec.describe self::Process do
 
       context "payment matches a withdrawal_request and memo" do
-        let!(:withdrawal_request) do
+        let(:withdrawal_request) do
           create(:stellar_base_withdrawal_request, {
             asset_type: "crypto",
             asset_code: "BTCT",
@@ -14,21 +14,24 @@ module StellarBase
             memo: "ABAKADA",
           })
         end
-        let(:bridge_callback) do
-          create(:stellar_base_bridge_callback, {
-            amount: 1.0,
+        let(:tx) do
+          build_stubbed(:stellar_base_stellar_transaction, {
+            memo: "ABAKADA",
+          })
+        end
+        let(:op) do
+          build_stubbed(:stellar_base_stellar_payment, {
             asset_code: "BTCT",
             asset_issuer: ENV["ISSUER_ADDRESS"],
-            memo_type: "text",
-            memo: "ABAKADA",
+            stellar_transaction: tx,
           })
         end
 
         it "calls .on_withdraw processor" do
-          expect(ProcessWithdrawal).to receive(:call).
-            with(withdrawal_request, bridge_callback)
+          expect(::ProcessWithdrawal).to receive(:call).
+            with(withdrawal_request, op)
 
-          described_class.(bridge_callback)
+          described_class.(op)
         end
       end
 

@@ -465,7 +465,7 @@ http_interactions:
               "selling_liabilities": "0.0000000",
               "asset_type": "credit_alphanum4",
               "asset_code": "BTCT",
-              "asset_issuer": "GDS6IO6YRGUIDQSC2K74JYRHNZN5NBXQDVL5RTQXHOJJ4AH4PQALQWPR"
+              "asset_issuer": "GCHL4DBMIBZE44WLDR6LZCPWOX72TVKXSYZ65MLOFB24FUZGQCXOXMOT"
             },
             {
               "balance": "9999.9999900",
@@ -793,7 +793,7 @@ http_interactions:
                 "transaction_hash": "96f490f990334bcbd17619e90dd27096ef889cde5653dd63395c159bd5595b5e",
                 "asset_type": "credit_alphanum4",
                 "asset_code": "BTCT",
-                "asset_issuer": "GDS6IO6YRGUIDQSC2K74JYRHNZN5NBXQDVL5RTQXHOJJ4AH4PQALQWPR",
+                "asset_issuer": "GCHL4DBMIBZE44WLDR6LZCPWOX72TVKXSYZ65MLOFB24FUZGQCXOXMOT",
                 "from": "GDLQ4MGAIYJHPW4RGKGT726V6GP5NQCGICRFOUI52HVNZAG7XQGMEVBG",
                 "to": "GCVEDH7SOUIYSUHTVXRXSIZSKWOFVUPQJCW6VPVIXCF4LPQ63U2NOTTD",
                 "amount": "1.5000000"

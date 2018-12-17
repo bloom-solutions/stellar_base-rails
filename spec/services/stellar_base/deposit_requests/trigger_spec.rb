@@ -57,7 +57,6 @@ module StellarBase
         result = Trigger.("bitcoin", "btc-addr", "3b1", 1.5)
 
         expect(result).to be_success
-        expect(result).to_not be_failure
 
         deposit = result.deposit
 
