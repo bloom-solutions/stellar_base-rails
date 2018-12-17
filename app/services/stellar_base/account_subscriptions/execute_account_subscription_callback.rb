@@ -1,6 +1,6 @@
 module StellarBase
   module AccountSubscriptions
-    class ExecuteCallback
+    class ExecuteAccountSubscriptionCallback
 
       extend LightService::Action
       expects :account_subscription, :tx, :operation, :on_account_event

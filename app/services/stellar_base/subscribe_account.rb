@@ -26,7 +26,7 @@ module StellarBase
         AccountSubscriptions::GetOperations,
         iterate(:operations, [
           AccountSubscriptions::GetTx,
-          AccountSubscriptions::ExecuteCallback,
+          AccountSubscriptions::ExecuteAccountSubscriptionCallback,
         ]),
         AccountSubscriptions::SaveCursor,
       ]
