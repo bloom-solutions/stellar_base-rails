@@ -9,8 +9,6 @@ module StellarBase
         cursor: "4827543248897",
       })
     end
-    let(:on_account_event) do
-    end
 
     it "executes `on_account_event` callback per operation found for the Stellar account", vcr: {record: :once} do
       last_stellar_address = last_tx = last_op = nil
@@ -22,10 +20,16 @@ module StellarBase
         count += 1
       end
 
+      # We process the withdrawal
+      allow(WithdrawalRequests::Process).to receive(:call)
+
       described_class.(account_subscription, {
         operation_limit: 5,
         on_account_event: on_account_event,
       })
+
+      expect(WithdrawalRequests::Process).
+        to have_received(:call).with(last_op)
 
       expect(last_stellar_address).to eq account_subscription.address
       expect(last_op.stellar_transaction.transaction_id)

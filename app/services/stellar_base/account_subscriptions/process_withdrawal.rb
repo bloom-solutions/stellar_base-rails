@@ -3,10 +3,10 @@ module StellarBase
     class ProcessWithdrawal
 
       extend LightService::Action
-      expects :transaction, :operation
+      expects :stellar_operation
 
       executed do |c|
-        WithdrawalRequests::Process.(c.transaction, c.operation)
+        WithdrawalRequests::Process.(c.stellar_operation)
       end
 
     end

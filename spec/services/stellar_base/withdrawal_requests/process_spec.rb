@@ -15,23 +15,23 @@ module StellarBase
           })
         end
         let(:tx) do
-          build(:stellar_base_stellar_transaction, {
-            memo_type: "text",
+          build_stubbed(:stellar_base_stellar_transaction, {
             memo: "ABAKADA",
           })
         end
         let(:op) do
-          build(:stellar_base_stellar_operation, {
+          build_stubbed(:stellar_base_stellar_payment, {
             asset_code: "BTCT",
             asset_issuer: ENV["ISSUER_ADDRESS"],
+            stellar_transaction: tx,
           })
         end
 
         it "calls .on_withdraw processor" do
-          expect(ProcessWithdrawal).to receive(:call).
-            with(withdrawal_request, tx, op)
+          expect(::ProcessWithdrawal).to receive(:call).
+            with(withdrawal_request, op)
 
-          described_class.(tx, op)
+          described_class.(op)
         end
       end
 

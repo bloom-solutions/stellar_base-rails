@@ -4,13 +4,11 @@ module StellarBase
   module AccountSubscriptions
     RSpec.describe ProcessWithdrawal do
 
-      let(:account_subscription) { create(:account_subscription) }
-      let(:tx) { build_stubbed(:stellar_base_stellar_transaction) }
-      let(:op) { build_stubbed(:stellar_base_stellar_operation) }
+      let(:op) { build_stubbed(:stellar_base_stellar_payment) }
 
       it "executes the `#{WithdrawalRequests::Process}`" do
-        expect(WithdrawalRequests::Process).to receive(:call).with(tx, op)
-        described_class.execute(transaction: tx, operation: op)
+        expect(WithdrawalRequests::Process).to receive(:call).with(op)
+        described_class.execute(stellar_operation: op)
       end
 
     end

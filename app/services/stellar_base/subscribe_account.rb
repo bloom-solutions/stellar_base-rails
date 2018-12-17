@@ -29,6 +29,7 @@ module StellarBase
           AccountSubscriptions::FindOrCreateTransaction,
           AccountSubscriptions::FindOrCreateOperation,
           AccountSubscriptions::ExecuteAccountSubscriptionCallback,
+          AccountSubscriptions::ProcessWithdrawal,
         ]),
         AccountSubscriptions::SaveCursor,
       ]

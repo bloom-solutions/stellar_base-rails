@@ -6,27 +6,28 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
   end
 
   before do
-    @withdraw_request = @bridge_callback = nil
+    @withdraw_request = @stellar_operation = nil
 
     StellarBase.configuration.on_withdraw =
-      -> (withdrawal_request, bridge_callback) do
+      -> (withdrawal_request, stellar_operation) do
         @withdrawal_request = withdrawal_request
-        @bridge_callback = bridge_callback
+        @stellar_operation = stellar_operation
       end
-
-    StellarBase.configuration.on_bridge_callback = -> (bridge_callback) do
-      StellarBase::WithdrawalRequests::Process.(bridge_callback)
-    end
   end
 
   context "payment for an asset that can be withdrawn" do
-    let(:bridge_callback) do
-      build_stubbed(:stellar_base_bridge_callback, {
+    let(:stellar_transaction) do
+      build_stubbed(:stellar_base_stellar_transaction, {
+        memo_type: json_response[:memo_type],
+        memo: json_response[:memo],
+      })
+    end
+    let(:stellar_operation) do
+      build_stubbed(:stellar_base_stellar_payment, {
         amount: 0.5,
         asset_code: "BTCT",
         asset_issuer: ENV["ISSUER_ADDRESS"],
-        memo_type: json_response[:memo_type],
-        memo: json_response[:memo],
+        stellar_transaction: stellar_transaction,
       })
     end
     let(:json_response) do
@@ -51,7 +52,7 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
       expect(json_response[:memo]).to be_present
 
       # Execute bridge callback
-      StellarBase::BridgeCallbacks::Process.(bridge_callback)
+      StellarBase::WithdrawalRequests::Process.(stellar_operation)
 
       expect(@withdrawal_request).to be_present
       expect(@withdrawal_request.account_id)
@@ -67,7 +68,7 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
       expect(@withdrawal_request.memo).to be_present
       expect(@withdrawal_request.max_amount).to eq 1
 
-      expect(@bridge_callback).to eq bridge_callback
+      expect(@stellar_operation).to eq stellar_operation
     end
   end
 
