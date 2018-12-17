@@ -2,7 +2,7 @@
 
 ## Subscribing to Account Operations
 
-Enable this if you want to receive operations on specific accounts. You will probably only either this or the bridge callback functionality, not both at the same time.
+Enable this if you want to receive operations on specific accounts. You will probably only use either this or the bridge callback functionality, not both at the same time.
 
 Enqueue the Sidekiq schedule with something like [sidekiq-cron](https://github.com/ondrejbartas/sidekiq-cron):
 
