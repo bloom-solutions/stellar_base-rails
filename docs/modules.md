@@ -133,12 +133,14 @@ You can also just pass in `StellarBase::WithdrawalRequests::Process` directly in
 
 #### c.on_withdraw
 - Value(s):
-  - object that responds to `.call` accepts the arguments:
-    - `withdrawal_request`
-    - `bridge_callback`
-  - String version of the object
+  - object that responds to `.call` which accepts, as arguments, instances of the following:
+    - `WithdrawalRequest`
+    - `StellarTransaction`
+    - `StellarOperation`
 - Required
-- Notes: This is run when a `GET /withdraw` is received and has passed validations
+- Notes:
+  - This is run when a payment is detected. You need to make sure that AccountSubscriptions is enabled by adding it to the schedule.
+  - You should put code that will ensure that you don't double-send in case the callback is called multiple times.
 
 Example:
 
@@ -148,13 +150,13 @@ StellarBase.configure do |c|
   c.on_withdraw = ProcessWithdrawal
   c.on_withdraw = "ProcessWithdrawal" # constantize will be called on this when a request is received
 
-  c.on_withdraw = ->(withdrawal_request, bridge_callback) do
+  c.on_withdraw = ->(withdrawal_request, stellar_tx, stellar_op) do
     # contact hot wallet here
   end
 end
 
 class ProcessWithdrawal
-  def self.call(withdrawal_request, bridge_callback)
+  def self.call(withdrawal_request, stellar_tx, stellar_op)
     # Contact hot wallet here
   end
 end

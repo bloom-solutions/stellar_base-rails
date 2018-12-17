@@ -1,6 +1,6 @@
 class ProcessWithdrawal
 
-  def self.call(bridge_callback)
+  def self.call(withdrawal_request, stellar_tx, stellar_op)
   end
 
 end

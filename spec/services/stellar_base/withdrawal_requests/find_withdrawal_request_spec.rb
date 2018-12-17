@@ -14,21 +14,23 @@ module StellarBase
             memo: "ABAKADA",
           })
         end
-        let(:bridge_callback) do
-          create(:stellar_base_bridge_callback, {
-            amount: 1.0,
-            asset_code: "BTCT",
-            asset_issuer: ENV["ISSUER_ADDRESS"],
+        let(:tx) do
+          build(:stellar_base_stellar_transaction, {
             memo_type: "text",
             memo: "ABAKADA",
           })
         end
+        let(:op) do
+          build(:stellar_base_stellar_operation, {
+            asset_code: "BTCT",
+            asset_issuer: ENV["ISSUER_ADDRESS"],
+            amount: 1.0,
+          })
+        end
 
         it "returns the correct withdrawal_request" do
-          resulting_ctx = described_class.execute(
-            bridge_callback: bridge_callback
-          )
-          expect(resulting_ctx.withdrawal_request).to eq withdrawal_request
+          result = described_class.execute(transaction: tx, operation: op)
+          expect(result.withdrawal_request).to eq withdrawal_request
         end
       end
 
@@ -42,21 +44,23 @@ module StellarBase
             memo: "ABAKADA",
           })
         end
-        let(:bridge_callback) do
-          create(:stellar_base_bridge_callback, {
-            amount: 1.0,
-            asset_code: "BTCT",
-            asset_issuer: "btct-issuer",
+        let(:tx) do
+          build(:stellar_base_stellar_transaction, {
             memo_type: "text",
             memo: "ABAKADA",
           })
         end
+        let(:op) do
+          build(:stellar_base_stellar_operation, {
+            asset_code: "BTC",
+            asset_issuer: ENV["ISSUER_ADDRESS"],
+            amount: 1.0,
+          })
+        end
 
         it "skips the rest of the actions" do
-          resulting_ctx = described_class.execute(
-            bridge_callback: bridge_callback
-          )
-          expect(resulting_ctx).to be_skip_remaining
+          result = described_class.execute(transaction: tx, operation: op)
+          expect(result).to be_skip_remaining
         end
       end
 
@@ -70,21 +74,23 @@ module StellarBase
             memo: "HELLO",
           })
         end
-        let(:bridge_callback) do
-          create(:stellar_base_bridge_callback, {
-            amount: 1.0,
-            asset_code: "BTCT",
-            asset_issuer: "btct-issuer",
+        let(:tx) do
+          build(:stellar_base_stellar_transaction, {
             memo_type: "text",
             memo: "ABAKADA",
           })
         end
+        let(:op) do
+          build(:stellar_base_stellar_operation, {
+            asset_code: "BTC",
+            asset_issuer: ENV["ISSUER_ADDRESS"],
+            amount: 1.0,
+          })
+        end
 
         it "skips the rest of the actions" do
-          resulting_ctx = described_class.execute(
-            bridge_callback: bridge_callback
-          )
-          expect(resulting_ctx).to be_skip_remaining
+          result = described_class.execute(transaction: tx, operation: op)
+          expect(result).to be_skip_remaining
         end
       end
 

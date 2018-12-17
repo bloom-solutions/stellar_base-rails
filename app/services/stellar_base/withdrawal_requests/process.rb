@@ -5,11 +5,13 @@ module StellarBase
       extend LightService::Organizer
 
       def self.call(
-        bridge_callback,
+        transaction,
+        operation,
         on_withdraw: StellarBase.configuration.on_withdraw
       )
         with(
-          bridge_callback: bridge_callback,
+          transaction: transaction,
+          operation: operation,
           on_withdraw: on_withdraw,
         ).reduce(actions)
       end

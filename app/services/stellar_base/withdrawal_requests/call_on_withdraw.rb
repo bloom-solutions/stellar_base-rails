@@ -3,14 +3,14 @@ module StellarBase
     class CallOnWithdraw
 
       extend LightService::Action
-      expects :withdrawal_request, :bridge_callback, :on_withdraw
+      expects :withdrawal_request, :transaction, :operation, :on_withdraw
 
       ON_WITHDRAW_ERROR = "`on_withdraw` must be a string of an object " \
         "that responds to `.call` or the object itself"
 
       executed do |c|
         callback = callback_from(c.on_withdraw)
-        callback.(c.withdrawal_request, c.bridge_callback)
+        callback.(c.withdrawal_request, c.transaction, c.operation)
       end
 
       def self.callback_from(on_withdraw)
