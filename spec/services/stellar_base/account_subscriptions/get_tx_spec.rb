@@ -16,8 +16,8 @@ module StellarBase
           operation: operation,
           stellar_sdk_client: client,
         })
-        expect(resulting_ctx.tx.raw.fee_paid).to eq 100
-        expect(resulting_ctx.tx.fee_paid).to eq 100
+        expect(resulting_ctx.transaction.raw.fee_paid).to eq 100
+        expect(resulting_ctx.transaction.fee_paid).to eq 100
       end
 
     end

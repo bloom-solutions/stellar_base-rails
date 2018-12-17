@@ -10,7 +10,7 @@ module StellarBase
 
       it "executes the `#{WithdrawalRequests::Process}`" do
         expect(WithdrawalRequests::Process).to receive(:call).with(tx, op)
-        described_class.execute(tx: tx, operation: op)
+        described_class.execute(transaction: tx, operation: op)
       end
 
     end

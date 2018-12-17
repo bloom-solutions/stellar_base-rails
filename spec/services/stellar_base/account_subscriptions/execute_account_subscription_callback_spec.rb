@@ -18,7 +18,7 @@ module StellarBase
 
           described_class.execute(
             account_subscription: account_subscription,
-            tx: tx,
+            transaction: tx,
             operation: op,
             on_account_event: callback,
           )
@@ -29,7 +29,7 @@ module StellarBase
         it "does nothing" do
           result = described_class.execute(
             account_subscription: account_subscription,
-            tx: tx,
+            transaction: tx,
             operation: op,
             on_account_event: nil
           )

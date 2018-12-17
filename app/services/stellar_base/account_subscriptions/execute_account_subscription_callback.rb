@@ -3,14 +3,14 @@ module StellarBase
     class ExecuteAccountSubscriptionCallback
 
       extend LightService::Action
-      expects :account_subscription, :tx, :operation, :on_account_event
+      expects :account_subscription, :transaction, :operation, :on_account_event
 
       executed do |c|
         next c if c.on_account_event.nil?
 
         c.on_account_event.(
           c.account_subscription.address,
-          c.tx,
+          c.transaction,
           c.operation,
         )
       end
