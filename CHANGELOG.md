@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Remove SidekiqUniqueJobs that sometimes caused the jobs to never run
 
-## [2.0.0-alpha.1]
+## [2.0.0-alpha.1] - 2018-12-17
 ### Changed
 - `StellarBase.on_withdraw` is triggered with different models and not a bridge callback. See `on_withdraw` documentation.
 
