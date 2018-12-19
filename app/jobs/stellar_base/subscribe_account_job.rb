@@ -1,12 +1,7 @@
 module StellarBase
   class SubscribeAccountJob < ApplicationJob
 
-    sidekiq_options(
-      retry: 0,
-      lock: :until_executed,
-      unique_args: :unique_args,
-      on_conflict: :log,
-    )
+    sidekiq_options retry: 0
 
     def perform(account_subscription_id)
       account_subscription = AccountSubscription.find(account_subscription_id)

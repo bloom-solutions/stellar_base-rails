@@ -12,7 +12,6 @@ require "reform/form/coercion"
 require "representable"
 require "toml-rb"
 require "sidekiq"
-require "sidekiq-unique-jobs"
 require "storext"
 
 require "stellar_base/engine"
@@ -42,7 +41,6 @@ module StellarBase
     convert_config_withdraw!
     convert_config_deposit!
     set_stellar_network!
-    configure_sidekiq_death_handler!
     configure_sending_strategy!
   end
 
@@ -112,14 +110,6 @@ module StellarBase
   end
   private_class_method :try_from_yaml_file_path
 
-  def self.configure_sidekiq_death_handler!
-    Sidekiq.configure_server do |config|
-      config.death_handlers << ->(job, _ex) do
-        return unless job['unique_digest']
-        SidekiqUniqueJobs::Digests.del(digest: job['unique_digest'])
-      end
-    end
-  end
 end
 
 require "stellar_base/horizon_client"
