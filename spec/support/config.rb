@@ -1,7 +1,5 @@
 RSpec.configure do |c|
   c.before(:each) do
-    SidekiqUniqueJobs.config.enabled = false
-
     StellarBase.configure do |c|
       c.bridge_callbacks_mac_key = "sample"
       c.check_bridge_callbacks_authenticity = false
