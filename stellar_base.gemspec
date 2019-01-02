@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "stellar-base", ">= 0.18.0"
   s.add_dependency "storext", "~> 2.0"
   s.add_dependency "toml-rb", "~> 1.0"
-  s.add_dependency "trailblazer", "~> 2.0"
+  s.add_dependency "trailblazer", ">= 2.0"
   s.add_dependency "trailblazer-rails"
   s.add_dependency "reform-rails"
   s.add_dependency "virtus"
