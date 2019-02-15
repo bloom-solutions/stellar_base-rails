@@ -10,6 +10,8 @@ module StellarBase
         hash = c.remote_operation["transaction_hash"]
         c.remote_transaction = c.stellar_sdk_client.horizon.
           transaction(hash: hash).to_hash
+      rescue Faraday::ResourceNotFound
+        raise NotFoundError, "transaction #{hash} not found"
       end
 
     end
