@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+- Do not blow up when subscribing to accounts whose operations Horizon does not know about
+
 ## [3.0.0] - 2019-02-15
 ### Changed
 - Raise `StellarBase::NotFoundError` if transaction is not found instead of letting `Faraday::NotFoundError` to bubble all the way up
