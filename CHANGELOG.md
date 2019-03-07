@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [3.0.1] - 2019-03-07
 ### Fixed
 - Do not blow up when subscribing to accounts whose operations Horizon does not know about
 
