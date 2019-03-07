@@ -13,9 +13,15 @@ module StellarBase
 
         address = c.account_subscription.address
 
-        c.cursor = c.stellar_sdk_client.horizon.
+        operation_records = c.stellar_sdk_client.horizon.
           account(account_id: address).
-          operations(order: "desc", limit: 1).records.first.id
+          operations(order: "desc", limit: 1).records
+
+        if operation_records.empty?
+          c.fail_and_return!("No operations available")
+        end
+
+        c.cursor = operation_records.first.id
 
         c.account_subscription.update_attributes!(cursor: c.cursor)
       rescue Faraday::ClientError => e

@@ -57,6 +57,28 @@ module StellarBase
           expect(account_subscription.cursor).to eq resulting_ctx.cursor
         end
       end
+
+      context "there is no local cursor and address has no operations" do
+        # NOTE: This is an account that was created manually on testnet
+        # VCR edited to not have records
+        let!(:account_subscription) do
+          create(:stellar_base_account_subscription, {
+            address: "GAMR45DZXZHEZEQ6D23Q4FCBBLO4MO5GA37HVYTSGLF6O2VULHWRDAR7",
+            cursor: nil,
+          })
+        end
+
+        it "stops processing", vcr: { record: :once } do
+          result = described_class.execute(
+            account_subscription: account_subscription,
+            stellar_sdk_client: client,
+          )
+
+          expect(result).to be_failure
+          expect(result).to be_stop_processing
+          expect(result.message).to eq "No operations available"
+        end
+      end
     end
   end
 end
