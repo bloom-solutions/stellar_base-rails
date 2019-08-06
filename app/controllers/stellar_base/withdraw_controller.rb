@@ -12,10 +12,7 @@ module StellarBase
             representer = WithdrawalRequestRepresenter.new(twin)
             render json: representer
           else
-            render(
-              json: { error: op["result.policy.message"] || op["contract.default"].errors },
-              status: :unprocessable_entity,
-            )
+            render json: errors_from(op), status: :unprocessable_entity
           end
         end
       end
