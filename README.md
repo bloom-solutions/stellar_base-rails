@@ -115,14 +115,7 @@ gem("stellar-sdk", {
 
 ## Development
 
-```ruby
-cp spec/config.yml{.sample,}
-```
-
-Edit the `spec/config.yml` file.
-
 ```sh
-cd spec/dummy
 rails db:migrate
 rails db:migrate RAILS_ENV=test
 ```
