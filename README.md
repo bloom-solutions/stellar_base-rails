@@ -20,6 +20,7 @@ rails db:migrate
 ```
 
 ### Configuration
+
 Create an initializer in your rails application:
 
 ```
