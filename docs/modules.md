@@ -192,7 +192,7 @@ This will mount the `/balance` endpoint. It returns the `max_amount` of a `withd
 
 ## [Getting Fees](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee)
 
-This will mount a `GET /fee` API endpoint described in [here](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee).
+Add a `fees` entry in the array of `config.modules`. This will mount a `GET /fee` API endpoint described in [here](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee).
 
 You'll need to configure a `fee_from` value in your `depositable_assets` or `withdrawable_assets` per asset. `fee_from` contains a class that you define which will run whenever a `GET /fee` request comes for that specific asset:
 
