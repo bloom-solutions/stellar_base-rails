@@ -3,5 +3,6 @@ StellarBase::Engine.routes.draw do
   get "/withdraw" => "withdraw#create", as: :withdraw
   get "/deposit" => "deposit#create", as: :deposit
   get "/balance/:asset_code" => "balances#show", as: :balance
+  get "/fee" => "fee_requests#show", as: :fee
 end
 

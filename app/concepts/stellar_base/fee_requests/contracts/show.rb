@@ -10,7 +10,14 @@ module StellarBase
 
         OPERATION_TYPES = %w[deposit withdraw].freeze
 
-        validates :operation, presence: true, inclusion: { in: OPERATION_TYPES }
+        validates(
+          :operation,
+          presence: true,
+          inclusion: {
+            in: OPERATION_TYPES,
+            message:  "%{value} is not a valid operation",
+          },
+        )
         validates(:asset_code, :amount, presence: true)
 
         validate :check_valid_asset_code
