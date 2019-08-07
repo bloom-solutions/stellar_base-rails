@@ -9,8 +9,7 @@ module StellarBase
 
       def self.callback_class
         on_bridge_callback = StellarBase.configuration.on_bridge_callback
-        return on_bridge_callback if on_bridge_callback.respond_to?(:call)
-        on_bridge_callback.constantize
+        GetCallbackFrom.(on_bridge_callback)
       rescue NameError
         error_message = [
           "StellarBase.on_bridge_callback isn't configured or the",

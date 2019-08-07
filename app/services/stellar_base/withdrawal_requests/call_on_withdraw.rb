@@ -15,9 +15,7 @@ module StellarBase
       end
 
       def self.callback_from(on_withdraw)
-        if on_withdraw.respond_to?(:constantize)
-          on_withdraw = on_withdraw.constantize
-        end
+        on_withdraw = GetCallbackFrom.(on_withdraw)
 
         if !on_withdraw.respond_to?(:call)
           fail ArgumentError, ON_WITHDRAW_ERROR

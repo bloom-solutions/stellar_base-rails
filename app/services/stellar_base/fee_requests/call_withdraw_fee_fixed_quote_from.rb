@@ -19,9 +19,7 @@ module StellarBase
       end
 
       def self.callback_from(fee_fixed_quote_from)
-        if fee_fixed_quote_from.respond_to?(:constantize)
-          fee_fixed_quote_from = fee_fixed_quote_from.constantize
-        end
+        fee_fixed_quote_from = GetCallbackFrom.(fee_fixed_quote_from)
 
         if !fee_fixed_quote_from.respond_to?(:call)
           fail ArgumentError, FEE_FIXED_QUOTE_FROM_ERROR
