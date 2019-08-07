@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Changed
+- Rename `fee_from` to `fixed_fee_quote_from` to reflect that this is used in the `/fee` endpoint for quoting
+
 ## [3.1.0] - 2019-08-07
 ### Added
 - Add a `GET /fee` endpoint that implements [sep-0006#fee](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee)

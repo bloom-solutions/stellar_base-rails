@@ -46,7 +46,7 @@ describe "GET /fee", type: :request do
           asset_code: "BTCT",
           issuer: ENV["ISSUER_ADDRESS"],
           max_amount_from: GetMaxAmount.to_s,
-          fee_from: GetWithdrawFeeFrom,
+          fixed_fee_quote_from: GetWithdrawFixedFeeQuoteFrom,
         },
       ]
     end

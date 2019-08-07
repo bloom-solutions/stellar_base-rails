@@ -22,7 +22,7 @@ RSpec.configure do |c|
           issuer: ENV["ISSUER_ADDRESS"],
           fee_fixed: 0.01,
           max_amount_from: GetMaxAmount.to_s,
-          fee_from: GetWithdrawFeeFrom,
+          fixed_fee_quote_from: GetWithdrawFixedFeeQuoteFrom,
         },
       ]
       c.depositable_assets = [

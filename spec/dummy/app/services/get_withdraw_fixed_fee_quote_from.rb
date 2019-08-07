@@ -1,4 +1,4 @@
-class GetWithdrawFeeFrom
+class GetWithdrawFixedFeeQuoteFrom
 
   def self.call(fee_request)
     0.0001

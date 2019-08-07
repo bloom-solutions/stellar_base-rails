@@ -53,8 +53,7 @@ module StellarBase
           options["model"].max_amount =
             DetermineMaxAmount.(withdrawal_asset_details[:max_amount_from])
 
-          # TODO: This should come from `CallFeeFrom.(details[:fee_from])`
-          # or dest_extra
+          # TODO: This should come from `CallWithdrawalFeeFrom.(params, details)`
           options["model"].fee_fixed =
             DetermineFee.(withdrawal_asset_details[:fee_fixed])
 
