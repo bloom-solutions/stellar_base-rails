@@ -212,7 +212,8 @@ config.withdrawable_assets = [
     fee_fixed: 0.01,
     fee_percent: 1,
     ## Or you can get it programatically (fixed fees only as of now):
-    fixed_fee_quote_from: GetWithdrawFixedFeeQuoteFrom,
+    fee_fixed_quote_from: GetWithdrawFeeFixedQuoteFrom, # used in `/fee`
+    fee_fixed_from: GetWithdrawFeeFixedFrom, # used to set the `fee_fixed` in `/withdraw`
   }
 ]
 
