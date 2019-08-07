@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
-- Rename `fee_from` to `fixed_fee_quote_from` to reflect that this is used in the `/fee` endpoint for quoting
+- Rename `fee_fixed_from` to `fee_fixed_quote_from` to reflect that this is used in the `/fee` endpoint for quoting
+
+### Added
+- Developer sets `fee_fixed_from` in withdrawable asset config to customize how fees on withdrawals are set
 
 ## [3.1.0] - 2019-08-07
 ### Added

@@ -18,6 +18,12 @@ module StellarBase
       end
 
       context "`fee_fixed` is not set in the configuration" do
+        context "there is no callback" do
+          let(:asset_details) { { } }
+          subject { described_class.(params, asset_details) }
+          it { is_expected.to be_zero }
+        end
+
         context "custom fee_fixed config returns a value" do
           let(:params) do
             { dest_extra: {fee_fixed: 1.23}.to_json }
@@ -30,7 +36,7 @@ module StellarBase
             }
           end
 
-          it "returns the result of `fixed_fee_from` proc" do
+          it "returns the result of `fee_fixed_from` proc" do
             result = described_class.(params, asset_details)
             expect(result).to eq 1.23
           end

@@ -29,9 +29,9 @@ module StellarBase
         end
 
         def set_fee_response!(options, model:, asset_details:, params:, **)
-          model.fee_response = FeeRequests::CallFeeFrom.(
+          model.fee_response = FeeRequests::CallWithdrawFeeFixedQuoteFrom.(
             fee_request: model,
-            fixed_fee_quote_from: asset_details[:fixed_fee_quote_from],
+            fee_fixed_quote_from: asset_details[:fee_fixed_quote_from],
           )
         end
 

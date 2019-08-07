@@ -9,18 +9,14 @@ module StellarBase
           expect(GenMemoFor).to receive(:call).with(WithdrawalRequest)
             .and_return("MEMO")
           expect(DetermineMaxAmount).to receive(:call).and_return(10)
-          expect(DetermineFee).to receive(:call).with(0.01).and_return(0.01)
-          expect(DetermineFee).to receive(:call).with(nil)
-            .and_return(0.0)
-          expect(DetermineFee).to receive(:network).with("bitcoin", 0.0005)
-            .and_return(0.0005)
+          expect(DetermineFee).to receive(:call).with(nil).and_return(0.0)
 
           op = described_class.(withdrawal_request: {
             type: "crypto",
             asset_code: "BTCT",
             dest: "my-btc-addr",
             dest_extra: "pls",
-            fee_network: 0.0005,
+            fee_fixed: 0.911,
           })
 
           expect(op).to be_success
@@ -37,9 +33,8 @@ module StellarBase
           expect(withdrawal_request.eta).to be_an Integer
           expect(withdrawal_request.min_amount).to be_a BigDecimal
           expect(withdrawal_request.max_amount).to eq 10
-          expect(withdrawal_request.fee_fixed).to eq 0.01
+          expect(withdrawal_request.fee_fixed).to eq 0.911
           expect(withdrawal_request.fee_percent).to be_zero
-          expect(withdrawal_request.fee_network).to eq 0.0005
         end
 
         context "Cannot request withdrawal" do
@@ -55,7 +50,6 @@ module StellarBase
               asset_code: "BTCT",
               dest: "my-btc-addr",
               dest_extra: "pls",
-              fee_network: 0.0005,
             })
 
             expect(op).to_not be_success
@@ -92,7 +86,6 @@ module StellarBase
               asset_code: "BTCT",
               dest: "my-btc-addr",
               dest_extra: "pls",
-              fee_network: 0.0005,
             })
 
             expect(op).to_not be_success

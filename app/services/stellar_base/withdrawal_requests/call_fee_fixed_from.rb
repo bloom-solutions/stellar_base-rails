@@ -12,6 +12,9 @@ module StellarBase
         end
 
         callback = GetCallbackFrom.(asset_details[CALLBACK_CONFIG_NAME])
+
+        return 0.0 if callback.nil?
+
         fee_fixed = callback.(params, asset_details)
 
         if fee_fixed.nil?

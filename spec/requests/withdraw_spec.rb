@@ -13,6 +13,21 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
         @withdrawal_request = withdrawal_request
         @stellar_operation = stellar_operation
       end
+
+    StellarBase.configuration.withdrawable_assets = [
+      {
+        type: "crypto",
+        network: "bitcoin",
+        asset_code: "BTCT",
+        issuer: ENV["ISSUER_ADDRESS"],
+        max_amount_from: GetMaxAmount.to_s,
+        fee_fixed_quote_from: GetWithdrawFeeFixedQuoteFrom,
+        fee_fixed_from: ->(params, asset_details) do
+          JSON.parse(params[:withdrawal_request][:dest_extra]).
+            with_indifferent_access[:fee_fixed]
+        end,
+      },
+    ]
   end
 
   context "payment for an asset that can be withdrawn" do
@@ -36,7 +51,7 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
           type: "crypto",
           asset_code: "BTCT",
           dest: "my-btc-address",
-          fee_network: 0.001,
+          dest_extra: {fee_fixed: 0.123}.to_json,
           format: :json,
         },
       })
@@ -61,9 +76,8 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
       expect(@withdrawal_request.asset_code).to eq "BTCT"
       expect(@withdrawal_request.issuer).to eq ENV["ISSUER_ADDRESS"]
       expect(@withdrawal_request.dest).to eq "my-btc-address"
-      expect(@withdrawal_request.fee_fixed).to eq 0.01
+      expect(@withdrawal_request.fee_fixed).to eq 0.123
       expect(@withdrawal_request.fee_percent).to be_zero
-      expect(@withdrawal_request.fee_network).to eq 0.001
       expect(@withdrawal_request.memo_type).to eq "text"
       expect(@withdrawal_request.memo).to be_present
       expect(@withdrawal_request.max_amount).to eq 1
@@ -79,7 +93,6 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
           type: "crypto",
           asset_code: "BCHT",
           dest: "my-bcht-address",
-          fee_network: 0.001,
           format: :json,
         },
       })
@@ -111,7 +124,6 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
           type: "crypto",
           asset_code: "BTCT",
           dest: "my-btc-address",
-          fee_network: 0.001,
           format: :json,
         },
       })

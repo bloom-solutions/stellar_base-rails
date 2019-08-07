@@ -10,10 +10,11 @@ module StellarBase
         failure :set_policy_error!
         step Model(WithdrawalRequest, :new)
         step :setup_params!
+        step :find_withdrawal_asset_details!
+        step :set_fee_fixed!
         step Contract::Build(constant: Contracts::Create)
         step Contract::Validate(key: :withdrawal_request)
         step Contract::Persist(method: :sync)
-        step :find_withdrawal_asset_details!
         success :set_defaults!
         step Contract::Persist(method: :save)
 
@@ -29,21 +30,19 @@ module StellarBase
           })
         end
 
-        def find_withdrawal_asset_details!(options, params:, **)
-          details = FindWithdrawableAsset
-            .(params[:withdrawal_request][:asset_code])
-          params[:withdrawal_asset_details] = details.presence || {}
+        def find_withdrawal_asset_details!(ctx, params:, **)
+          asset_code = params[:withdrawal_request][:asset_code]
+          details = FindWithdrawableAsset.(asset_code)
+          ctx["asset_details"] = details.presence || {}
         end
 
-        def set_defaults!(options, params:, **)
-          withdrawal_asset_details = params[:withdrawal_asset_details]
+        def set_fee_fixed!(ctx, params:, asset_details:, **)
+          params[:withdrawal_request][:fee_fixed] =
+            CallFeeFixedFrom.(params, asset_details)
+        end
 
-          fee_network = DetermineFee.network(
-            withdrawal_asset_details[:network],
-            params[:withdrawal_request][:fee_network],
-          )
-
-          options["model"].issuer = withdrawal_asset_details[:issuer]
+        def set_defaults!(options, params:, asset_details:, **)
+          options["model"].issuer = asset_details[:issuer]
           options["model"].account_id =
             StellarBase.configuration.distribution_account
           options["model"].memo_type = "text"
@@ -51,15 +50,10 @@ module StellarBase
           options["model"].eta = DEFAULT_ETA
           options["model"].min_amount = 0.0
           options["model"].max_amount =
-            DetermineMaxAmount.(withdrawal_asset_details[:max_amount_from])
-
-          # TODO: This should come from `CallWithdrawalFeeFrom.(params, details)`
-          options["model"].fee_fixed =
-            DetermineFee.(withdrawal_asset_details[:fee_fixed])
+            DetermineMaxAmount.(asset_details[:max_amount_from])
 
           options["model"].fee_percent =
-            DetermineFee.(withdrawal_asset_details[:fee_percent])
-          options["model"].fee_network = fee_network
+            DetermineFee.(asset_details[:fee_percent])
         end
 
       end
