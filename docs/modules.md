@@ -205,8 +205,13 @@ config.withdrawable_assets = [
     network: "bitcoin",
     asset_code: "BTCT",
     issuer: ENV["ISSUER_ADDRESS"],
-    fee_fixed: 0.01,
     max_amount_from: GetMaxAmount.to_s,
+
+    # Fees
+    ## You can set it directly
+    fee_fixed: 0.01,
+    fee_percent: 1,
+    ## Or you can get it programatically (fixed fees only as of now):
     fixed_fee_quote_from: GetWithdrawFixedFeeQuoteFrom,
   }
 ]
