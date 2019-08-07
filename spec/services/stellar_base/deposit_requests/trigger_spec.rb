@@ -52,7 +52,7 @@ module StellarBase
       let(:client) { InitStellarClient.execute.stellar_sdk_client }
 
       it("exposes information about the Stellar transaction", {
-        vcr: {record: :once},
+        vcr: { record: :once },
       }) do
         result = Trigger.("bitcoin", "btc-addr", "3b1", 1.5)
 

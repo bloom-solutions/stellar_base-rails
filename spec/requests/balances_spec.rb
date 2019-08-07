@@ -29,8 +29,8 @@ describe "GET /balance", type: :request do
       expect(response).not_to be_successful
       json = JSON.parse(response.body).with_indifferent_access
 
-      expect(json["errors"]).to be_present
-      expect(json["errors"]["asset_code"])
+      expect(json["error"]).to be_present
+      expect(json["error"]["asset_code"])
         .to include "invalid asset_code. Valid asset_codes: BTCT"
     end
   end
@@ -48,8 +48,8 @@ describe "GET /balance", type: :request do
       expect(response).not_to be_successful
       json = JSON.parse(response.body).with_indifferent_access
 
-      expect(json["errors"]).to be_present
-      expect(json["errors"]).to eq "Not authorized to check balances"
+      expect(json["error"]).to be_present
+      expect(json["error"]).to eq "Not authorized to check balances"
     end
   end
 end

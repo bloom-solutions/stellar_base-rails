@@ -6,7 +6,7 @@ RSpec.configure do |c|
       c.check_bridge_callbacks_mac_payload = false
       c.distribution_account = "G-DISTRO-ACCOUNT"
       c.horizon_url = "https://horizon-testnet.stellar.org"
-      c.modules = %i[bridge_callbacks withdraw deposit balances]
+      c.modules = %i[bridge_callbacks withdraw deposit balances fees]
       c.on_bridge_callback = "ProcessBridgeCallback"
       c.on_withdraw = ProcessWithdrawal.to_s
       c.stellar_toml = { TRANSFER_SERVER: "http://example.com/stellar" }
@@ -22,6 +22,7 @@ RSpec.configure do |c|
           issuer: ENV["ISSUER_ADDRESS"],
           fee_fixed: 0.01,
           max_amount_from: GetMaxAmount.to_s,
+          fee_from: GetWithdrawFeeFrom,
         },
       ]
       c.depositable_assets = [

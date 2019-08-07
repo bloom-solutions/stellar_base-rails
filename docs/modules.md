@@ -189,3 +189,57 @@ This engine gives you a method called `StellarBase.on_deposit_trigger` you call 
 Activate this by specifying `balances` in the `modules` configuration.
 
 This will mount the `/balance` endpoint. It returns the `max_amount` of a `withdrawable_asset`. This should be used in conjunction with `withdraw` module.
+
+## [Getting Fees](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee)
+
+Add a `fees` entry in the array of `config.modules`. This will mount a `GET /fee` API endpoint described in [here](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee).
+
+You'll need to configure a `fee_from` value in your `depositable_assets` or `withdrawable_assets` per asset. `fee_from` contains a class that you define which will run whenever a `GET /fee` request comes for that specific asset:
+
+```
+ex:
+
+config.withdrawable_assets = [
+  {
+    type: "crypto",
+    network: "bitcoin",
+    asset_code: "BTCT",
+    issuer: ENV["ISSUER_ADDRESS"],
+    fee_fixed: 0.01,
+    max_amount_from: GetMaxAmount.to_s,
+    fee_from: GetWithdrawFeeFrom,
+  }
+]
+
+# or
+
+config.depositable_assets = [
+  {
+    type: "crypto",
+    network: "bitcoin",
+    asset_code: "BTCT",
+    issuer: ENV["ISSUER_ADDRESS"],
+    distributor: ENV["DISTRIBUTOR_ADDRESS"],
+    distributor_seed: ENV["DISTRIBUTOR_SEED"],
+    how_from: GetHow.to_s,
+    max_amount_from: GetMaxAmount.to_s,
+  },
+]
+
+class GetWithdrawFeeFrom
+
+  def self.call(fee_request)
+    # insert code that returns a BigDecimal
+    # by getting from the BTC network or something
+  end
+
+end
+```
+
+#### Notes
+
+- the class that you put in `fee_from` would be passed a `FeeRequest` model, `FeeRequest` is an object that has the following attributes: `asset_code, operation, type, amount`.
+- the class should implement a `def self.call` method that accepts the `FeeRequest` model
+- the service class should return a `BigDecimal` value, that value would be returned to the requester.
+- If you don't supply a `fee_from` class, whenever someone goes to `GET /fee` and asks for the fees for that `asset_code`, `GET /fees` will return 0 for that `asset_code`.
+- In the example above, when someone asks `GET /fee?operation=deposit&asset_code=BTCT` it will return with 0.

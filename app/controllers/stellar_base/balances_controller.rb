@@ -21,16 +21,6 @@ module StellarBase
 
     private
 
-    def errors_from(op)
-      unless op["result.policy.default"].success?
-        return { errors: op["result.policy.message"] }
-      end
-
-      if op["contract.default"].errors.any?
-        return { errors: op["contract.default"].errors }
-      end
-    end
-
     def balance_params
       params.permit(:asset_code).to_hash.with_indifferent_access
     end

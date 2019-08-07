@@ -54,6 +54,8 @@ module StellarBase
           options["model"].min_amount = 0.0
 
           # Make Deposits free unless we want it configured
+          #
+          # TODO: this should come from `CallFeeFrom.(details[:fee_from)`
           options["model"].fee_fixed = details[:fee_fixed] || 0.0
           options["model"].fee_percent = details[:fee_percent] || 0.0
         end

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Add a `GET /fee` endpoint that implements [sep-0006#fee](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee)
+
 ## [3.0.1] - 2019-03-07
 ### Fixed
 - Do not blow up when subscribing to accounts whose operations Horizon does not know about
