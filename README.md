@@ -102,6 +102,8 @@ gem 'stellar_base-rails'
 And then execute:
 ```bash
 $ bundle
+$ rails stellar_base:install:migrations
+$ rails db:migrate
 ```
 
 If you're using `StellarBase.on_deposit_trigger` you'll need to install:
