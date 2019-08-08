@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0] - 2019-08-08
+### Changed
+- Rename `fee_fixed_from` to `fee_fixed_quote_from` to reflect that this is used in the `/fee` endpoint for quoting
+- Remove `fee_network`: this is not a Stellar standard. Any apps that use this gem should determine and/or store the network fee in its own records.
+
+### Added
+- Developer sets `fee_fixed_from` in withdrawable asset config to customize how fees on withdrawals are set
+
 ## [3.1.0] - 2019-08-07
 ### Added
 - Add a `GET /fee` endpoint that implements [sep-0006#fee](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0006.md#fee)

@@ -5,7 +5,10 @@ module StellarBase
 
     def self.call(class_name)
       # TODO: how do we handle errors
-      return class_name.constantize.send(:call) if class_name.present?
+      if class_name.present?
+        callback = GetCallbackFrom.(class_name)
+        return callback.send(:call)
+      end
       DEFAULT
     end
 

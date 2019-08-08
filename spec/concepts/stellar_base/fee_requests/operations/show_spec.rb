@@ -19,7 +19,7 @@ module StellarBase
           expect(fee_request.amount).to eq 0.01
           expect(fee_request.type).to be_nil
 
-          # from GetWithdrawFeeFrom
+          # from GetWithdrawFeeFixedQuoteFrom
           expect(fee_request.fee_response).to eq 0.0001
         end
 
@@ -37,7 +37,7 @@ module StellarBase
           expect(fee_request.amount).to eq 0.01
           expect(fee_request.type).to be_nil
 
-          # fee_from is not configured for depositable_assets -> BTCT
+          # fee_fixed_quote_from is not configured for depositable_assets -> BTCT
           expect(fee_request.fee_response).to be_zero
         end
 

@@ -7,11 +7,12 @@ module StellarBase
       def self.call(class_name, params)
         # TODO: how do we handle errors
         if class_name.present?
-          unless class_name.constantize.method(:call).arity.zero?
-            return class_name.constantize.send(:call, params)
+          callback = GetCallbackFrom.(class_name)
+          unless callback.method(:call).arity.zero?
+            return callback.send(:call, params)
           end
 
-          return class_name.constantize.send(:call)
+          return callback.send(:call)
         end
         DEFAULT
       end

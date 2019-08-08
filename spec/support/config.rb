@@ -20,9 +20,9 @@ RSpec.configure do |c|
           network: "bitcoin",
           asset_code: "BTCT",
           issuer: ENV["ISSUER_ADDRESS"],
-          fee_fixed: 0.01,
           max_amount_from: GetMaxAmount.to_s,
-          fee_from: GetWithdrawFeeFrom,
+          fee_fixed_quote_from: GetWithdrawFeeFixedQuoteFrom,
+          fee_fixed_from: GetWithdrawFeeFixedFrom,
         },
       ]
       c.depositable_assets = [

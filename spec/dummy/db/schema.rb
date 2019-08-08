@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_090323) do
+ActiveRecord::Schema.define(version: 2019_08_08_014913) do
 
   create_table "stellar_base_account_subscriptions", force: :cascade do |t|
     t.string "address", null: false
@@ -106,7 +106,6 @@ ActiveRecord::Schema.define(version: 2018_12_17_090323) do
     t.decimal "max_amount"
     t.decimal "fee_fixed", default: "0.0", null: false
     t.decimal "fee_percent", default: "0.0", null: false
-    t.decimal "fee_network", default: "0.0", null: false
     t.string "extra_info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

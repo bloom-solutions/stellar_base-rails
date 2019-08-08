@@ -5,8 +5,8 @@ module StellarBase
       DEFAULT = nil
 
       def self.call(class_name)
-        return class_name.constantize.send(:call) if class_name.present?
-        DEFAULT
+        return DEFAULT if class_name.blank?
+        GetCallbackFrom.(class_name).()
       end
 
     end
