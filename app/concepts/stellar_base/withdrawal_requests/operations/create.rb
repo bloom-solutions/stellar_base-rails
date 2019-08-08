@@ -38,7 +38,7 @@ module StellarBase
 
         def set_fee_fixed!(ctx, params:, asset_details:, **)
           params[:withdrawal_request][:fee_fixed] =
-            CallFeeFixedFrom.(params, asset_details)
+            CallFeeFixedFrom.(params[:withdrawal_request], asset_details)
         end
 
         def set_defaults!(options, params:, asset_details:, model:, **)

@@ -23,7 +23,7 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
         max_amount_from: GetMaxAmount.to_s,
         fee_fixed_quote_from: GetWithdrawFeeFixedQuoteFrom,
         fee_fixed_from: ->(params, asset_details) do
-          JSON.parse(params[:withdrawal_request][:dest_extra]).
+          JSON.parse(params[:dest_extra]).
             with_indifferent_access[:fee_fixed]
         end,
       },
