@@ -130,7 +130,7 @@ describe "GET /withdraw", type: :request, vcr: { record: :once } do
 
       json = JSON.parse(response.body).with_indifferent_access
 
-      expect(response).to_not be_success
+      expect(response).to_not be_successful
       expect(json["error"]).to_not be_empty
     end
   end
