@@ -41,19 +41,15 @@ module StellarBase
             CallFeeFixedFrom.(params, asset_details)
         end
 
-        def set_defaults!(options, params:, asset_details:, **)
-          options["model"].issuer = asset_details[:issuer]
-          options["model"].account_id =
-            StellarBase.configuration.distribution_account
-          options["model"].memo_type = "text"
-          options["model"].memo = GenMemoFor.(WithdrawalRequest)
-          options["model"].eta = DEFAULT_ETA
-          options["model"].min_amount = 0.0
-          options["model"].max_amount =
-            DetermineMaxAmount.(asset_details[:max_amount_from])
-
-          options["model"].fee_percent =
-            DetermineFee.(asset_details[:fee_percent])
+        def set_defaults!(options, params:, asset_details:, model:, **)
+          model.issuer = asset_details[:issuer]
+          model.account_id = StellarBase.configuration.distribution_account
+          model.memo_type = "text"
+          model.memo = GenMemoFor.(WithdrawalRequest)
+          model.eta = DEFAULT_ETA
+          model.min_amount = 0.0
+          model.max_amount = DetermineMaxAmount.(asset_details[:max_amount_from])
+          model.fee_percent = DetermineFee.(asset_details[:fee_percent])
         end
 
       end
