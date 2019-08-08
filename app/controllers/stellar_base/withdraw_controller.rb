@@ -25,7 +25,6 @@ module StellarBase
         :asset_code,
         :dest,
         :dest_extra,
-        :fee_network,
         :type,
       ).to_hash.with_indifferent_access
     end

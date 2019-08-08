@@ -10,7 +10,6 @@ module StellarBase
         max_amount: 10.0,
         fee_fixed: 0.01,
         fee_percent: 1.0,
-        fee_network: 0.001,
         memo_type: "text",
         memo: "ABC",
         extra_info: "extra info",
@@ -25,7 +24,6 @@ module StellarBase
       expect(twin.max_amount).to eq 10.0
       expect(twin.fee_fixed).to eq 0.01
       expect(twin.fee_percent).to eq 1.0
-      expect(twin.fee_network).to eq 0.001
       expect(twin.extra_info).to eq "extra info"
     end
 
