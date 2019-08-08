@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [4.0.0] - 2019-08-08
 ### Changed
 - Rename `fee_fixed_from` to `fee_fixed_quote_from` to reflect that this is used in the `/fee` endpoint for quoting
 - Remove `fee_network`: this is not a Stellar standard. Any apps that use this gem should determine and/or store the network fee in its own records.
