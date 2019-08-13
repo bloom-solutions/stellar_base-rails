@@ -30,33 +30,29 @@ module StellarBase
 
         def find_depositable_asset_details!(options, params:, **)
           details = FindDepositableAsset.(params[:deposit_request][:asset_code])
-          params[:deposit_asset_details] = details.presence || {}
+          options[:asset_details] = details.presence || {}
         end
 
-        def determine_how!(options, params:, **)
-          details = params[:deposit_asset_details]
-          options["model"].deposit_address =
-            DetermineHow.(details[:how_from], params[:deposit_request])
+        def determine_how!(options, params:, asset_details:, model:, **)
+          model.deposit_address =
+            DetermineHow.(asset_details[:how_from], params[:deposit_request])
         end
 
-        def determine_max_amount!(options, params:, **)
-          details = params[:deposit_asset_details]
-          options["model"].max_amount =
-            ConfiguredClassRunner.(details[:max_amount_from]) || 0
+        def determine_max_amount!(options, params:, asset_details:, model:, **)
+          model.max_amount =
+            ConfiguredClassRunner.(asset_details[:max_amount_from]) || 0
         end
 
-        def set_defaults!(options, params:, **)
-          details = params[:deposit_asset_details]
-
-          options["model"].asset_type = details[:type]
-          options["model"].issuer = details[:issuer]
-          options["model"].eta = DEFAULT_ETA
-          options["model"].min_amount = 0.0
+        def set_defaults!(options, params:, model:, asset_details:, **)
+          model.asset_type = asset_details[:type]
+          model.issuer = asset_details[:issuer]
+          model.eta = DEFAULT_ETA
+          model.min_amount = 0.0
 
           # Make Deposits free unless we want it configured
-          # TODO: this should come from `CallDepositFeeFrom.(params, details)`
-          options["model"].fee_fixed = details[:fee_fixed] || 0.0
-          options["model"].fee_percent = details[:fee_percent] || 0.0
+          # TODO: this should come from `CallDepositFeeFrom.(params, asset_details)`
+          model.fee_fixed = asset_details[:fee_fixed] || 0.0
+          model.fee_percent = asset_details[:fee_percent] || 0.0
         end
 
         def memo_type_from(params)
