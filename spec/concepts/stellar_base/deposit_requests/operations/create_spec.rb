@@ -5,6 +5,9 @@ module StellarBase
     module Operations
       RSpec.describe Create do
         context "valid parameters" do
+          let(:asset_details) do
+            FindAssetDetails.(operation: "deposit", asset_code: "BTCT")
+          end
           it "succeeds and creates DepositRequest" do
             expect(GenMemoFor).to receive(:call).with(DepositRequest)
               .and_return("MEMO")
@@ -18,8 +21,12 @@ module StellarBase
                 deposit_type: nil,
                 memo: "MEMO",
                 memo_type: "text",
+                extra_info: {extra: "info"}.to_json,
               })
               .and_return("BTCADDR")
+            expect(DetermineExtraInfo).to receive(:call).
+              with(asset_details).
+              and_return({extra: "info"})
 
             op = described_class.(deposit_request: {
               asset_code: "BTCT",
@@ -44,6 +51,8 @@ module StellarBase
             expect(deposit.max_amount).to eq 100
             expect(deposit.fee_fixed).to be_zero
             expect(deposit.fee_percent).to be_zero
+            expect(JSON.parse(deposit.extra_info)["extra"]).
+              to eq "info"
           end
         end
 

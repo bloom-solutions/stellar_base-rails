@@ -9,6 +9,7 @@ module StellarBase
         property :memo
         property :email_address
         property :deposit_type
+        property :extra_info
 
         validates(
           :asset_code,

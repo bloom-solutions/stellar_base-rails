@@ -31,6 +31,7 @@ module StellarBase
           distributor_seed: ENV["DISTRIBUTOR_SEED"],
           how_from: GetHow.to_s,
           max_amount_from: GetMaxAmount.to_s,
+          extra_info_from: GetDepositExtraInfo,
         })
       end
     end

@@ -7,11 +7,12 @@ module StellarBase
 
         step self::Policy::Pundit(DepositRequestPolicy, :create?)
         step Model(DepositRequest, :new)
+        step :find_depositable_asset_details!
         step :setup_params!
+        step :set_extra_info!
         step Contract::Build(constant: Contracts::Create)
         step Contract::Validate(key: :deposit_request)
         step Contract::Persist(method: :sync)
-        step :find_depositable_asset_details!
         step :determine_how!
         step :determine_max_amount!
         success :set_defaults!
@@ -36,6 +37,11 @@ module StellarBase
         def determine_how!(options, params:, asset_details:, model:, **)
           model.deposit_address =
             DetermineHow.(asset_details[:how_from], params[:deposit_request])
+        end
+
+        def set_extra_info!(ctx, params:, asset_details:, **)
+          params[:deposit_request][:extra_info] =
+            DetermineExtraInfo.(asset_details).to_json
         end
 
         def determine_max_amount!(options, params:, asset_details:, model:, **)
