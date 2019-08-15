@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.0] - 2019-08-13
+### Fixed
+- `/deposit` returns `extra_info` as a json object
+
+### Added
+- Gem user can customize `extra_info` for a DepositRequest
+
 ## [4.0.0] - 2019-08-08
 ### Changed
 - Rename `fee_fixed_from` to `fee_fixed_quote_from` to reflect that this is used in the `/fee` endpoint for quoting
