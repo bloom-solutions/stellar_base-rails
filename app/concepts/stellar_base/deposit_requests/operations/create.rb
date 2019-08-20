@@ -3,8 +3,6 @@ module StellarBase
     module Operations
       class Create < ApplicationOperation
 
-        DEFAULT_ETA = (10 * 60).freeze
-
         step self::Policy::Pundit(DepositRequestPolicy, :create?)
         step Model(DepositRequest, :new)
         step :find_depositable_asset_details!
@@ -52,7 +50,8 @@ module StellarBase
         def set_defaults!(options, params:, model:, asset_details:, **)
           model.asset_type = asset_details[:type]
           model.issuer = asset_details[:issuer]
-          model.eta = DEFAULT_ETA
+          model.eta =
+            DetermineEta.(asset_details[:eta_from], params[:deposit_request])
           model.min_amount = 0.0
 
           # Make Deposits free unless we want it configured
