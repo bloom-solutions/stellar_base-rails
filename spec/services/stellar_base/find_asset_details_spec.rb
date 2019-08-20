@@ -29,8 +29,9 @@ module StellarBase
           issuer: ENV["ISSUER_ADDRESS"],
           distributor: ENV["DISTRIBUTOR_ADDRESS"],
           distributor_seed: ENV["DISTRIBUTOR_SEED"],
-          how_from: GetHow.to_s,
-          max_amount_from: GetMaxAmount.to_s,
+          how_from: GetHow,
+          eta_from: GetEta,
+          max_amount_from: GetMaxAmount,
           extra_info_from: GetDepositExtraInfo,
         })
       end
@@ -45,7 +46,7 @@ module StellarBase
           network: "bitcoin",
           asset_code: "BTCT",
           issuer: ENV["ISSUER_ADDRESS"],
-          max_amount_from: GetMaxAmount.to_s,
+          max_amount_from: GetMaxAmount,
           fee_fixed_quote_from: GetWithdrawFeeFixedQuoteFrom,
           fee_fixed_from: GetWithdrawFeeFixedFrom,
         })
