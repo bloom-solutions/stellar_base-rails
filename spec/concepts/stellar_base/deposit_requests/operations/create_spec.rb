@@ -8,21 +8,27 @@ module StellarBase
           let(:asset_details) do
             FindAssetDetails.(operation: "deposit", asset_code: "BTCT")
           end
+          let(:params) do
+            {
+              asset_code: "BTCT",
+              account: "G-STELLAR-ACCOUNT",
+              account_id: "G-STELLAR-ACCOUNT",
+              deposit_type: nil,
+              memo: "MEMO",
+              memo_type: "text",
+              extra_info: {extra: "info"}.to_json,
+            }
+          end
           it "succeeds and creates DepositRequest" do
             expect(GenMemoFor).to receive(:call).with(DepositRequest)
               .and_return("MEMO")
             expect(ConfiguredClassRunner).to receive(:call)
-              .with(GetMaxAmount.to_s).and_return(100)
+              .with(GetMaxAmount).and_return(100)
+            expect(DetermineEta).to receive(:call)
+              .with(GetEta, params)
+              .and_return(600)
             expect(DetermineHow).to receive(:call)
-              .with(GetHow.to_s, {
-                asset_code: "BTCT",
-                account: "G-STELLAR-ACCOUNT",
-                account_id: "G-STELLAR-ACCOUNT",
-                deposit_type: nil,
-                memo: "MEMO",
-                memo_type: "text",
-                extra_info: {extra: "info"}.to_json,
-              })
+              .with(GetHow, params)
               .and_return("BTCADDR")
             expect(DetermineExtraInfo).to receive(:call).
               with(asset_details).
@@ -46,7 +52,7 @@ module StellarBase
             expect(deposit.issuer).to eq ENV["ISSUER_ADDRESS"]
             expect(deposit.memo_type).to eq "text"
             expect(deposit.memo).to eq "MEMO"
-            expect(deposit.eta).to be_an Integer
+            expect(deposit.eta).to eq 600
             expect(deposit.min_amount).to be_a BigDecimal
             expect(deposit.max_amount).to eq 100
             expect(deposit.fee_fixed).to be_zero

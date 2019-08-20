@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Gem user can customize `eta` response from `GET /deposit`
+
 ## [4.1.0] - 2019-08-13
 ### Fixed
 - `/deposit` returns `extra_info` as a json object

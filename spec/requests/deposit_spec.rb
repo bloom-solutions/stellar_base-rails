@@ -20,8 +20,9 @@ describe "GET /deposit", type: :request, vcr: { record: :once } do
         issuer: ENV["ISSUER_ADDRESS"],
         distributor: distributor_account.address,
         distributor_seed: distributor_account.seed,
-        how_from: GetHow.to_s,
-        max_amount_from: GetMaxAmount.to_s,
+        how_from: GetHow,
+        eta_from: GetEta,
+        max_amount_from: GetMaxAmount,
       ]
     end
 
@@ -41,7 +42,7 @@ describe "GET /deposit", type: :request, vcr: { record: :once } do
 
         expect(json[:how]).to eq GetHow::SAMPLE_BTC_ADDRESS
         expect(json[:max_amount].to_f).to eq GetMaxAmount::SAMPLE_MAX_AMOUNT
-        expect(json[:eta]).to eq 600
+        expect(json[:eta]).to eq GetEta::DEFAULT
         expect(json[:fee_fixed]).to eq "0.0"
         expect(json[:fee_percent]).to eq "0.0"
       end
