@@ -11,7 +11,15 @@
 
   # Max amount a user can deposit
   max_amount_from: "GetStellarBitcoinAssetBalance"
+
+  # Deposit Address
   how_from: "FetchBitcoinAddress"
+
+  # ETA
+  eta_from: "GetEta"
+
+  # extra info field
+  extra_info_from: "ExtraInfoFrom"
 
   # Fees for depositing
   fee_fixed: 0.0
