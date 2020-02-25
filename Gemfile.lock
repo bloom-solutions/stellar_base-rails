@@ -176,7 +176,7 @@ GEM
     multipart-post (2.0.0)
     net-http-digest_auth (1.4.1)
     nio4r (2.4.0)
-    nokogiri (1.10.3)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     pipetree (0.1.1)
     pry (0.11.3)
