@@ -4,7 +4,7 @@ services:
 language: ruby
 cache: bundler
 rvm:
-  - 2.6.0
+  - 2.6.3
 before_install:
   - sudo apt-get -y update
   - sudo apt-get install -y libsodium-dev
