@@ -35,7 +35,7 @@ module StellarBase
           expect(op.asset_issuer).to eq "GISSUER"
           expect(op.from).to eq "GFROM"
           expect(op.to).to eq "GTO"
-          expect(op.amount).to eq BigDecimal.new("0.01234567")
+          expect(op.amount).to eq BigDecimal("0.01234567")
         end
       end
 
