@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stellar_base-rails (4.2.0)
+    stellar_base-rails (4.2.1)
       addressable
       disposable
       dry-types
