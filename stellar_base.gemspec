@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "multi_json" # required by representable json
   s.add_dependency "addressable"
   s.add_dependency "sidekiq", ">= 5.0"
-  s.add_dependency "rails", "~> 5.2"
+  s.add_dependency "rails", "~> 6.0"
   s.add_dependency "representable"
   s.add_dependency "stellar-base", ">= 0.18.0"
   s.add_dependency "storext", "~> 3.0"
