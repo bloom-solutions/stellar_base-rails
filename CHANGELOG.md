@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.2] - 2020-08-24
+### Changed
+- Upgrade rails version to 6.0
+- Upgrade storext to 3.1
+- Upgrade sqlite3 to 1.4
+
 ## [4.2.1] - 2020-03-12
 ### Fixed
 - Loosen sidekiq constraint
