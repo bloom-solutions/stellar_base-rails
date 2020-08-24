@@ -14,7 +14,7 @@ PATH
       representable
       sidekiq (>= 5.0)
       stellar-base (>= 0.18.0)
-      storext (~> 2.0)
+      storext (~> 3.0)
       toml-rb (~> 1.0)
       trailblazer (>= 2.0, < 2.1)
       trailblazer-rails
@@ -290,8 +290,8 @@ GEM
       gem_config
       redis
       stellar-sdk (>= 0.6.0)
-    storext (2.2.2)
-      rails (>= 4.0, < 6.0)
+    storext (3.1.0)
+      activerecord (>= 4.0, < 6.1)
       virtus
     thor (1.0.1)
     thread_safe (0.3.6)
