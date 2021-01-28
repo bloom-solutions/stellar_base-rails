@@ -112,5 +112,4 @@ module StellarBase
 
 end
 
-require "stellar_base/horizon_client"
 require "stellar_base/rails/routes"
